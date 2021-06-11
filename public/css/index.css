@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500&display=swap');
+
+/* CSS page Index */
+
+header {
+    position: fixed;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    background: #eee;
+    padding: 0 3em;
+    height: 70px;
+    z-index: 999;
+}
+
+header .left {
+    font-size: 1.8em;
+    color: rgb(224, 24, 64); 
+    font-weight: bold;
+}
+
+#hero {
+    background: url("../images/heroBg.jpeg") no-repeat fixed left top ;
+    background-size: cover;
+    filter: brightness(.8);
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#hero .left {
+    text-transform: uppercase;
+    font-size: 4em;
+    width: 500px;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+
+.container {
+    background: rgb(201, 201, 201);
+}
+
+.container h2 {
+    text-align: center;
+    padding: 3em 0;
+    font-size: 2em;
+}
+
+.container .slider {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-bottom: 3em;
+}
+
+.container .slider .box {
+    background: rgb(255, 255, 255);
+    width: 30vw;
+    height: 30vw;
+    border: 4px solid black;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.container .slider .box p {
+    text-align: justify;
+    font-size: 1.1em;
+    padding: 10px 1em;
+}
+
+.container .slider .box img {
+    width: 100px;
+    border-radius: 8rem;
+    border: 4px solid black;
+    margin-top: -50px;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 3em;
+    height: 10vh;
+    color: white;
+}
+
+footer a {
+    color: white;
+}
+
+@media only screen and (max-width: 900px){
+    .container h2 {
+        padding: 2em 0;
+    }
+
+    .container .slider {
+        display: block;
+    }
+
+    .container .slider .box {
+        width: 80vw;
+        height: auto;
+        min-height: 200px;
+        margin: 5em auto;
+    }
+}
+
+@media only screen and (max-width: 560px) {
+    header {
+        padding: 0 1em;
+    }
+
+    #hero {
+        background: url("../images/heroBg.jpeg") no-repeat top center;
+    }
+    
+    #hero .left {
+        text-transform: uppercase;
+        font-size: 3em;
+        width: 100%;
+        text-align: center;
+        font-family: 'Oswald', sans-serif;
+        letter-spacing: 2px;
+        font-weight: 500;
+    }
+
+    .container .slider .box  {
+        padding-bottom: 10px;
+        width: 90vw;
+    }
+
+    footer {
+        padding: 0 1em;
+    }
+}

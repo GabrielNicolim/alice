@@ -1,0 +1,96 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background: rgb(255, 255, 255);
+    padding: 1em 2em;
+    border-radius: 10px;
+}
+
+.container .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1em auto 2.5em auto;
+}
+
+.container .top h1 {
+    color: rgb(224, 24, 64);
+}
+
+.container .top .return {
+    font-size: 1.5em;
+}
+
+.container form {
+    margin: 0 auto;
+}
+
+.container input  {
+    width: 100%;
+    padding: 15px 10px;
+    font-size: 1.2em;
+}
+
+.container input:not(:last-child) {
+    margin-bottom: 1.5em;
+}
+
+.container input::placeholder {
+    font-weight: 500;
+}
+
+.container input[type="submit"] {
+    border: 0;
+    font-weight: 500;
+}
+
+.container input[type="submit"]:hover {
+    background: rgb(224, 24, 64);
+    color: white;
+    transition: 400ms;
+    cursor: pointer;
+}
+
+.register {
+    margin: 1em 0;
+}
+
+.register span a {
+    color: rgb(75, 75, 75);
+}
+
+.register span a:hover {
+    color: rgb(224, 24, 64);
+    transition: 400ms;
+}
+
+@media only screen and (max-width: 426px) {
+    body {
+        display: block;
+    }
+
+    .container {
+        height: 100vh;
+        padding: 1em 1.5em;
+    }
+
+    .container .top {
+        margin-bottom: 3.5em;
+    }
+
+    .container input  {
+        width: 100%;
+        padding: 15px 10px;
+        font-size: 1em;
+    }
+
+    .register {
+        text-align: justify;
+        margin-top: 1.5em;
+        font-size: 1.1em;
+    }
+}
