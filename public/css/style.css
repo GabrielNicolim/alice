@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Tammudu+2:wght@500;700&family=Roboto+Condensed:wght@400;700&display=swap');
+
+* {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+body {
+    width: 100vw;
+    min-height: 300vh;
+    background: rgb(112, 112, 112);
+}
+
+header {
+    position: fixed;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    background: #eee;
+    padding: 0 3em;
+    height: 70px;
+    z-index: 999;
+}
+
+header .left {
+    font-size: 1.8em;
+    color: rgb(224, 24, 64); 
+    font-weight: bold;
+}
+
+header .btn {
+    font-size: 1.4em;
+    color: rgb(0, 0, 0);
+    font-weight: 500;
+}
+
+header .btn:hover {
+    color: rgb(224, 24, 64); 
+    font-size: 1.5em;
+    transition: 400ms;
+}
+
+#hero {
+    display: flex; 
+    justify-content: space-between;
+    width: 100vw;
+    padding: 0 8em;
+    background: url("/public/images/hero.jpeg") no-repeat fixed left top ;
+    background-size: cover;
+    filter: brightness(.8);
+    height: 90vh;
+}
+
+#hero .left {
+    text-transform: uppercase;
+    font-size: 4em;
+    width: 500px;
+    margin: auto 0;
+    color: rgb(0, 0, 0);
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+
