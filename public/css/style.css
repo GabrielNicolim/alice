@@ -52,7 +52,7 @@ header .btn:hover {
 }
 
 #hero {
-    background: url("/public/images/heroBg.jpeg") no-repeat fixed left top ;
+    background: url("../images/heroBg.jpeg") no-repeat fixed left top ;
     background-size: cover;
     filter: brightness(.8);
     height: 90vh;
@@ -145,7 +145,7 @@ footer a {
     }
 
     #hero {
-        background: url("/public/images/heroBg.jpeg") no-repeat top center;
+        background: url("../images/heroBg.jpeg") no-repeat top center;
     }
     
     #hero .left {
