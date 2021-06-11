@@ -85,6 +85,7 @@ footer {
     padding: 0 3em;
     height: 10vh;
     color: white;
+    background-color: rgb(92, 92, 92);
 }
 
 footer a {
@@ -111,10 +112,6 @@ footer a {
 @media only screen and (max-width: 560px) {
     header {
         padding: 0 1em;
-    }
-
-    #hero {
-        background: url("../images/heroBg.jpeg") no-repeat top center;
     }
     
     #hero .left {
