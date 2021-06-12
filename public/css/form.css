@@ -31,7 +31,8 @@ body {
     margin: 0 auto;
 }
 
-.container input  {
+.container input,
+.submitBtn  {
     width: 100%;
     padding: 15px 10px;
     font-size: 1.2em;
@@ -48,20 +49,33 @@ body {
     font-weight: 500;
 }
 
-.container input[type="submit"] {
+.container .submitBtn {
     font-weight: 500;
+    text-align: center;
 }
 
-.container input[type="submit"]:hover {
+.container .submitBtn:hover {
     background: rgb(224, 24, 64);
-    border: 2px solid rgb(224, 24, 64);;
+    border: 2px solid rgb(224, 24, 64);
     color: white;
     transition: 400ms;
     cursor: pointer;
 }
 
+/* Teste Erro */
+
+.error {
+    border: 2px solid rgb(224, 24, 64) !important; 
+}
+
+.error::placeholder {
+    color: rgb(224, 24, 64);
+    font-size: .9em;
+}
+
 .register {
     margin: 1em 0;
+    text-align: center;
 }
 
 .register span a {
@@ -80,7 +94,7 @@ body {
     }
 }
 
-@media only screen and (max-width: 426px) {
+@media only screen and (max-width: 506px) {
     body {
         display: block;
     }
@@ -102,7 +116,6 @@ body {
     }
 
     .register {
-        text-align: justify;
         margin-top: 1.5em;
         font-size: 1.1em;
     }

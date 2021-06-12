@@ -7,7 +7,7 @@
     <title>Register</title>
 
     <script src="https://kit.fontawesome.com/1ab94d0eba.js" crossorigin="anonymous"></script>
-   
+
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/form.css">
 </head>
@@ -28,12 +28,14 @@
             <input type="email" name="email" id="email" placeholder="Email">
             <input type="text" name="password" id="password" placeholder="Senha">
             <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirmar senha">
-            <input type="submit" value="Cardastrar-se">
+            <div onclick="RegisterValidate()" class="submitBtn">Cadastrar-se</div>
         </form>
 
         <div class="register">
             <span>Já possui um cadastro? <a href="login.html">Entrar</a></span>
         </div>
     </div>
+
+    <script src="../scripts/formDataValidate.js"></script>
 </body>
 </html>
