@@ -9,6 +9,7 @@ body {
     padding: 1em 2em;
     width: 40%;
     border-radius: 10px;
+    box-shadow: 1px 1px 30px rgb(97, 97, 97);
 }
 
 .container .top {
@@ -34,6 +35,9 @@ body {
     width: 100%;
     padding: 15px 10px;
     font-size: 1.2em;
+    border-radius: 8px;
+    border: 2px solid rgb(219, 219, 219);
+    outline: 0;
 }
 
 .container input:not(:last-child) {
@@ -45,12 +49,12 @@ body {
 }
 
 .container input[type="submit"] {
-    border: 0;
     font-weight: 500;
 }
 
 .container input[type="submit"]:hover {
     background: rgb(224, 24, 64);
+    border: 2px solid rgb(224, 24, 64);;
     color: white;
     transition: 400ms;
     cursor: pointer;
