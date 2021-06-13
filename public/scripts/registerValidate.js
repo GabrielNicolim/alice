@@ -1,4 +1,4 @@
-function RegisterValidate(event) {
+function registerValidate(event) {
     let valid = true; 
 
     let name = event.target.name
