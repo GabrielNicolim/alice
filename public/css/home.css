@@ -1,3 +1,71 @@
 header .btn {
     font-size: 2.5em;
 }
+
+.container {
+    min-height: 80vh;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 20px;
+}
+
+.container .box {
+    background: white;
+    height: 200px;
+    width: 200px;
+    margin: 1em 1em;
+    position: relative;
+    border-radius: 8px;
+}
+
+.container .box .title {
+    text-align: center;
+    font-size: 1.3em;
+    padding: 10px 0;
+    background: black;
+    color: white;
+    border-radius: 8px 8px 0 0;
+}
+
+.container .data {
+    padding: 5px;
+}
+
+.container span {
+    display: block;
+}
+
+.container .box .edit {
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.4em;
+}
+
+.container .box .edit a{
+    color: black;
+    display: block;
+    border-radius: 8px;
+    border: 2px solid rgb(219, 219, 219);
+    position: absolute;
+    width: 100%;
+    padding: 10px 0;
+    bottom: 0;
+}
+
+.container .box .edit a:hover {
+    background: rgb(224, 24, 64); 
+    border: 2px solid rgb(224, 24, 64);
+    color: white;
+    transition: 400ms;
+}
+
+@media only screen and (max-width: 508px) {
+    .container {
+        display: block;
+    }
+
+    .container .box {
+        width: 100%;
+        margin: 2em 0;
+    }
+}

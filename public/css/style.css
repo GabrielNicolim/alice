@@ -36,6 +36,11 @@ header .left {
     font-weight: bold;
 }
 
+.clear {
+    height: 70px;
+    width: 100vw;
+}
+
 .btn {
     font-size: 1.4em;
     color: rgb(0, 0, 0);
