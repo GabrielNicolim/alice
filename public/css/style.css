@@ -28,6 +28,7 @@ header {
     padding: 0 3em;
     height: 70px;
     z-index: 999;
+    box-shadow: 0 0 10px rgb(77, 77, 77);
 }
 
 header .left {
@@ -57,10 +58,11 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 3em;
-    height: 10vh;
+    padding: 1em 3em;
+    width: 100vw;
     color: white;
-    background-color: rgb(92, 92, 92);
+    background: rgb(92, 92, 92);
+    box-shadow: 0 0 10px rgb(77, 77, 77);
 }
 
 footer a,

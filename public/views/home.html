@@ -20,9 +20,25 @@
         </div>
 
         <nav class="right btn">
-            <i class="fas fa-user-circle"></i>
+            <i class="fas fa-user-circle" id="user" onclick="openMenu()"></i>
         </nav>
     </header>
+
+    <div id="menu" class="hidden">
+        <div class="close" onclick="closeMenu()">
+            <i class="fas fa-times-circle btn"></i>
+        </div>
+
+        <div class="body-menu">
+            <a href="../../index.html">
+                <div class="menu-btn">Home</div>
+            </a>
+    
+            <a href="">
+                <div class="menu-btn">Usuário</div>
+            </a>
+        </div>
+    </div>
 
     <div class="clear"></div>
 
@@ -144,5 +160,7 @@
             <a href="https://github.com/GabrielNicolim/ALICE">Sobre nós</a>
         </div>
     </footer>
+
+    <script src="../scripts/menuShow.js"></script>
 </body>
 </html>
