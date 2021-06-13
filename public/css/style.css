@@ -16,7 +16,24 @@ body {
 
 a {
     text-decoration: none;
-    color: black;
+}
+
+header {
+    position: fixed;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    background: rgb(238, 238, 238);
+    padding: 0 3em;
+    height: 70px;
+    z-index: 999;
+}
+
+header .left {
+    font-size: 1.8em;
+    color: rgb(224, 24, 64); 
+    font-weight: bold;
 }
 
 .btn {
@@ -28,4 +45,57 @@ a {
 .btn:hover {
     color: rgb(224, 24, 64); 
     transition: 400ms;
+    cursor: pointer;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 3em;
+    height: 10vh;
+    color: white;
+    background-color: rgb(92, 92, 92);
+}
+
+footer a,
+footer .btn {
+    color: white;
+}
+
+footer .left, 
+footer .right {
+    width: 40%;
+}
+
+footer .right {
+    text-align: right;
+    font-size: 1.2em;
+}
+
+footer .logo {
+    text-align: center;
+    font-size: 2em;
+}
+
+@media only screen and (max-width: 560px) {
+    header {
+        padding: 0 1em;
+    }
+
+    header .left {
+        font-size: 1.4em;
+    }
+
+    footer {
+        padding: 0 1em;
+    }
+
+    footer .logo {
+        font-size: 1.5em;
+    }
+
+    footer .right {
+        font-size: 1em;
+    }
 }

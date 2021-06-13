@@ -1,6 +1,6 @@
 <?php
 
-    $stringdeconexao = "host=localhost port=5432 dbname=testeBD1 user=alunocti password=alunocti";
+    $stringdeconexao = "host=localhost port=5432 dbname=a06felipeestevanatto user=a06felipeestevanatto password=cti";
     
     $conecta = pg_connect($stringdeconexao);
     

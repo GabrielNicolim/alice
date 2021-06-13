@@ -6,7 +6,7 @@
 </head>
 <body>
 <?php
-$conecta = pg_connect("host=localhost port=5432 dbname=testeBD1 user=alunocti password=alunocti");
+$conecta = pg_connect("host=localhost port=5432 dbname=a06felipeestevanatto user=a06felipeestevanatto password=cti");
 if (!$conecta)
 {
 echo "Não foi possível estabelecer conexão com o banco de dados!<br><br>";

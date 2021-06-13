@@ -2,26 +2,8 @@
 
 /* CSS page Index */
 
-header {
-    position: fixed;
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    background: rgb(238, 238, 238);
-    padding: 0 3em;
-    height: 70px;
-    z-index: 999;
-}
-
-header .left {
-    font-size: 1.8em;
-    color: rgb(224, 24, 64); 
-    font-weight: bold;
-}
-
 #hero {
-    background: url("../images/teste.jpg") no-repeat fixed center;
+    background: url("../images/heroBg.jpg") no-repeat fixed center;
     background-size: cover;
     height: 90vh;
     display: flex;
@@ -82,20 +64,6 @@ header .left {
     margin-top: -50px;
 }
 
-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 3em;
-    height: 10vh;
-    color: white;
-    background-color: rgb(92, 92, 92);
-}
-
-footer a {
-    color: white;
-}
-
 @media only screen and (max-width: 900px){
     .container h2 {
         padding: 2em 0;
@@ -114,15 +82,7 @@ footer a {
     }
 }
 
-@media only screen and (max-width: 560px) {
-    header {
-        padding: 0 1em;
-    }
-
-    header .left {
-        font-size: 1.5em;
-    }
-    
+@media only screen and (max-width: 560px) {    
     #hero span {
         text-transform: uppercase;
         font-size: 2.5em;
@@ -135,9 +95,5 @@ footer a {
     .container .slider .box  {
         padding-bottom: 10px;
         width: 90vw;
-    }
-
-    footer {
-        padding: 0 1em;
     }
 }
