@@ -1,58 +1,10 @@
-function voidCheck(v) {
-    if(v == undefined || v == '' || v == null) {
-        return true
-    }
-    else {
-        return false
-    }
-}
+function RegisterValidate(event) {
+    let valid = true; 
 
-function loginValidate() {
-    let email = window.document.getElementById('email')
-    let password = window.document.getElementById('password')
-
-    let passwordValue = password.value.trim()
-    let emailValue = email.value.trim()
-
-    if(voidCheck(passwordValue)) {
-        password.classList = 'error'
-        password.placeholder = "Esse campo não pode estar vazio"
-    }
-    else {
-        password.classList = 'normal'
-        password.placeholder = 'Senha'
-    }
-
-    if(voidCheck(emailValue)) {
-        email.classList = 'error'
-        email.placeholder = "Esse campo não pode estar vazio"
-    }
-    else if(emailValidate(emailValue)) {
-        email.classList = 'error'
-        email.placeholder = "Insira um email valido"
-    }
-    else {
-        email.classList = 'normal'
-        email.placeholder = 'Email'
-    }
-}
-
-function emailValidate(e) {
-    const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-
-    if(!e.match(validRegex)) {
-        return true;
-    }
-    else {
-        return false;
-    }
-}
-
-function RegisterValidate() {
-    let name = window.document.getElementById('name')
-    let email = window.document.getElementById('email')
-    let password = window.document.getElementById('password')
-    let secondPassword = window.document.getElementById('confirmPassword')
+    let name = event.target.name
+    let email = event.target.email
+    let password = event.target.password
+    let secondPassword = event.target.confirmPassword
 
     let nameValue = name.value.trim()
     let emailValue = email.value.trim()
@@ -63,6 +15,7 @@ function RegisterValidate() {
     if(voidCheck(nameValue)) {
         name.classList = 'error'
         name.placeholder = "Preencha este campo"
+        valid = false 
     }
     else {
         name.classList = 'normal'
@@ -73,10 +26,12 @@ function RegisterValidate() {
     if(voidCheck(emailValue)) {
         email.classList = 'error'
         email.placeholder = "Preencha este campo"
+        valid = false 
     }
     else if(emailValidate(emailValue)) {
         email.classList = 'error'
         email.placeholder = "Insira um email valido"
+        valid = false 
     }
     else {
         email.classList = 'normal'
@@ -87,6 +42,7 @@ function RegisterValidate() {
     if(voidCheck(passwordValue)) {
         password.classList = 'error'
         password.placeholder = "Preencha este campo"
+        valid = false 
     }
     else {
         password.classList = 'normal'
@@ -97,13 +53,17 @@ function RegisterValidate() {
     if(voidCheck(confirmPasswordValue)) {
         secondPassword.classList = 'error'
         secondPassword.placeholder = "Preencha este campo"
+        valid = false 
     }
     else if(confirmPasswordValue !== passwordValue) {
         secondPassword.classList = 'error'
         secondPassword.placeholder = "Este campo deve ser igual a senha"
+        valid = false 
     }
     else {
         secondPassword.classList = 'normal'
         secondPassword.placeholder = 'Confirmar senha'
     }
+
+    return valid 
 }

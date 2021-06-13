@@ -23,12 +23,12 @@
             </div>
         </div>
 
-        <form action="POST">
-            <input type="text" name="name" id="name" placeholder="Nome">
-            <input type="email" name="email" id="email" placeholder="Email">
-            <input type="text" name="password" id="password" placeholder="Senha">
-            <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirmar senha">
-            <div onclick="RegisterValidate()" class="submitBtn">Cadastrar-se</div>
+        <form action="" onsubmit="return RegisterValidate(event)">
+            <input type="text" name="name" id="name" placeholder="Nome" onfocus="changePlaceholder(this)">
+            <input type="email" name="email" id="email" placeholder="Email" onfocus="changePlaceholder(this)">
+            <input type="text" name="password" id="password" placeholder="Senha" onfocus="changePlaceholder(this)">
+            <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirmar senha" onfocus="changePlaceholder(this)">
+            <input type="submit" class="submitBtn" value="Cadastrar-se">
         </form>
 
         <div class="register">
@@ -36,6 +36,7 @@
         </div>
     </div>
 
-    <script src="../scripts/formDataValidate.js"></script>
+    <script src="../scripts/formValidate.js"></script>
+    <script src="../scripts/registerValidate.js"></script>
 </body>
 </html>

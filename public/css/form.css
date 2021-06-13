@@ -47,6 +47,7 @@ body {
 
 .container input::placeholder {
     font-weight: 500;
+    text-transform: capitalize;
 }
 
 .container .submitBtn {

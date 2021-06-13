@@ -8,7 +8,7 @@ header {
     width: 100%;
     justify-content: space-between;
     align-items: center;
-    background: #eee;
+    background: rgb(238, 238, 238);
     padding: 0 3em;
     height: 70px;
     z-index: 999;
@@ -54,10 +54,11 @@ header .left {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    padding-bottom: 3em;
+    padding-bottom: 10em;
 }
 
 .container .slider .box {
+    /* rgb(7, 0, 44); */
     background: rgb(255, 255, 255);
     width: 30vw;
     height: 30vw;
@@ -102,6 +103,7 @@ footer a {
 
     .container .slider {
         display: block;
+        padding-bottom: 3em;
     }
 
     .container .slider .box {
@@ -115,6 +117,10 @@ footer a {
 @media only screen and (max-width: 560px) {
     header {
         padding: 0 1em;
+    }
+
+    header .left {
+        font-size: 1.5em;
     }
     
     #hero span {
