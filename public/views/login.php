@@ -1,7 +1,8 @@
 <?php
     session_start();
     if(isset($_SESSION['isAuth'])){
-        header("Location: home.html ");
+        header("Location: home.php ");
+	exit();
     }
 ?>
 
@@ -31,7 +32,7 @@
                 </a>
             </div>
         </div>
-
+		
         <form action="" onsubmit="return loginValidate(event)" method="POST">
             <input type="email" name="email" id="email" placeholder="Email">
             <input type="password" name="password" id="password" placeholder="Senha">
@@ -40,7 +41,6 @@
                 <input type="checkbox" name="showPassword" id="showPassword">
                 <label for="showPassword">Apresentar senha</label>
             </div>
-
             <input type="submit" class="submitBtn" value="Entrar">
         </form>
 
@@ -54,11 +54,10 @@
 </body>
 </html>
 
-<?php print_r($_POST);
+<?php
 //Provar que funcionou mostrando os dados que você enviou
 if(!empty($_POST['email']) && !empty($_POST['password'])){
-    require_once("conexao.php");
-    
+    require_once("../../php/conexao.php");
 
     $emailU = pg_escape_string( clean($_POST['email']) );
     $senhaU = pg_escape_string( clean($_POST['password']) );
@@ -80,12 +79,12 @@ if(!empty($_POST['email']) && !empty($_POST['password'])){
                 $_SESSION['isAuth'] = true;
         
                 //redireciona a pessoa para a home     
-                header("Location: home.html");
+                header("Location: home.php");
                 exit();
         
             }else{  
                 //echo "<br>Invalid Details";
-                header("Location: login.html");
+                header("Location: login.php"); 
                 exit();
             }
         } catch (PDOException $e) {

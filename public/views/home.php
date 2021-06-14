@@ -40,7 +40,7 @@
                 <div class="menu-btn">Usuário</div>
             </a>
 
-            <a href="">
+            <a href="../../php/logout.php">
                 <div class="menu-btn">Logout</div>
             </a>
         </div>

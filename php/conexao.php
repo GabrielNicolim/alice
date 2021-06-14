@@ -4,8 +4,10 @@
         //echo "Não foi possível estabelecer conexão com o banco de dados!<br><br>";
         exit;
     }
-    else
+    else{
         //echo "Conexão estabelecida com o banco de dados!<br><br>";
+    }
+        
 
     function clean($string) {
         return preg_replace('/[^A-Za-z0-9\@\.]/', '', $string); // Sanitiza a string
