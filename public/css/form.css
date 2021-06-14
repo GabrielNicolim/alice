@@ -63,6 +63,49 @@ body {
     cursor: pointer;
 }
 
+.container input[type="checkbox"] {
+    width: auto;
+    position: relative;
+    visibility: hidden;
+    cursor: pointer;
+}
+
+.container  input[type='checkbox']:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: -3px;
+    left: 0;
+    border: 2px solid rgb(219, 219, 219);
+    border-radius: 3px;
+    background-color: white;
+    visibility: visible;
+}
+.container  input[type='checkbox']:checked:after {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 10px;
+    border: solid black;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    top: -1px;
+    left: 6px;
+    visibility: visible;
+}
+
+.container label {
+    margin-left: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    color: rgb(107, 107, 107);
+}
+
 /* Teste Erro */
 
 .error {

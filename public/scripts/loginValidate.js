@@ -36,3 +36,15 @@ function loginValidate(event) {
 
     return valid
 }
+
+function showPassword() {
+    let btn = window.document.getElementById('showPassword')
+    let passwordInput = window.document.getElementById('password')
+
+    if(btn.checked) {
+        passwordInput.type = 'text'
+    }
+    else {
+        passwordInput.type = 'password'
+    }
+}

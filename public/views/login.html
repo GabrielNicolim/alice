@@ -28,6 +28,12 @@
         <form action="../../php/login.php" onsubmit="return loginValidate(event)" method="POST">
             <input type="email" name="email" id="email" placeholder="Email" onfocus="changePlaceholder(this)">
             <input type="password" name="password" id="password" placeholder="Senha" onfocus="changePlaceholder(this)">
+
+            <div onclick="showPassword()">
+                <input type="checkbox" name="showPassword" id="showPassword">
+                <label for="showPassword">Apresentar senha</label>
+            </div>
+
             <input type="submit" class="submitBtn" value="Entrar">
         </form>
 
