@@ -54,6 +54,15 @@ header .left {
     cursor: pointer;
 }
 
+/* Menu */
+header #user {
+    font-size: 45px;
+}
+
+.hidden {
+    display: none;
+}
+
 footer {
     display: flex;
     justify-content: space-between;

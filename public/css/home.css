@@ -1,47 +1,27 @@
-header .btn {
-    font-size: 2.5em;
+.add {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 20px;
 }
 
-.hidden {
-    display: none;
-}
-
-#menu {
-    width: 40%;
-    height: 100%;
-    background: rgb(238, 238, 238);
-    position: fixed;
-    right: 0;
-    z-index: 9999;
-    padding: 2em;
-    box-shadow: 0 0 10px rgb(77, 77, 77);
-}
-
-#menu .close {
-    font-size: 2em;
+.add a {
+    margin: 1em;
+    padding: 10px;
+    width: 250px;
+    border-radius: 8px;
+    background: rgb(70, 99, 206);
+    border: 2px solid rgb(46, 82, 214);
     color: white;
-    float: right;
-}
-
-#menu .body-menu {
-    margin-top: 4em;
-}
-
-#menu .menu-btn {
-    font-size: 1.5em;
-    border: 2px solid rgb(219, 219, 219);
-    color: black;
+    font-size: 1.1em;
     text-align: center;
-    border-radius: 4px;
-    padding: 5px 0;
-    margin: 1em auto 0 auto;
+    font-weight: 500;
+    box-shadow: 0 2px 5px rgb(77, 77, 77);
 }
 
-#menu .menu-btn:hover {
-    background: rgb(224, 24, 64); 
-    border: 2px solid rgb(224, 24, 64);
-    color: white;
-    transition: 200ms;
+.add a:hover {
+    background: rgb(32, 69, 202);
+    border: 2px solid rgb(32, 69, 202);
+    transition: 400ms;
 }
 
 .container {
@@ -58,6 +38,7 @@ header .btn {
     margin: 1em 1em;
     position: relative;
     border-radius: 8px;
+    box-shadow: 0 5px 10px rgb(77, 77, 77);
 }
 
 .container .box .title {
@@ -102,6 +83,13 @@ header .btn {
 }
 
 @media only screen and (max-width: 508px) {
+    .add a {
+        margin: 1em 0;
+        padding: 15px;
+        width: 100%;
+        font-size: 1.2em;
+    }
+
     .container {
         display: block;
     }
