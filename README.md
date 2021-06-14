@@ -12,5 +12,5 @@ e Exclui os dados dos produtos, daí o acrônimo A.L.I.C.E.
 
 Prazo de entrega: <b>18 de jun. 23:59</b>
 
-Link de acesso no github: https://gabrielnicolim.github.io/ALICE
-No servidor: http://200.145.153.175/felipeestevanatto/ALICE/public/views/index.html
+Link de acesso no <a href="https://gabrielnicolim.github.io/ALICE">Github</a><br>
+No servidor da <a href="http://200.145.153.175/felipeestevanatto/ALICE/public/views/index.html">escola</a>
