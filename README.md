@@ -11,3 +11,6 @@ armazenados previamente. Sendo assim, haverá um programa que Altera, Loga, Incl
 e Exclui os dados dos produtos, daí o acrônimo A.L.I.C.E.
 
 Prazo de entrega: <b>18 de jun. 23:59</b>
+
+Link de acesso no github: https://gabrielnicolim.github.io/ALICE
+No servidor: http://200.145.153.175/felipeestevanatto/ALICE/public/views/index.html
