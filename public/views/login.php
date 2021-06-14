@@ -27,7 +27,7 @@
             <h1>Login</h1>
 
             <div class="return">
-                <a href="../../index.html" class="btn">
+                <a href="../../index.php" class="btn">
                     <i class="fas fa-arrow-alt-circle-right"></i>
                 </a>
             </div>
@@ -45,7 +45,7 @@
         </form>
 
         <div class="register">
-            <span>Não tem uma conta? <a href="register.html">Cadastre-se</a></span>
+            <span>Não tem uma conta? <a href="register.php">Cadastre-se</a></span>
         </div>
     </div>
 
