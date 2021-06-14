@@ -50,6 +50,23 @@
     border-radius: 8px 8px 0 0;
 }
 
+.container .box .quantity,
+.container .box .type {
+    background: rgb(236, 236, 236);
+    border-radius: 4em;
+    position: relative;
+    text-align: center;
+    font-weight: 500;
+    margin-top: 15px;
+    padding: 3px 0;
+}
+
+.container .box .data div + span {
+    text-align: center;
+    margin-top: 5px;
+    height: 20px;
+}
+
 .container .data {
     padding: 5px;
 }
@@ -67,7 +84,7 @@
 .container .box .edit a {
     color: black;
     display: block;
-    border-radius: 8px;
+    border-radius: 0 0 8px 8px;
     border: 2px solid rgb(219, 219, 219);
     position: absolute;
     width: 100%;
