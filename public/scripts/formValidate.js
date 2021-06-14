@@ -17,23 +17,3 @@ function emailValidate(e) {
         return false;
     }
 }
-
-function changePlaceholder(obj) {
-    let name
-    switch(obj.name) {
-        case "name":
-            name = "nome"
-            break
-        case "email":
-            name = "email"
-            break
-        case "password":
-            name = "senha"
-            break
-        case "confirmPassword":
-            name = "Confirmar senha"
-            break
-    }
-    obj.placeholder = name
-    obj.classList = 'normal'
-}

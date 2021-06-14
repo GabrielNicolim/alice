@@ -8,30 +8,21 @@ function loginValidate(event) {
     let emailValue = email.value.trim()
 
     // Email
-    if(voidCheck(emailValue)) {
+    if(voidCheck(emailValue) || emailValidate(emailValue)) {
         email.classList = 'error'
-        email.placeholder = "Esse campo não pode estar vazio"
-        valid = false 
-    }
-    else if(emailValidate(emailValue)) {
-        email.classList = 'error'
-        email.placeholder = "Insira um email valido"
         valid = false 
     }
     else {
         email.classList = 'normal'
-        email.placeholder = 'Email'
     }
 
     // Password
     if(voidCheck(passwordValue)) {
         password.classList = 'error'
-        password.placeholder = "Esse campo não pode estar vazio"
         valid = false 
     }
     else {
         password.classList = 'normal'
-        password.placeholder = 'Senha'
     }
 
     return valid
