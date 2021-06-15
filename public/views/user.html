@@ -57,28 +57,36 @@
             </div>
 
             <div class="statics">
-                <div class="field">Registros</div>
-                <span>241421</span>
+                <div id="statics-field">
+                    <div class="field">Registros</div>
+                    <span class="full-screen">241421</span>
+    
+                    <div class="field">Valor em Estoque</div>
+                    <span class="full-screen">R$ 312321</span>
+    
+                    <div class="field">Tipos em Estoque</div>
+                    <span class="full-screen">4323</span>
+                </div>
 
-                <div class="field">Valor em Estoque</div>
-                <span>R$ 312321</span>
-
-                <div class="field">Tipos em Estoque</div>
-                <span>4323</span>
+                <div class="responsive">
+                    <span>241421</span>
+                    <span>R$ 312321</span>
+                    <span>4323</span>
+                </div>
             </div>
         </div>
 
         <div class="right">
             <div class="top">
-                <h1>Cadastro</h1>
+                <h1>Alterar Dados</h1>
             </div>
 
-            <form action="" method="POST">
+            <form action="" onsubmit="return registerValidate(event)" method="POST">
                 <input type="text" name="name" id="name" placeholder="Nome">
                 <input type="email" name="email" id="email" placeholder="Email">
                 <input type="password" name="password" id="password" placeholder="Senha">
                 <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirmar senha">
-                <input type="submit" class="submitBtn" value="Cadastrar-se">
+                <input type="submit" class="submitBtn" value="Salvar">
             </form>
         </div>
     </div>
@@ -96,5 +104,7 @@
     </footer>
 
     <script src="../scripts/menuShow.js"></script>
+    <script src="../scripts/formValidate.js"></script>
+    <script src="../scripts/registerValidate.js"></script>
 </body>
 </html>

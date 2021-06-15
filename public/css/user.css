@@ -1,6 +1,5 @@
 .container {
     width: 90vw;
-    height: 100vh;
     margin: 2em auto;
     display: flex;
     box-shadow: 0 5px 15px rgba(77, 77, 77, 0.555);
@@ -9,13 +8,12 @@
 .container .left {
     width: 35%;
     background: rgb(218, 218, 218);
-    height: 100%;
     padding: 10px 20px;
 }
 
 .container .left .welcome {
-    font-weight: 500;
-    font-size: 1.5em;
+    font-weight: 700;
+    font-size: 1.7em;
     text-align: center;
     width: 100%;
     height: 30%;
@@ -44,7 +42,6 @@
 
 .container .right {
     width: 65%;
-    height: 100%;
     background: rgb(255, 255, 255);
     padding: 6em 0;
 }
@@ -91,4 +88,85 @@
     color: white;
     transition: 400ms;
     cursor: pointer;
+}
+
+/* Error */
+
+.error {
+    border: 2px solid rgb(224, 24, 64) !important; 
+}
+
+.error::placeholder {
+    color: rgb(224, 24, 64);
+    font-size: .9em;
+}
+
+.responsive {
+    visibility: hidden;
+}
+
+@media only screen and (max-width: 767px) {
+    .container {
+        display: block;
+        width: 100vw;
+        margin: 0;
+    }
+
+    .container .left {
+        width: 100%;
+        padding: 30px 5px;
+    }
+
+    .container .left .welcome {
+        margin-bottom: 1em;
+    }
+
+    .container .left .statics .field {
+        margin-top: 0;
+        width: 30%;
+        font-size: .8em;
+        padding: 5px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container .left .statics #statics-field {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .container .left .statics #statics-field .full-screen {
+        display: none;
+    }
+
+    .responsive {
+        visibility: unset;
+        margin-top: 5px;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .responsive span {
+        width: 30%;
+        text-align: center;
+        font-size: .8em;
+    }
+
+    .container .right {
+        width: 100%;
+        height: 100%;
+        padding: 2em 1.5em;
+    }
+
+    .container .right .top {
+        width: 100%;
+    }
+
+    .container input,
+    .submitBtn {
+        width: 100%;
+    }
 }

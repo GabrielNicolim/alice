@@ -64,7 +64,7 @@
     margin-top: -50px;
 }
 
-@media only screen and (max-width: 900px){
+@media only screen and (max-width: 1015px){
     .container h2 {
         padding: 2em 0;
     }
@@ -79,6 +79,10 @@
         height: auto;
         min-height: 200px;
         margin: 5em auto;
+    }
+
+    .container .slider .box p {
+        padding: 30px 2em;
     }
 }
 
@@ -95,5 +99,9 @@
     .container .slider .box  {
         padding-bottom: 10px;
         width: 90vw;
+    }
+
+    .container .slider .box p {
+        padding: 30px 1em;
     }
 }
