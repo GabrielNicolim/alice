@@ -4,7 +4,7 @@
     margin: 20px 20px;
 }
 
-.add a {
+.add .left{
     margin: 1em;
     padding: 10px;
     width: 250px;
@@ -16,9 +16,10 @@
     text-align: center;
     font-weight: 500;
     box-shadow: 0 2px 5px rgb(77, 77, 77);
+    cursor: pointer;
 }
 
-.add a:hover {
+.add .left:hover {
     background: rgb(32, 69, 202);
     border: 2px solid rgb(32, 69, 202);
     transition: 400ms;
@@ -98,8 +99,102 @@
     transition: 400ms;
 }
 
+/* Create */
+
+#shadow {
+    background: rgba(0, 0, 0, 0.397);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+#create {
+    position: fixed;
+    left: 30%;
+    margin-left: -50px;
+    width: 50%;
+    background: rgb(255, 255, 255);
+    top: 15%;
+    z-index: 99999;
+    padding: 2em;
+    border-radius: 8px;
+}
+
+#create .top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1em;
+    font-size: 1.8em;
+    width: 80%;
+    margin: 1em auto;
+}
+
+#create .top h3 {
+    color: rgb(224, 24, 64);
+}
+
+#create form {
+    width: 80%;
+    margin: 0 auto;
+}
+
+#create form input {
+    width: 100%;
+}
+
+#create input,
+.submitBtn  {
+    width: 100%;
+    padding: 15px 10px;
+    font-size: 1.2em;
+    border-radius: 8px;
+    border: 2px solid rgb(219, 219, 219);
+    outline: 0;
+}
+
+#create  input:not(:last-child) {
+    margin-bottom: 1.5em;
+}
+
+#create input::placeholder {
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+#create .submitBtn {
+    font-weight: 500;
+    text-align: center;
+}
+
+#create .submitBtn:hover {
+    background: rgb(224, 24, 64);
+    border: 2px solid rgb(224, 24, 64);
+    color: white;
+    transition: 400ms;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 750px){
+    #create {
+        left: 10%;
+        width: 90%;
+        padding: 2em 1em;
+        margin-left: -30px;
+    }    
+
+    #create .top {
+        width: 90%;
+    }
+    
+    #create form {
+        width: 90%;
+    }
+}
+
 @media only screen and (max-width: 508px) {
-    .add a {
+    .add .left {
         margin: 1em 0;
         padding: 15px;
         width: 100%;
@@ -118,4 +213,14 @@
     #menu {
         width: 100% 
     }
+
+    #create {
+        width: 100%;
+        height: 100%;
+        margin-left: .1em;
+        padding: 1em 1.5em;
+        top: 0;
+        left: 0;
+        border-radius: 0;
+    }   
 }

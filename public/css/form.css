@@ -83,6 +83,7 @@ body {
     background-color: white;
     visibility: visible;
 }
+
 .container  input[type='checkbox']:checked:after {
     content: "";
     display: block;
