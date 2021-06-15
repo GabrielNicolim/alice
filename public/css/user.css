@@ -1,5 +1,6 @@
 .container {
     width: 90vw;
+    height: 100vh;
     margin: 2em auto;
     display: flex;
     box-shadow: 0 5px 15px rgba(77, 77, 77, 0.555);
