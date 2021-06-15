@@ -1,7 +1,7 @@
 <?php
     session_start();
     if(isset($_SESSION['isAuth'])){
-        header("Location: home.php ");
+        header("Location: public/views/home.php ");
 	exit();
     }
 ?>
@@ -43,17 +43,17 @@
         <h2>Nossos parceiros</h2>
         <div class="slider">
             <div class="box">
-                <img src="/public/images/#" alt="">
+                <img src="public/images/people1.jpg" alt="">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero quis esse, nisi unde exercitationem dignissimos cum, vel quasi, reprehenderit ipsam neque fugiat excepturi corporis laborum eos ipsa rerum quisquam nihil!</p>
             </div>
     
             <div class="box">
-                <img src="/public/images/#" alt="">
+                <img src="public/images/people2.jpg" alt="">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia modi ex, doloribus quo, in vel dolorem fugiat facere deserunt maxime explicabo dolore! Porro assumenda repellendus aliquam corrupti consequuntur dolorem nihil!</p>
             </div>
     
             <div class="box">
-                <img src="/public/images/#" alt="">
+                <img src="public/images/people3.jpg" alt="">
                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil labore sapiente consectetur esse facilis corporis, fuga odio? Quod cum, corrupti perferendis voluptas id nihil eaque modi non eligendi. Provident, natus.</p>
             </div>
         </div>

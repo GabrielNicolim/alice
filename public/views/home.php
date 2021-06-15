@@ -39,7 +39,7 @@
         </div>
 
         <div class="body-menu">
-            <a href="../../index.html">
+            <a href="home.php">
                 <div class="menu-btn">Home</div>
             </a>
     
