@@ -54,7 +54,6 @@
 .container .box .type {
     background: rgb(236, 236, 236);
     border-radius: 4em;
-    position: relative;
     text-align: center;
     font-weight: 500;
     margin-top: 15px;

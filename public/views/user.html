@@ -32,15 +32,15 @@
         </div>
 
         <div class="body-menu">
-            <a href="../../index.html">
+            <a href="home.php">
                 <div class="menu-btn">Home</div>
             </a>
     
-            <a href="">
+            <a href="user.php">
                 <div class="menu-btn">Usuário</div>
             </a>
 
-            <a href="">
+            <a href="../../php/logout.php">
                 <div class="menu-btn">Logout</div>
             </a>
         </div>
@@ -51,14 +51,43 @@
     <!-- End Header -->
 
     <div class="container">
+        <div class="left">
+            <div class="welcome">
+                Olá usuário!
+            </div>
 
+            <div class="statics">
+                <div class="field">Registros</div>
+                <span>241421</span>
+
+                <div class="field">Valor em Estoque</div>
+                <span>R$ 312321</span>
+
+                <div class="field">Tipos em Estoque</div>
+                <span>4323</span>
+            </div>
+        </div>
+
+        <div class="right">
+            <div class="top">
+                <h1>Cadastro</h1>
+            </div>
+
+            <form action="" method="POST">
+                <input type="text" name="name" id="name" placeholder="Nome">
+                <input type="email" name="email" id="email" placeholder="Email">
+                <input type="password" name="password" id="password" placeholder="Senha">
+                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirmar senha">
+                <input type="submit" class="submitBtn" value="Cadastrar-se">
+            </form>
+        </div>
     </div>
 
     <footer>
         <div class="left"></div>
 
         <div class="logo btn">
-            <a href="#"><i class="fas fa-box-open"></i></a>
+            <a href="home.php"><i class="fas fa-box-open"></i></a>
         </div>
 
         <div class="right">
