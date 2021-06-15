@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -24,7 +27,12 @@
                 </a>
             </div>
         </div>
-
+        <?php 
+            if($_GET['erro'] == 1)
+                echo "<div class='error-login'>Login ou senha estão invalidos!</div>";
+            if($_GET['erro'] == 2)
+                echo "<div class='error-login'>Email já cadastrado! <a class='btn' href='login.php'>Faça login</a></div>";
+        ?>
         <form action="" onsubmit="return registerValidate(event)" method="POST">
             <input type="text" name="name" id="name" placeholder="Nome">
             <input type="email" name="email" id="email" placeholder="Email">
@@ -58,24 +66,28 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['name'
                 $emailcheck = pg_query($conecta,"SELECT * FROM usuario where email='{$emailU}'");
                 $count = pg_num_rows($emailcheck);
                 if($count > 0){
-                        print_r( "Email Already Registered -> login");
-                
+                    header("Location: register.php?erro=2");
+                    exit();
                 }else{
                         //INSERT INTO usuario VALUES(DEFAULT,'{$nomeU}','{$emailU}',md5('{$senhaU}') )
                         $sql = "INSERT INTO usuario VALUES(DEFAULT,'{$nomeU}','{$emailU}',md5('{$senhaU}') )";
-                        $ret = pg_query($conecta, $sql);
-                        echo"aaaa";
-                        if($ret){
-                                print_r( "Data saved Successfully");
-				
+                        $return = pg_query($conecta, $sql);
+ 
+                        if($return){
+                            //print_r( "Data saved Successfully");
+                            $_SESSION['isAuth'] = TRUE;
+                            $linha = pg_fetch_array($return);
+                            $_SESSION['idUser'] = $linha['iduser'];
+                            header("Location: home.php");
+                            exit();
                         }else{
-                        
-                                print_r(  "Something Went Wrong");
+                            //print_r(  "Something Went Wrong");
+                            header("Location: register.php?erro=1");
+                            exit();
                         }
                 }   
         }else{  
-                //echo "<br>Invalid Details";
-                header("Location: register.php");
+                header("Location: register.php?erro=1");
                 exit();
         }
 }

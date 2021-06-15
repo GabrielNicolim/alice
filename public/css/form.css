@@ -27,6 +27,16 @@ body {
     font-size: 1.5em;
 }
 
+.container .error-login {
+    padding: 10px;
+    width: 100%;
+    color: white;
+    background:rgb(224, 24, 64);
+    text-align: center;
+    margin-bottom: 2em;
+    border-radius: 8px;
+}
+
 .container form {
     margin: 0 auto;
 }

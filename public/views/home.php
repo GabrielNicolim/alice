@@ -1,9 +1,6 @@
 <?php
     session_start();
-    if(!isset($_SESSION['isAuth'])){
-        header("Location: login.php ");
-	exit();
-    }
+    require_once("../../php/loginValidation.php");
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -43,7 +40,7 @@
                 <div class="menu-btn">Home</div>
             </a>
     
-            <a href="">
+            <a href="user.php">
                 <div class="menu-btn">Usuário</div>
             </a>
 

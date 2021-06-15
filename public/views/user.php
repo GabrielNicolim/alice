@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    require("../../php/loginValidation.php");
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -58,20 +63,23 @@
 
             <div class="statics">
                 <div id="statics-field">
+                    
                     <div class="field">Registros</div>
-                    <span class="full-screen">241421</span>
+                    <?php echo"<span class='full-screen'>".$_SESSION['idUser']."</span>"; ?>
     
                     <div class="field">Valor em Estoque</div>
-                    <span class="full-screen">R$ 312321</span>
+                    <?php echo"<span class='full-screen'>R$ 312321</span>"; ?>
     
                     <div class="field">Tipos em Estoque</div>
-                    <span class="full-screen">4323</span>
+                    <?php echo"<span class='full-screen'>4323</span>"; ?>
                 </div>
 
                 <div class="responsive">
-                    <span>241421</span>
-                    <span>R$ 312321</span>
-                    <span>4323</span>
+                    <?php 
+                    echo "<span> ".$_SESSION['idUser']."</span>";
+                    echo "<span>R$ 312321</span>";
+                    echo "<span>4323</span>";
+                    ?>
                 </div>
             </div>
         </div>
@@ -108,3 +116,13 @@
     <script src="../scripts/registerValidate.js"></script>
 </body>
 </html>
+
+<?php
+
+    $sql = "SELECT * FROM usuario WHERE email ='{$emailU}' AND senha = md5('{$senhaU}')";
+    
+
+    $resultado = pg_query($conecta, $sql);  echo $resultado;
+    $login_check = pg_num_rows($resultado);
+
+?>

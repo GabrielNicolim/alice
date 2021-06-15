@@ -32,7 +32,10 @@
                 </a>
             </div>
         </div>
-		
+		<?php 
+            if($_GET['erro'])
+            echo "<div class='error-login'>Login ou senha estão invalidos!</div>"; 
+        ?>
         <form action="" onsubmit="return loginValidate(event)" method="POST">
             <input type="email" name="email" id="email" placeholder="Email">
             <input type="password" name="password" id="password" placeholder="Senha">
@@ -68,23 +71,22 @@ if(!empty($_POST['email']) && !empty($_POST['password'])){
 
             $sql = "SELECT * FROM usuario WHERE email ='{$emailU}' AND senha = md5('{$senhaU}')";
             
-            $resultado = pg_query($conecta, $sql);  echo $resultado;
-            $login_check = pg_num_rows($resultado);
+            $return = pg_query($conecta, $sql);
+            $login_check = pg_num_rows($return);
             
             if($login_check > 0){ 
                 
-                //echo "<br>Login Successfully";
                 unset($_SESSION['OLD_DATA']);
-                $_SESSION['usuario'] = $emailU;
-                $_SESSION['isAuth'] = true;
-        
-                //redireciona a pessoa para a home     
+                $_SESSION['isAuth'] = TRUE;
+                $linha = pg_fetch_array($return);
+                $_SESSION['idUser'] = $linha['iduser'];  
+
                 header("Location: home.php");
                 exit();
         
             }else{  
-                //echo "<br>Invalid Details";
-                header("Location: login.php"); 
+                //echo Invalid Details
+                header("Location: login.php?erro=1");
                 exit();
             }
         } catch (PDOException $e) {
