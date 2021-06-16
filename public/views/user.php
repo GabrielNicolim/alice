@@ -1,6 +1,41 @@
 <?php
     session_start();
+    require_once("../../php/conexao.php");
     require("../../php/loginValidation.php");
+    $sql = "SELECT * FROM usuario WHERE iduser = '{$_SESSION['idUser']}' ";
+
+    $return = pg_query($conecta, $sql);
+    $login_check = pg_num_rows($return);
+    
+    if($login_check > 0){
+          
+        $linha = pg_fetch_array($return);
+
+        $nome = $linha['nome'];
+        $id = $_SESSION['idUser'];
+        $email = $linha['email'];
+
+        //Quantidade de registros
+        $sql = "SELECT COUNT(*) FROM registros WHERE '{$_SESSION['idUser']}' = fk_user";
+        $return = pg_fetch_row(pg_query($conecta, $sql));    
+        $numRegistros = $return[0];
+
+        //Calcular o valor total do estoque
+        $sql = "SELECT valorprod,qntprod FROM registros WHERE '{$_SESSION['idUser']}' = fk_user";
+        $return = pg_fetch_all(pg_query($conecta, $sql));
+        $valor = 0;
+        foreach($return as $i){
+            $valor = $valor + $i['valorprod']*$i['qntprod'];
+        }
+
+        //Monta os tipos
+        $sql = "SELECT tipoprod FROM registros WHERE '{$_SESSION['idUser']}' = fk_user GROUP BY tipoprod ORDER BY tipoprod";
+        $tipo = pg_fetch_all(pg_query($conecta, $sql));
+
+        //echo"<pre>";
+        //print_r($tipo);
+        //echo"</pre>";
+    }
 ?>
 
 <!DOCTYPE html>
@@ -58,27 +93,33 @@
     <div class="container">
         <div class="left">
             <div class="welcome">
-                Olá usuário!
+                Olá usuário!<br> <?php echo$nome; ?>
             </div>
 
             <div class="statics">
                 <div id="statics-field">
                     
                     <div class="field">Registros</div>
-                    <?php echo"<span class='full-screen'>".$_SESSION['idUser']."</span>"; ?>
+                    <?php echo"<span class='full-screen'>".$numRegistros."</span>"; ?>
     
                     <div class="field">Valor em Estoque</div>
-                    <?php echo"<span class='full-screen'>R$ 312321</span>"; ?>
+                    <?php echo"<span class='full-screen'>R$ ".$valor."</span>";?>
     
                     <div class="field">Tipos em Estoque</div>
-                    <?php echo"<span class='full-screen'>4323</span>"; ?>
+                    <?php 
+                    echo"<span class='full-screen'>";
+                    foreach($tipo as $i){
+                        echo$i['tipoprod'].", ";
+                    }
+                    echo"</span>";
+                    ?>
                 </div>
 
                 <div class="responsive">
-                    <?php 
-                    echo "<span> ".$_SESSION['idUser']."</span>";
-                    echo "<span>R$ 312321</span>";
-                    echo "<span>4323</span>";
+                    <?php
+                    echo "<span>".$email."</span>";
+                    echo "<span>".$id."</span>";
+                    echo "<span>".$nome."</span>";
                     ?>
                 </div>
             </div>
@@ -90,10 +131,14 @@
             </div>
 
             <form action="" onsubmit="return registerValidate(event)" method="POST">
-                <input type="text" name="name" id="name" placeholder="Nome">
-                <input type="email" name="email" id="email" placeholder="Email">
-                <input type="password" name="password" id="password" placeholder="Senha">
-                <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirmar senha">
+                <?php 
+                echo"<div class=''''>Nome</div>";
+                echo"<input type='text' name='name' id='name' value='$nome'>";
+                echo"<div class=''''>Email</div>";
+                echo"<input type='email' name='email' id='email' value='$email'>";
+                echo"<input type='password' name='password' id='password' placeholder='Senha'>";
+                echo"<input type='password' name='confirmPassword' id='confirmPassword' placeholder='Confirmar senha'>";
+                ?>
                 <input type="submit" class="submitBtn" value="Salvar">
             </form>
         </div>
@@ -116,13 +161,3 @@
     <script src="../scripts/registerValidate.js"></script>
 </body>
 </html>
-
-<?php
-
-    $sql = "SELECT * FROM usuario WHERE email ='{$emailU}' AND senha = md5('{$senhaU}')";
-    
-
-    $resultado = pg_query($conecta, $sql);  echo $resultado;
-    $login_check = pg_num_rows($resultado);
-
-?>

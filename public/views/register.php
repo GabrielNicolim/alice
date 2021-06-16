@@ -74,9 +74,12 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['name'
                         $return = pg_query($conecta, $sql);
  
                         if($return){
+                            $sql = "SELECT iduser FROM usuario WHERE email ='{$emailU}' AND senha = md5('{$senhaU}')";
+                            
+                            $linha = pg_fetch_array(pg_query($conecta, $sql));
+
                             //print_r( "Data saved Successfully");
                             $_SESSION['isAuth'] = TRUE;
-                            $linha = pg_fetch_array($return);
                             $_SESSION['idUser'] = $linha['iduser'];
                             header("Location: home.php");
                             exit();

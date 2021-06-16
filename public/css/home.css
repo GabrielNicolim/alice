@@ -7,7 +7,7 @@
 .add .left{
     margin: 1em;
     padding: 10px;
-    width: 250px;
+    width: 300px;
     border-radius: 8px;
     background: rgb(70, 99, 206);
     border: 2px solid rgb(46, 82, 214);
@@ -34,8 +34,8 @@
 
 .container .box {
     background: white;
-    height: 250px;
-    width: 250px;
+    height: 300px;
+    width: 300px;
     margin: 1em 1em;
     position: relative;
     border-radius: 8px;

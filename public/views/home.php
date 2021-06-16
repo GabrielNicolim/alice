@@ -1,6 +1,7 @@
 <?php
     session_start();
     require_once("../../php/loginValidation.php");
+    require_once("../../php/conexao.php");
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -17,6 +18,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/menu.css">
     <link rel="stylesheet" href="../css/home.css">
+ 
 </head>
 <body>
     <!-- Header -->
@@ -69,34 +71,54 @@
     <div class="container">
 
         <!-- Base box -->
-        <div class="box">
-            <div class="title">
-                Name
-            </div>
+        <?php
 
-            <div class="data">
-                <div class="quantity">
-                    Quantidade
-                </div>
+            $sql = "SELECT nomeprod,qntprod,tipoprod,valorprod FROM registros WHERE '{$_SESSION['idUser']}' = fk_user";
 
-                <span>123</span>
+            $return = pg_query($conecta, $sql);
+            $linha = pg_fetch_all($return);
+            $numero = pg_num_rows($return);
 
-                <div class="type">
-                    Tipo
-                </div>
+            //print('<pre>');
+            //print_r($linha);
+            //print('</pre>');
 
-                <span>Eletrônico</span>
-            </div>
+            //Irá instanciar a matriz com os registros e seus arrays internos de dados, printando td na tela
+            foreach($linha as $obj){
+            
+                echo"<div class='box'>";
+                echo"<div class='title'>";
+                        echo"<span>".$obj['nomeprod']."</span>";
+                echo"</div>";
 
-            <div class="edit">
-                <a href="#">Editar</a>
-            </div>
-        </div>
+                    echo"<div class='data'>";
+                        echo"<div class='quantity'>";
+                            echo"Quantidade";
+                        echo"</div>";
+                        echo"<span>".$obj['qntprod']."</span>";
 
+                        echo"<div class='type'>";
+                            echo"Tipo";
+                        echo"</div>";
+                        echo"<span>".$obj['tipoprod']."</span>";
+
+                        echo"<div class='type'>";
+                            echo"Valor";
+                        echo"</div>";
+                        echo"<span>".$obj['valorprod']."</span>";
+
+                    echo"</div>";
+
+                    echo"<div class='edit'>";
+                        echo"<a href='#'>Editar</a>";
+                    echo"</div>";
+                echo"</div>";
+            }
+        ?>
         <!-- End Base box -->
 
     </div>
-
+         
     <footer>
         <div class="left"></div>
 
@@ -109,6 +131,7 @@
         </div>
     </footer>
 
+    <!-- Formulário para receber dados -->
     <div id="shadow" class="hidden" onclick="closeCreate()"></div>
     <div id="create" class="hidden">
         <div class="top">
@@ -118,11 +141,10 @@
                     <i class="fas fa-times-circle btn"></i>
             </div>
         </div>
-
         <form action="" onsubmit="return registerValidate(event)" method="POST">
             <input type="text" name="name" id="name" placeholder="Nome">
             <input type="number" name="quantity" id="quantity" placeholder="Quantidade">
-            <input type="number" name="price" id="price" placeholder="Preço">
+            <input type="number" name="price" min="0" step=".01" id="price" placeholder="Preço">
             <input type="text" name="type" id="type" placeholder="Tipo">
             <input type="submit" class="submitBtn" value="Adicionar">
         </form>
@@ -132,3 +154,38 @@
     <script src="../scripts/createShow.js"></script>
 </body>
 </html>
+
+<?php
+
+    $sql = "SELECT * FROM usuario WHERE iduser = '{$_SESSION['idUser']}' ";
+
+    $return = pg_query($conecta, $sql);
+    $login_check = pg_num_rows($return);
+    
+    if(!empty($_POST['name']) && !empty($_POST['quantity']) && !empty($_POST['price']) && !empty($_POST['type']) ){
+        if($login_check > 0){
+
+            $nome = $_POST['name'];
+            $qnt = $_POST['quantity'];
+            $preco = $_POST['price'];
+            $tipo = $_POST['type'];
+
+            //$linha = pg_fetch_array($return);
+
+            $sql = "INSERT INTO registros VALUES(DEFAULT,'{$nome}','{$qnt}','{$tipo}','{$preco}','FALSE','{$_SESSION['idUser']}' )";
+
+            $return = pg_query($conecta, $sql);
+    
+            if($return){
+                print_r( "Data saved Successfully");
+                header('location: home.php');
+                exit;
+            }else{
+                print_r(  "Something Went Wrong");
+                //header("Location: register.php?erro=1");
+                //exit();
+            }
+            
+        }
+    }
+?>
