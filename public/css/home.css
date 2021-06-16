@@ -51,6 +51,13 @@
     border-radius: 8px 8px 0 0;
 }
 
+.container .box .title .trash{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+}
+
 .container .box .quantity,
 .container .box .type {
     background: rgb(236, 236, 236);
@@ -81,7 +88,7 @@
     font-size: 1.4em;
 }
 
-.container .box .edit a {
+.container .box .edit {
     color: black;
     display: block;
     border-radius: 0 0 8px 8px;
@@ -90,9 +97,10 @@
     width: 100%;
     padding: 10px 0;
     bottom: 0;
+    cursor: pointer;
 }
 
-.container .box .edit a:hover {
+.container .box .edit:hover {
     background: rgb(224, 24, 64); 
     border: 2px solid rgb(224, 24, 64);
     color: white;
@@ -110,7 +118,9 @@
     z-index: 1000;
 }
 
-#create {
+#create, 
+#edit,
+#exclude {
     position: fixed;
     left: 30%;
     margin-left: -50px;
@@ -122,7 +132,9 @@
     border-radius: 8px;
 }
 
-#create .top {
+#create .top,
+#edit .top,
+#exclude .top {
     display: flex;
     justify-content: space-between;
     font-size: 1.8em;
@@ -130,21 +142,29 @@
     margin: .5em auto;
 }
 
-#create .top h3 {
+#create .top h3,
+#edit .top h3,
+#exclude .top h3 {
     color: rgb(224, 24, 64);
 }
 
-#create form {
+#create form,
+#edit form,
+#exclude form {
     width: 80%;
     margin: 1em auto;
 }
 
-#create form input {
+#create form input,
+#edit form input,
+#exclude form input {
     width: 100%;
 }
 
 #create input,
-.submitBtn  {
+#edit input,
+#exclude input,
+.submitBtn {
     width: 100%;
     padding: 15px 10px;
     font-size: 1.2em;
@@ -153,21 +173,26 @@
     outline: 0;
 }
 
-#create  input:not(:last-child) {
+#exclude input:disabled {
+    background: rgb(226, 226, 226);
+}
+
+#create input:not(:last-child),
+#edit input:not(:last-child),
+#exclude input:not(:last-child) {
     margin-bottom: 1.5em;
 }
 
-#create input::placeholder {
-    font-weight: 500;
-    text-transform: capitalize;
-}
-
-#create .submitBtn {
+#create .submitBtn,
+#edit .submitBtn,
+#exclude .submitBtn {
     font-weight: 500;
     text-align: center;
 }
 
-#create .submitBtn:hover {
+#create .submitBtn:hover,
+#edit .submitBtn:hover,
+#exclude .submitBtn:hover {
     background: rgb(224, 24, 64);
     border: 2px solid rgb(224, 24, 64);
     color: white;
@@ -187,18 +212,24 @@
 }
 
 @media only screen and (max-width: 750px){
-    #create {
+    #create,
+    #edit,
+    #exclude {
         left: 10%;
         width: 90%;
         padding: 2em 1em;
         margin-left: -30px;
     }    
 
-    #create .top {
+    #create .top,
+    #edit .top,
+    #exclude .top {
         width: 90%;
     }
     
-    #create form {
+    #create form,
+    #edit form,
+    #exclude form {
         width: 90%;
     }
 }
@@ -224,7 +255,9 @@
         width: 100% 
     }
 
-    #create {
+    #create,
+    #edit,
+    #exclude {
         width: 100%;
         height: 100%;
         margin-left: .1em;

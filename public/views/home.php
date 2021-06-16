@@ -86,9 +86,11 @@
             //Irá instanciar a matriz com os registros e seus arrays internos de dados, printando td na tela
             foreach($linha as $obj){
             
-                echo"<div class='box'>";
+                echo"<div class='box' id=''>";
                 echo"<div class='title'>";
                         echo"<span>".$obj['nomeprod']."</span>";
+
+                        echo"<i class="fas fa-trash-alt trash" onclick="openExclude(<!-- Colocar id -->)"></i>";
                 echo"</div>";
 
                     echo"<div class='data'>";
@@ -109,8 +111,8 @@
 
                     echo"</div>";
 
-                    echo"<div class='edit'>";
-                        echo"<a href='#'>Editar</a>";
+                    echo"<div class='edit' onclick="openEdit()">";
+                        echo"Editar";
                     echo"</div>";
                 echo"</div>";
             }
@@ -131,11 +133,11 @@
         </div>
     </footer>
 
-    <!-- Formulário para receber dados -->
-    <div id="shadow" class="hidden" onclick="closeCreate()"></div>
+    <!-- Create -->
+    <div id="shadow" class="hidden" onclick="closeCreate(),closeEdit(), closeExclude()"></div>
     <div id="create" class="hidden">
         <div class="top">
-            <h3>Create</h3>
+            <h3>Criar</h3>
 
             <div class="close" onclick="closeCreate()">
                     <i class="fas fa-times-circle btn"></i>
@@ -150,8 +152,45 @@
         </form>
     </div>
 
+    <!-- Edit -->
+    <div id="edit" class="hidden">
+        <div class="top">
+            <h3>Editar</h3>
+
+            <div class="close" onclick="closeEdit()">
+                    <i class="fas fa-times-circle btn"></i>
+            </div>
+        </div>
+        <form action="" onsubmit="return createValidate(event)" method="POST">
+            <input type="text" name="name" id="name" placeholder="Nome">
+            <input type="number" name="quantity" id="quantity" placeholder="Quantidade">
+            <input type="number" name="price" min="0" step=".01" id="price" placeholder="Preço">
+            <input type="text" name="type" id="type" placeholder="Tipo">
+            <input type="submit" class="submitBtn" value="Adicionar">
+        </form>
+    </div>
+
+    <!-- Exclude -->
+    <div id="exclude" class="hidden">
+        <div class="top">
+            <h3>Excluir</h3>
+
+            <div class="close" onclick="closeExclude()">
+                    <i class="fas fa-times-circle btn"></i>
+            </div>
+        </div>
+
+        <form action="">
+            <input type="text" name="name" id="name" placeholder="Nome" disabled>
+            <input type="number" name="quantity" id="quantity" placeholder="Quantidade" disabled>
+            <input type="number" name="price" min="0" step=".01" id="price" placeholder="Preço" disabled>
+            <input type="text" name="type" id="type" placeholder="Tipo" disabled>
+            <input type="submit" class="submitBtn" value="Confirmar">
+        </form>
+    </div>
+
     <script src="../scripts/menuShow.js"></script>
-    <script src="../scripts/createShow.js"></script>
+    <script src="../scripts/modalShow.js"></script>
     <script src="../scripts/formValidate.js"></script>
     <script src="../scripts/createValidate.js"></script>
 </body>
