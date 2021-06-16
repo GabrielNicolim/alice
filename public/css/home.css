@@ -125,10 +125,9 @@
 #create .top {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 1em;
     font-size: 1.8em;
     width: 80%;
-    margin: 1em auto;
+    margin: .5em auto;
 }
 
 #create .top h3 {
@@ -137,7 +136,7 @@
 
 #create form {
     width: 80%;
-    margin: 0 auto;
+    margin: 1em auto;
 }
 
 #create form input {
@@ -174,6 +173,17 @@
     color: white;
     transition: 400ms;
     cursor: pointer;
+}
+
+/* Error */
+
+.error {
+    border: 2px solid rgb(224, 24, 64) !important; 
+}
+
+.error::placeholder {
+    color: rgb(224, 24, 64);
+    font-size: .9em;
 }
 
 @media only screen and (max-width: 750px){
