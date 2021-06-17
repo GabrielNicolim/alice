@@ -7,17 +7,17 @@ const excludeInput = window.document.getElementById('excludeInput')
 
 // Edit 
 
-const editName = window.document.getElementsById("editName")
-const editQuantity = window.document.getElementsById("editQuantity")
-const editPrice = window.document.getElementsById("editPrice")
-const editType = window.document.getElementsById("editType")
+const editName = window.document.getElementById("editName")
+const editQuantity = window.document.getElementById("editQuantity")
+const editPrice = window.document.getElementById("editPrice")
+const editType = window.document.getElementById("editType")
 
 // Exclude 
 
-const excludeName = window.document.getElementsById("excludeName")
-const excludeQuantity = window.document.getElementsById("excludeQuantity")
-const excludePrice = window.document.getElementsById("excludePrice")
-const excludeType = window.document.getElementsById("excludeType")
+const excludeName = window.document.getElementById("excludeName")
+const excludeQuantity = window.document.getElementById("excludeQuantity")
+const excludePrice = window.document.getElementById("excludePrice")
+const excludeType = window.document.getElementById("excludeType")
 
 function openCreate() {
     shadow.classList = ''
@@ -34,10 +34,10 @@ function openEdit(id) {
     edit.classList = ''
     editInput.value = id
 
-    editName.value = window.document.getElementById("name" + id)
-    editQuantity.value = window.document.getElementById("qnt" + id)
-    editType.value = window.document.getElementById("typ" + id)
-    editValue.value = window.document.getElementById("val" + id)
+    editName.value = window.document.getElementById("name" + id).innerText
+    editQuantity.value = window.document.getElementById("qnt" + id).innerText
+    editType.value = window.document.getElementById("typ" + id).innerText
+    editPrice.value = window.document.getElementById("val" + id).innerText
 }
 
 function closeEdit() {
@@ -60,8 +60,8 @@ function openExclude(id) {
     exclude.classList = ''
     excludeInput.value = id
 
-    excludeName.value = window.document.getElementById("name" + id)
-    excludeQuantity.value = window.document.getElementById("qnt" + id)
-    excludeType.value = window.document.getElementById("typ" + id)
-    excludeValue.value = window.document.getElementById("val" + id)
+    excludeName.placeholder = window.document.getElementById("name" + id).innerText
+    excludeQuantity.placeholder = window.document.getElementById("qnt" + id).innerText
+    excludeType.placeholder = window.document.getElementById("typ" + id).innerText
+    excludePrice.placeholder = window.document.getElementById("val" + id).innerText
 }
