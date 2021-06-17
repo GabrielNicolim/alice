@@ -2,6 +2,7 @@
     session_start();
     require_once("../../php/loginValidation.php");
     require_once("../../php/conexao.php");
+    include("../../php/insertData.php");
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -71,26 +72,26 @@
     <div class="container">
 
         <!-- Base box -->
-        <?php
+        <?php 
 
-            $sql = "SELECT nomeprod,qntprod,tipoprod,valorprod FROM registros WHERE '{$_SESSION['idUser']}' = fk_user";
+            $sql = "SELECT idregistro,nomeprod,qntprod,tipoprod,valorprod FROM registros WHERE '{$_SESSION['idUser']}' = fk_user AND excluido = 'FALSE'";
 
             $return = pg_query($conecta, $sql);
-            $linha = pg_fetch_all($return);
+            $_SESSION['ids'] = pg_fetch_all($return);
             $numero = pg_num_rows($return);
 
             //print('<pre>');
             //print_r($linha);
             //print('</pre>');
 
-            //Irá instanciar a matriz com os registros e seus arrays internos de dados, printando td na tela
-            foreach($linha as $obj){
-            
-                echo"<div class='box' id=''>";
+            //Irá instanciar a matriz com os registros e seus arrays internos de dados, printando a informação na tela
+            foreach($_SESSION['ids'] as $obj){
+                
+                echo"<div class='box'>";
                 echo"<div class='title'>";
-                        echo"<span>".$obj['nomeprod']."</span>";
+                        echo"<span>".$obj['nomeprod']; if($obj['nomeprod'] == ' ' || $obj['nomeprod'] == '' || $obj['nomeprod'] == null) echo"Registro #".$obj['idregistro']."</span>";
 
-                        echo"<i class="fas fa-trash-alt trash" onclick="openExclude(<!-- Colocar id -->)"></i>";
+                        echo"<i class='fas fa-trash-alt trash' onclick='openExclude(".$obj['idregistro'].")'></i>";
                 echo"</div>";
 
                     echo"<div class='data'>";
@@ -98,7 +99,7 @@
                             echo"Quantidade";
                         echo"</div>";
                         echo"<span>".$obj['qntprod']."</span>";
-
+                    
                         echo"<div class='type'>";
                             echo"Tipo";
                         echo"</div>";
@@ -111,7 +112,7 @@
 
                     echo"</div>";
 
-                    echo"<div class='edit' onclick="openEdit()">";
+                    echo"<div class='edit' onclick='openEdit(".$obj['idregistro'].")'>";
                         echo"Editar";
                     echo"</div>";
                 echo"</div>";
@@ -120,7 +121,7 @@
         <!-- End Base box -->
 
     </div>
-         
+
     <footer>
         <div class="left"></div>
 
@@ -143,7 +144,7 @@
                     <i class="fas fa-times-circle btn"></i>
             </div>
         </div>
-        <form action="" onsubmit="return createValidate(event)" method="POST">
+        <form action="../../php/insertData.php" onsubmit="return createValidate(event);" method="POST">
             <input type="text" name="name" id="name" placeholder="Nome">
             <input type="number" name="quantity" id="quantity" placeholder="Quantidade">
             <input type="number" name="price" min="0" step=".01" id="price" placeholder="Preço">
@@ -161,8 +162,9 @@
                     <i class="fas fa-times-circle btn"></i>
             </div>
         </div>
-        <form action="" onsubmit="return createValidate(event)" method="POST">
-            <input type="text" name="name" id="name" placeholder="Nome">
+        <form action="../../php/editData.php" onsubmit="return createValidate(event)" method="POST">
+            <input type="text" class="hidden" name="editInput" id="editInput">
+            <input type="text" name="name" id="name" placeholder="Nome" value="">
             <input type="number" name="quantity" id="quantity" placeholder="Quantidade">
             <input type="number" name="price" min="0" step=".01" id="price" placeholder="Preço">
             <input type="text" name="type" id="type" placeholder="Tipo">
@@ -170,7 +172,7 @@
         </form>
     </div>
 
-    <!-- Exclude -->
+    <!-- Exclude: exclusão lógica-->
     <div id="exclude" class="hidden">
         <div class="top">
             <h3>Excluir</h3>
@@ -180,7 +182,8 @@
             </div>
         </div>
 
-        <form action="">
+        <form action="../../php/deleteData.php" method="POST">
+            <input type="text" class="hidden" name="exclude" id="excludeInput">
             <input type="text" name="name" id="name" placeholder="Nome" disabled>
             <input type="number" name="quantity" id="quantity" placeholder="Quantidade" disabled>
             <input type="number" name="price" min="0" step=".01" id="price" placeholder="Preço" disabled>
@@ -195,38 +198,3 @@
     <script src="../scripts/createValidate.js"></script>
 </body>
 </html>
-
-<?php
-
-    $sql = "SELECT * FROM usuario WHERE iduser = '{$_SESSION['idUser']}' ";
-
-    $return = pg_query($conecta, $sql);
-    $login_check = pg_num_rows($return);
-    
-    if(!empty($_POST['name']) && !empty($_POST['quantity']) && !empty($_POST['price']) && !empty($_POST['type']) ){
-        if($login_check > 0){
-
-            $nome = $_POST['name'];
-            $qnt = $_POST['quantity'];
-            $preco = $_POST['price'];
-            $tipo = $_POST['type'];
-
-            //$linha = pg_fetch_array($return);
-
-            $sql = "INSERT INTO registros VALUES(DEFAULT,'{$nome}','{$qnt}','{$tipo}','{$preco}','FALSE','{$_SESSION['idUser']}' )";
-
-            $return = pg_query($conecta, $sql);
-    
-            if($return){
-                print_r( "Data saved Successfully");
-                header('location: home.php');
-                exit;
-            }else{
-                print_r(  "Something Went Wrong");
-                //header("Location: register.php?erro=1");
-                //exit();
-            }
-            
-        }
-    }
-?>
