@@ -4,8 +4,8 @@
 if(!empty($_POST['email']) && !empty($_POST['password'])){
     require_once("conexao.php");
     
-    $emailU = pg_escape_string( clean($_POST['email']) );
-    $senhaU = pg_escape_string( clean($_POST['password']) );
+    $emailU = cleanString($_POST['email']);
+    $senhaU = cleanString($_POST['password']);
 
     //Se os campos não estiverem vazios depois da limpeza:
     if(!empty($emailU) && !empty($senhaU)){

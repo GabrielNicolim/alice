@@ -9,8 +9,13 @@
     }
         
 
-    function clean($string) {
-        return preg_replace('/[^A-Za-z0-9\@\.]/', '', $string); // Sanitiza a string
+    function cleanString($string) {
+        $badWords = array('DROP','TABLE','GROUP BY');      
+        return preg_replace('/[^A-Za-z0-9\@\.\,\s]/', '', str_replace($badWords, '', $string));
+    }
+
+    function cleanNumber($string) {
+        return preg_replace('/[^0-9\.\,]/', '', $string);
     }
 
 ?>
