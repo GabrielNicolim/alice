@@ -107,6 +107,11 @@
     visibility: hidden;
 }
 
+.little-title{
+    margin-left: 15%;
+    font-weight: 800;
+}
+
 @media only screen and (max-width: 767px) {
     .container {
         display: block;
@@ -165,6 +170,10 @@
 
     .container .right .top {
         width: 100%;
+    }
+
+    .little-title{
+        margin-left: 1%;
     }
 
     .container input,

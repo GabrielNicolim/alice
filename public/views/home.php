@@ -63,14 +63,17 @@
 
             <span>
                 Add new 
-            </span>
+            </span> 
         </div>
-
-        <div></div> <!-- Futura busca -->
+        <!--
+        <div class="right">
+            <form action="" class="fas fa-plus left">
+                Pesquisa <input type="text">
+            </form>
+        </div>  Futura busca -->
     </div>
 
     <div class="container">
-
         <!-- Base box -->
         <?php 
 
@@ -89,7 +92,7 @@
                 
                 echo"<div class='box'>";
                 echo"<div class='title'>";
-                        echo"<span>".$obj['nomeprod']; if($obj['nomeprod'] == ' ' || $obj['nomeprod'] == '' || $obj['nomeprod'] == null) echo"Registro #".$obj['idregistro']."</span>";
+                        echo"<span>".$obj['nomeprod']; if( $obj['nomeprod'] == '' || $obj['nomeprod'] == ' ' || $obj['nomeprod'] == null) echo"Registro #".$obj['idregistro']."</span>";
 
                         echo"<i class='fas fa-trash-alt trash' onclick='openExclude(".$obj['idregistro'].")'></i>";
                 echo"</div>";
@@ -164,7 +167,7 @@
         </div>
         <form action="../../php/editData.php" onsubmit="return createValidate(event)" method="POST">
             <input type="text" class="hidden" name="editInput" id="editInput">
-            <input type="text" name="name" id="name" placeholder="Nome" value="">
+            <input type="text" name="name" id="name" value="<?php echo"aaaa"; ?>">
             <input type="number" name="quantity" id="quantity" placeholder="Quantidade">
             <input type="number" name="price" min="0" step=".01" id="price" placeholder="Preço">
             <input type="text" name="type" id="type" placeholder="Tipo">
@@ -181,10 +184,10 @@
                     <i class="fas fa-times-circle btn"></i>
             </div>
         </div>
-
+        
         <form action="../../php/deleteData.php" method="POST">
             <input type="text" class="hidden" name="exclude" id="excludeInput">
-            <input type="text" name="name" id="name" placeholder="Nome" disabled>
+            <input type="text" name="name" id="name" value="<?php $exclusao = $_POST['exclude'];  echo$exclusao; ?>" disabled>
             <input type="number" name="quantity" id="quantity" placeholder="Quantidade" disabled>
             <input type="number" name="price" min="0" step=".01" id="price" placeholder="Preço" disabled>
             <input type="text" name="type" id="type" placeholder="Tipo" disabled>

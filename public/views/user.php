@@ -16,12 +16,12 @@
         $email = $linha['email'];
 
         //Quantidade de registros
-        $sql = "SELECT COUNT(*) FROM registros WHERE '{$_SESSION['idUser']}' = fk_user";
+        $sql = "SELECT COUNT(*) FROM registros WHERE '{$_SESSION['idUser']}' = fk_user AND excluido = 'FALSE'";
         $return = pg_fetch_row(pg_query($conecta, $sql));    
         $numRegistros = $return[0];
 
         //Calcular o valor total do estoque
-        $sql = "SELECT valorprod,qntprod FROM registros WHERE '{$_SESSION['idUser']}' = fk_user";
+        $sql = "SELECT valorprod,qntprod FROM registros WHERE '{$_SESSION['idUser']}' = fk_user AND excluido = 'FALSE'";
         $return = pg_fetch_all(pg_query($conecta, $sql));
         $valor = 0;
         foreach($return as $i){
@@ -29,7 +29,7 @@
         }
 
         //Monta os tipos
-        $sql = "SELECT tipoprod FROM registros WHERE '{$_SESSION['idUser']}' = fk_user GROUP BY tipoprod ORDER BY tipoprod";
+        $sql = "SELECT tipoprod FROM registros WHERE '{$_SESSION['idUser']}' = fk_user AND excluido = 'FALSE' GROUP BY tipoprod ORDER BY tipoprod";
         $tipo = pg_fetch_all(pg_query($conecta, $sql));
 
         //echo"<pre>";
@@ -130,11 +130,11 @@
                 <h1>Alterar Dados</h1>
             </div>
 
-            <form action="" onsubmit="return registerValidate(event)" method="POST">
+            <form action="../../php/changeUserData.php" onsubmit="return registerValidate(event)" method="POST">
                 <?php 
-                echo"<div class=''''>Nome</div>";
+                echo"<div class='little-title'>Nome</div>";
                 echo"<input type='text' name='name' id='name' value='$nome'>";
-                echo"<div class=''''>Email</div>";
+                echo"<div class='little-title'>Email</div>";
                 echo"<input type='email' name='email' id='email' value='$email'>";
                 echo"<input type='password' name='password' id='password' placeholder='Senha'>";
                 echo"<input type='password' name='confirmPassword' id='confirmPassword' placeholder='Confirmar senha'>";
