@@ -11,9 +11,9 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['name'
 
         require_once("conexao.php");
 
-        $nomeU = clean($_POST['name']);
-        $emailU = clean($_POST['email']);
-        $senhaU = clean($_POST['password']);
+        $nomeU = cleanString($_POST['name']);
+        $emailU = cleanString($_POST['email']);
+        $senhaU = cleanString($_POST['password']);
 
         if(!empty($emailU) && !empty($senhaU) && !empty($nomeU) ){
 
