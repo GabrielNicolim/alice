@@ -57,9 +57,9 @@ if(!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['name'
 
         require_once("../../php/conexao.php");
 
-        $nomeU = pg_escape_string( clean($_POST['name']) );
-        $emailU = pg_escape_string( clean($_POST['email']) );
-        $senhaU = pg_escape_string( clean($_POST['password']) );
+        $nomeU = pg_escape_string( cleanString($_POST['name']) );
+        $emailU = pg_escape_string( cleanString($_POST['email']) );
+        $senhaU = pg_escape_string( cleanString($_POST['password']) );
 
         if(!empty($emailU) && !empty($senhaU) && !empty($nomeU) ){
 
