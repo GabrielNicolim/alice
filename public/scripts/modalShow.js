@@ -22,6 +22,7 @@ const excludeType = window.document.getElementById("excludeType")
 function openCreate() {
     shadow.classList = ''
     create.classList = ''
+    closeMenu()
 }
 
 function closeCreate() {
@@ -38,6 +39,7 @@ function openEdit(id) {
     editQuantity.value = window.document.getElementById("qnt" + id).innerText
     editType.value = window.document.getElementById("typ" + id).innerText
     editPrice.value = window.document.getElementById("val" + id).innerText
+    closeMenu()
 }
 
 function closeEdit() {
@@ -64,4 +66,5 @@ function openExclude(id) {
     excludeQuantity.placeholder = window.document.getElementById("qnt" + id).innerText
     excludeType.placeholder = window.document.getElementById("typ" + id).innerText
     excludePrice.placeholder = window.document.getElementById("val" + id).innerText
+    closeMenu()
 }
