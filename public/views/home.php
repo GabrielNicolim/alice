@@ -4,6 +4,7 @@
     require_once("../../php/conexao.php");
     include("../../php/insertData.php");
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -92,7 +93,7 @@
                 
                 echo"<div class='box'>";
                 echo"<div class='title'>";
-                        echo"<span>".$obj['nomeprod']; if( $obj['nomeprod'] == '' || $obj['nomeprod'] == ' ' || $obj['nomeprod'] == null) echo"Registro #".$obj['idregistro']."</span>";
+                        echo"<span id='name.$obj['idregistro']>".$obj['nomeprod']; if( $obj['nomeprod'] == '' || $obj['nomeprod'] == ' ' || $obj['nomeprod'] == null) echo"Registro #".$obj['idregistro']."</span>";
 
                         echo"<i class='fas fa-trash-alt trash' onclick='openExclude(".$obj['idregistro'].")'></i>";
                 echo"</div>";
@@ -101,17 +102,17 @@
                         echo"<div class='quantity'>";
                             echo"Quantidade";
                         echo"</div>";
-                        echo"<span>".$obj['qntprod']."</span>";
+                        echo"<span id='qnt.$obj['idregistro'].'>".$obj['qntprod']."</span>";
                     
                         echo"<div class='type'>";
                             echo"Tipo";
                         echo"</div>";
-                        echo"<span>".$obj['tipoprod']."</span>";
+                        echo"<span id='typ.$obj['idregistro'].'>".$obj['tipoprod']."</span>";
 
                         echo"<div class='type'>";
                             echo"Valor";
                         echo"</div>";
-                        echo"<span>".$obj['valorprod']."</span>";
+                        echo"<span id='val.$obj['idregistro'].'>".$obj['valorprod']."</span>";
 
                     echo"</div>";
 
@@ -167,10 +168,10 @@
         </div>
         <form action="../../php/editData.php" onsubmit="return createValidate(event)" method="POST">
             <input type="text" class="hidden" name="editInput" id="editInput">
-            <input type="text" name="name" id="name" value="<?php echo"aaaa"; ?>">
-            <input type="number" name="quantity" id="quantity" placeholder="Quantidade">
-            <input type="number" name="price" min="0" step=".01" id="price" placeholder="Preço">
-            <input type="text" name="type" id="type" placeholder="Tipo">
+            <input type="text" name="name" id="editName" value="<?php echo"aaaa"; ?>">
+            <input type="number" name="quantity" id="editQuantity" placeholder="Quantidade">
+            <input type="number" name="price" min="0" step=".01" id="editPrice" placeholder="Preço">
+            <input type="text" name="type" id="editType" placeholder="Tipo">
             <input type="submit" class="submitBtn" value="Adicionar">
         </form>
     </div>
@@ -187,10 +188,10 @@
         
         <form action="../../php/deleteData.php" method="POST">
             <input type="text" class="hidden" name="exclude" id="excludeInput">
-            <input type="text" name="name" id="name" value="<?php $exclusao = $_POST['exclude'];  echo$exclusao; ?>" disabled>
-            <input type="number" name="quantity" id="quantity" placeholder="Quantidade" disabled>
-            <input type="number" name="price" min="0" step=".01" id="price" placeholder="Preço" disabled>
-            <input type="text" name="type" id="type" placeholder="Tipo" disabled>
+            <input type="text" name="name" id="excludeName" value="<?php $exclusao = $_POST['exclude'];  echo$exclusao; ?>" disabled>
+            <input type="number" name="quantity" id="excludeQuantity" placeholder="Quantidade" disabled>
+            <input type="number" name="price" min="0" step=".01" id="excludePrice" placeholder="Preço" disabled>
+            <input type="text" name="type" id="excludeType" placeholder="Tipo" disabled>
             <input type="submit" class="submitBtn" value="Confirmar">
         </form>
     </div>
