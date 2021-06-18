@@ -2,26 +2,27 @@
     session_start();
     require_once("../../php/conexao.php");
     require("../../php/loginValidation.php");
-    $sql = "SELECT * FROM usuario WHERE iduser = '{$_SESSION['idUser']}' ";
+    
+    $sql = "SELECT * FROM usuarios WHERE id_user = $_SESSION[idUser] ";
 
     $return = pg_query($conecta, $sql);
     $login_check = pg_num_rows($return);
-    
+
     if($login_check > 0){
           
         $linha = pg_fetch_array($return);
 
         $nome = $linha['nome'];
-        $id = $_SESSION['idUser'];
+        $idUser = $_SESSION['idUser'];
         $email = $linha['email'];
 
         //Quantidade de registros
-        $sql = "SELECT COUNT(*) FROM registros WHERE '{$_SESSION['idUser']}' = fk_user AND excluido = 'FALSE'";
+        $sql = "SELECT COUNT(*) FROM registros WHERE $idUser = fk_user AND excluido = 'FALSE'";
         $return = pg_fetch_row(pg_query($conecta, $sql));    
         $numRegistros = $return[0];
 
         //Calcular o valor total do estoque
-        $sql = "SELECT valorprod,qntprod FROM registros WHERE '{$_SESSION['idUser']}' = fk_user AND excluido = 'FALSE'";
+        $sql = "SELECT valorprod,qntprod FROM registros WHERE $idUser = fk_user AND excluido = 'FALSE'";
         $return = pg_fetch_all(pg_query($conecta, $sql));
         $valor = 0;
         foreach($return as $i){
@@ -29,12 +30,13 @@
         }
 
         //Monta os tipos
-        $sql = "SELECT tipoprod FROM registros WHERE '{$_SESSION['idUser']}' = fk_user AND excluido = 'FALSE' GROUP BY tipoprod ORDER BY tipoprod";
+        $sql = "SELECT tipoprod FROM registros WHERE $idUser = fk_user AND excluido = 'FALSE' GROUP BY tipoprod ORDER BY tipoprod";
         $tipo = pg_fetch_all(pg_query($conecta, $sql));
 
-        //echo"<pre>";
-        //print_r($tipo);
-        //echo"</pre>";
+    }else{
+        echo "<script type='text/javascript'>alert('Ocorreu um problema no seu login, tente sair e entrar da conta!!!')</script>";
+        //header('location: home.php');
+        //exit;
     }
 ?>
 
@@ -93,7 +95,7 @@
     <div class="container">
         <div class="left">
             <div class="welcome">
-                Olá usuário!<br> <?php echo$nome; ?>
+                Olá <?php echo$nome; if(empty($nome))echo"Usuário".$_SESSION['idUser'];?>!
             </div>
 
             <div class="statics">
@@ -117,9 +119,9 @@
 
                 <div class="responsive">
                     <?php
-                    echo "<span>".$email."</span>";
-                    echo "<span>".$id."</span>";
-                    echo "<span>".$nome."</span>";
+                    echo "<span>".$numRegistros."</span>";
+                    echo "<span>R$ ".$valor."</span>";
+                    echo "<span>"; foreach($tipo as $i){ echo$i['tipoprod'].", "; }"</span>";
                     ?>
                 </div>
             </div>
@@ -130,12 +132,12 @@
                 <h1>Alterar Dados</h1>
             </div>
 
-            <form action="../../php/changeUserData.php" onsubmit="return registerValidate(event)" method="POST">
+            <form action="../../php/alterUserData.php" onsubmit="return registerValidate(event)" method="POST">
                 <?php 
                 echo"<div class='little-title'>Nome</div>";
-                echo"<input type='text' name='name' id='name' value='$nome'>";
+                echo"<input type='text' name='name' id='name' value='$nome' maxlength='40'>";
                 echo"<div class='little-title'>Email</div>";
-                echo"<input type='email' name='email' id='email' value='$email'>";
+                echo"<input type='email' name='email' id='email' value='$email' maxlength='128'>";
                 echo"<input type='password' name='password' id='password' placeholder='Senha'>";
                 echo"<input type='password' name='confirmPassword' id='confirmPassword' placeholder='Confirmar senha'>";
                 ?>

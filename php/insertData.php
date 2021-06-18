@@ -1,23 +1,24 @@
 <?php
     session_start();
-    require_once("loginValidation.php");
+
+    if(!isset($_SESSION['isAuth'])){
+        header("Location: ../public/views/login.php ");
+        exit();
+    }
+
     require_once("conexao.php");
     
-    $sql = "SELECT * FROM usuario WHERE iduser = '{$_SESSION['idUser']}' ";
+    if(!empty($_POST['name']) && !empty($_POST['quantity']) && !empty($_POST['price']) && !empty($_POST['type']) ){
+        
+        if(checkAuth()){
 
-    $return = pg_query($conecta, $sql);
-    $login_check = pg_num_rows($return);
+            $nome = cleanString($_POST['name']); 
+            $qnt = cleanString($_POST['quantity']);
+            $preco = cleanString($_POST['price']);
+            $tipo = cleanString($_POST['type']);
 
-    if($login_check > 0){
-
-        $nome = cleanString($_POST['name']); 
-        $qnt = cleanString($_POST['quantity']);
-        $preco = cleanString($_POST['price']);
-        $tipo = cleanString($_POST['type']);
-
-        if(!empty($_POST['name']) && !empty($_POST['quantity']) && !empty($_POST['price']) && !empty($_POST['type']) ){
-
-            $sql = "INSERT INTO registros VALUES(DEFAULT,'{$nome}','{$qnt}','{$tipo}','{$preco}','FALSE','{$_SESSION['idUser']}' )";
+            //INSERT INTO registros VALUES(DEFAULT,'nomeprod',qntprod,'tipoprod',valorprod ,'FALSE', NULL, fk_user)
+            $sql = "INSERT INTO registros VALUES(DEFAULT,'$nome',$qnt,'$tipo',$preco,'FALSE', NULL ,$_SESSION[idUser] )";
 
             $return = pg_query($conecta, $sql);
 
@@ -34,7 +35,14 @@
             }
             
         }
+        else{
+            echo "<script type='text/javascript'>alert('Ocorreu um problema no seu login, tente sair e entrar da conta: $_SESSION[idUser]')</script>";
+            //header('location: ../public/views/home.php');
+            //exit;
+        }
     }else{
-        
+        header("Location: ../public/views/home.php?erro=1");
+        exit();
     }
+
 ?>

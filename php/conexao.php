@@ -1,7 +1,8 @@
 <?php
-    $conecta = pg_connect("host=localhost port=5432 dbname=a06felipeestevanatto user=a06felipeestevanatto password=cti");
+    define("Host","host=localhost port=5432 dbname=a06felipeestevanatto user=a06felipeestevanatto password=cti");
+    $conecta = pg_connect(Host);
     if (!$conecta){
-        //echo "Não foi possível estabelecer conexão com o banco de dados!<br><br>";
+        echo "Não foi possível estabelecer conexão com o banco de dados! Contate um admin<br><br>";
         exit;
     }
     else{
@@ -11,11 +12,21 @@
 
     function cleanString($string) {
         $badWords = array('DROP','TABLE','GROUP BY');      
-        return preg_replace('/[^A-Za-z0-9\@\.\,\s]/', '', str_replace($badWords, '', $string));
+        return pg_escape_string(preg_replace('/[^A-Za-z0-9\@\.\,\s]/', '', str_replace($badWords, '', $string)));
     }
 
     function cleanNumber($string) {
         return preg_replace('/[^0-9\.\,]/', '', $string);
     }
 
+    function checkAuth(){
+
+        $sql = "SELECT * FROM usuarios WHERE id_user = $_SESSION[idUser] ";
+
+        $return = pg_query(pg_connect(Host), $sql);
+        $login_check = pg_num_rows($return);
+
+        if($login_check > 0) return true;
+        else return false;
+    }
 ?>

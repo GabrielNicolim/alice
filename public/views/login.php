@@ -5,7 +5,6 @@
 	exit();
     }
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -32,7 +31,7 @@
                 </a>
             </div>
         </div>
-		<?php 
+		<?php
             if($_GET['erro'])
             echo "<div class='error-login'>Login ou senha estão invalidos!</div>"; 
         ?>
@@ -62,24 +61,24 @@
 if(!empty($_POST['email']) && !empty($_POST['password'])){
     require_once("../../php/conexao.php");
 
-    $emailU = strtolower( pg_escape_string( cleanString($_POST['email']) ) );
-    $senhaU = pg_escape_string( cleanString($_POST['password']) );
+    $emailU = strtolower( cleanString($_POST['email']));
+    $senhaU = cleanString($_POST['password']);
 
     //Se os campos não estiverem vazios depois da limpeza:
     if(!empty($emailU) && !empty($senhaU)){
         try {
 
-            $sql = "SELECT * FROM usuario WHERE email ='{$emailU}' AND senha = md5('{$senhaU}')";
+            $sql = "SELECT * FROM usuarios WHERE email ='$emailU' AND senha = md5('$senhaU')";
             
             $return = pg_query($conecta, $sql);
             $login_check = pg_num_rows($return);
             
             if($login_check > 0){ 
                 
-                unset($_SESSION['OLD_DATA']);
-                $_SESSION['isAuth'] = TRUE;
                 $linha = pg_fetch_array($return);
-                $_SESSION['idUser'] = $linha['iduser'];  
+
+                $_SESSION['isAuth'] = TRUE; 
+                $_SESSION['idUser'] = $linha['id_user'];
 
                 header("Location: home.php");
                 exit();

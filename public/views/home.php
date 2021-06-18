@@ -2,7 +2,6 @@
     session_start();
     require_once("../../php/loginValidation.php");
     require_once("../../php/conexao.php");
-    include("../../php/insertData.php");
 ?>
 
 <!DOCTYPE html>
@@ -77,53 +76,50 @@
     <div class="container">
         <!-- Base box -->
         <?php 
-
-            $sql = "SELECT idregistro,nomeprod,qntprod,tipoprod,valorprod FROM registros WHERE '{$_SESSION['idUser']}' = fk_user AND excluido = 'FALSE'";
+            $sql = "SELECT idregistro,nomeprod,qntprod,tipoprod,valorprod FROM registros WHERE $_SESSION[idUser] = fk_user AND excluido = 'FALSE'";
 
             $return = pg_query($conecta, $sql);
             $_SESSION['ids'] = pg_fetch_all($return);
             $numero = pg_num_rows($return);
 
-            //print('<pre>');
-            //print_r($linha);
-            //print('</pre>');
-
             //Irá instanciar a matriz com os registros e seus arrays internos de dados, printando a informação na tela
             foreach($_SESSION['ids'] as $obj){
                 
-                echo"<div class='box'>";
+            echo"<div class='box'>";
                 echo"<div class='title'>";
-                        echo"<span id='name".$obj['idregistro']."'>" .$obj['nomeprod'];  if( $obj['nomeprod'] == '' || $obj['nomeprod'] == ' ' || $obj['nomeprod'] == null) echo"Registro #".$obj['idregistro']." </span>";
+                        echo"<span id='name".$obj['idregistro']."'>"; 
+                        echo $obj['nomeprod']; if( $obj['nomeprod'] == '' || $obj['nomeprod'] == ' ' || $obj['nomeprod'] == null) echo"Registro #".$obj['idregistro']; 
+                        echo "</span>";
 
                         echo"<i class='fas fa-trash-alt trash' onclick='openExclude(".$obj['idregistro'].")'></i>";
                 echo"</div>";
 
-                    echo"<div class='data'>";
-                        echo"<div class='quantity'>";
-                            echo"Quantidade";
-                        echo"</div>";
-                        echo"<span id='qnt".$obj['idregistro']."'>".$obj['qntprod']."</span>";
-                    
-                        echo"<div class='type'>";
-                            echo"Tipo";
-                        echo"</div>";
-                        echo"<span id='typ".$obj['idregistro']."'>".$obj['tipoprod']."</span>";
+                echo"<div class='data'>";
+                    echo"<div class='quantity'>";
+                        echo"Quantidade";
+                    echo"</div>";
+                    echo"<span id='qnt".$obj['idregistro']."'>".$obj['qntprod']."</span>";
 
-                        echo"<div class='type'>";
-                            echo"Valor";
-                        echo"</div>";
-                        echo"<span id='val".$obj['idregistro']."'>".$obj['valorprod']."</span>";
+                    echo"<div class='type'>";
+                        echo"Valor";
+                    echo"</div>";
+                    echo"<span id='val".$obj['idregistro']."'>R$ ".$obj['valorprod']."</span>";
+
+                    echo"<div class='type'>";
+                        echo"Tipo";
+                    echo"</div>";
+                    echo"<span id='typ".$obj['idregistro']."'>".$obj['tipoprod']."</span>";
 
                     echo"</div>";
 
                     echo"<div class='edit' onclick='openEdit(".$obj['idregistro'].")'>";
                         echo"Editar";
-                    echo"</div>";
                 echo"</div>";
+            echo"</div>";
             }
         ?>
         <!-- End Base box -->
-
+            
     </div>
 
     <footer>
@@ -149,10 +145,10 @@
             </div>
         </div>
         <form action="../../php/insertData.php" onsubmit="return createValidate(event);" method="POST">
-            <input type="text" name="name" id="name" placeholder="Nome">
-            <input type="number" name="quantity" id="quantity" placeholder="Quantidade">
-            <input type="number" name="price" min="0" step=".01" id="price" placeholder="Preço">
-            <input type="text" name="type" id="type" placeholder="Tipo">
+            <input type="text" name="name" id="name" placeholder="Nome" maxlength="20">
+            <input type="number" name="quantity" id="quantity" placeholder="Quantidade" min="0" max="9999999999">
+            <input type="number" name="price" min="0" step=".01" id="price" placeholder="Preço" min="0" max="9999999999">
+            <input type="text" name="type" id="type" placeholder="Tipo" maxlength="20">
             <input type="submit" class="submitBtn" value="Adicionar">
         </form>
     </div>
@@ -168,11 +164,15 @@
         </div>
         <form action="../../php/editData.php" onsubmit="return createValidate(event)" method="POST">
             <input type="text" class="hidden" name="editInput" id="editInput">
-            <input type="text" name="name" id="editName" placeholder="Nome">
-            <input type="number" name="quantity" id="editQuantity" placeholder="Quantidade">
-            <input type="number" name="price" min="0" step=".01" id="editPrice" placeholder="Preço">
-            <input type="text" name="type" id="editType" placeholder="Tipo">
-            <input type="submit" class="submitBtn" value="Adicionar">
+            Nome:
+            <input type="text" name="name" id="editName" placeholder="Nome" maxlength="20">
+            Quantidade:
+            <input type="number" name="quantity" id="editQuantity" placeholder="Quantidade" min="0" max="9999999999">
+            Preço:
+            <input type="number" name="price" min="0" step=".01" id="editPrice" placeholder="Preço" min="0" max="9999999999">
+            Tipo:
+            <input type="text" name="type" id="editType" placeholder="Tipo" maxlength="20">
+            <input type="submit" class="submitBtn" value="Salvar Edição">
         </form>
     </div>
 

@@ -38,7 +38,7 @@ function openEdit(id) {
     editName.value = window.document.getElementById("name" + id).innerText
     editQuantity.value = window.document.getElementById("qnt" + id).innerText
     editType.value = window.document.getElementById("typ" + id).innerText
-    editPrice.value = window.document.getElementById("val" + id).innerText
+    editPrice.value = window.document.getElementById("val" + id).innerText.replace("R$ ","")    
     closeMenu()
 }
 

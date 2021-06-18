@@ -21,7 +21,7 @@ function createValidate(event) {
     }
 
     // Quantity
-    if(voidCheck(quantityValue)) {
+    if(voidCheck(quantityValue) || quantityValue < 0) {
         quantity.classList = 'error'
         valid = false 
     }
@@ -30,7 +30,7 @@ function createValidate(event) {
     }
 
     // PriceValue
-    if(voidCheck(priceValue)) {
+    if(voidCheck(priceValue) || priceValue < 0) {
         price.classList = 'error'
         valid = false 
     }
