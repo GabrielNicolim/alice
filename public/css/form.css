@@ -143,6 +143,15 @@ body {
     text-decoration: underline;
 }
 
+.btn-error{
+    color: rgb(255, 255, 255);
+}
+
+.btn-error:hover{
+    color: rgb(221, 221, 221);
+    transition: 400ms;
+}
+
 @media only screen and (max-width: 901px) {
     .container {
         width: 70%;

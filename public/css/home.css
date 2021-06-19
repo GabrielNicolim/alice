@@ -25,6 +25,52 @@
     transition: 400ms;
 }
 
+.add .right{
+    margin: 1em;
+    box-shadow: 0 2px 5px rgb(77, 77, 77);
+}
+
+.add .right form{
+    width: 100%;
+    display: flex;
+    height: 100%;
+}
+
+.add .right form input,
+.add .right form select{
+    padding: 3px;
+    outline: 0;
+    font-weight: 500;
+}
+
+.add .right form select{
+    width: 60px;
+}
+
+.add .right form #typeSearch,
+.add .right form #textSearch{
+    color: white;
+    background: rgb(51, 89, 226);
+    border: 2px solid rgb(32, 69, 202);
+}
+
+.add .right form #textSearch::placeholder{
+    color: rgb(223, 223, 223);
+}
+
+.add .right form label{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    cursor: pointer;
+}
+
+.add .right form label:hover{
+    transition: 400ms;
+    background: white;
+}
+
 .container {
     min-height: 100vh;
     display: flex;
@@ -44,7 +90,7 @@
 
 .container .box .title {
     text-align: center;
-    font-size: 1.3em;
+    font-size: 1.2em;
     padding: 10px 0;
     background: black;
     color: white;
@@ -53,7 +99,7 @@
 
 .container .box .title .trash{
     position: absolute;
-    top: 5px;
+    top: 10px;
     right: 5px;
     cursor: pointer;
 }
@@ -105,6 +151,14 @@
     border: 2px solid rgb(224, 24, 64);
     color: white;
     transition: 400ms;
+}
+
+#void{
+    padding: 0 1em;
+    font-size: 2em;
+    font-weight: bold;
+    margin: 300px auto;
+    text-align: center;
 }
 
 /* Create */
@@ -235,11 +289,27 @@
 }
 
 @media only screen and (max-width: 508px) {
+    .add{
+        display: block;
+    }
+
     .add .left {
         margin: 1em 0;
         padding: 15px;
         width: 100%;
         font-size: 1.2em;
+    }
+
+    .add .right{
+        margin: 1em 0;
+    }
+
+    .add .right form input{
+        padding: 15px;
+    }
+
+    .add .right form select{
+        width: 50%;
     }
 
     .container {

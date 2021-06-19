@@ -2,6 +2,7 @@
     session_start();
     require_once("../../php/loginValidation.php");
     require_once("../../php/conexao.php");
+    require_once("../../php/showData.php");
 ?>
 
 <!DOCTYPE html>
@@ -62,61 +63,39 @@
             <i class="fas fa-plus"></i>
 
             <span>
-                Add new 
+                Add new
             </span> 
         </div>
-        <!--
+        
         <div class="right">
-            <form action="" class="fas fa-plus left">
-                Pesquisa <input type="text">
+            <form action="" method="POST">
+                <select name="typeSearch" id="typeSearch">
+                    <option value="">Tipo</option>
+                    <?php
+                        $sql = "SELECT idregistro,nomeprod,qntprod,tipoprod FROM registros WHERE $_SESSION[idUser] = fk_user AND excluido = 'FALSE'";
+
+                        $return = pg_query($conecta, $sql);
+                        $array = pg_fetch_all($return);
+                        
+                        foreach($array as $i){
+                            echo"<option value='".$i['tipoprod']."'> Tipo ".$i['tipoprod']."</option>";
+                        }
+
+                        $restricao = $_POST;
+                    ?>
+                </select>
+                <input type="text" name="textSearch" id="textSearch" placeholder="Pesquisa">
+                
+                <input type="submit" id="submitSearch" class="hidden">
+                <label for="submitSearch"><i class="fas fa-search"></i></label>
             </form>
-        </div>  Futura busca -->
+        </div>
     </div>
 
     <div class="container">
         <!-- Base box -->
-        <?php 
-            $sql = "SELECT idregistro,nomeprod,qntprod,tipoprod,valorprod FROM registros WHERE $_SESSION[idUser] = fk_user AND excluido = 'FALSE'";
-
-            $return = pg_query($conecta, $sql);
-            $_SESSION['ids'] = pg_fetch_all($return);
-            $numero = pg_num_rows($return);
-
-            //Irá instanciar a matriz com os registros e seus arrays internos de dados, printando a informação na tela
-            foreach($_SESSION['ids'] as $obj){
-                
-            echo"<div class='box'>";
-                echo"<div class='title'>";
-                        echo"<span id='name".$obj['idregistro']."'>"; 
-                        echo $obj['nomeprod']; if( $obj['nomeprod'] == '' || $obj['nomeprod'] == ' ' || $obj['nomeprod'] == null) echo"Registro #".$obj['idregistro']; 
-                        echo "</span>";
-
-                        echo"<i class='fas fa-trash-alt trash' onclick='openExclude(".$obj['idregistro'].")'></i>";
-                echo"</div>";
-
-                echo"<div class='data'>";
-                    echo"<div class='quantity'>";
-                        echo"Quantidade";
-                    echo"</div>";
-                    echo"<span id='qnt".$obj['idregistro']."'>".$obj['qntprod']."</span>";
-
-                    echo"<div class='type'>";
-                        echo"Valor";
-                    echo"</div>";
-                    echo"<span id='val".$obj['idregistro']."'>R$ ".$obj['valorprod']."</span>";
-
-                    echo"<div class='type'>";
-                        echo"Tipo";
-                    echo"</div>";
-                    echo"<span id='typ".$obj['idregistro']."'>".$obj['tipoprod']."</span>";
-
-                    echo"</div>";
-
-                    echo"<div class='edit' onclick='openEdit(".$obj['idregistro'].")'>";
-                        echo"Editar";
-                echo"</div>";
-            echo"</div>";
-            }
+        <?php
+            showBoxes($restricao);
         ?>
         <!-- End Base box -->
             

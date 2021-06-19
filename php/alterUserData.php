@@ -8,40 +8,37 @@
 
         $nome = cleanString($_POST['name']); 
         $email = cleanString($_POST['email']);
-        $password = cleanString($_POST['password']);
         $confirmPassword = cleanString($_POST['confirmPassword']);
-
-        if( $confirmPassword == $password && !empty($confirmPassword) && !empty($password)){
+        //echo"aaaaa";
+        if(!empty($confirmPassword)){
             
-            $emailcheck = pg_query($conecta,"SELECT * FROM usuarios where email = '$email' ");
+            $emailcheck = pg_query($conecta,"SELECT * FROM usuarios WHERE email = '$email' EXCEPT id_user = $_SESSION[idUser] ");
             $count = pg_num_rows($emailcheck);
-            if($count > 0){
-                header("Location: ../public/views/user.php?erro=emailexistente");
-                exit();
 
+            if($count > 0){
+                header("Location: ../public/views/user.php?error=0");
+                exit();
             }else{
-                $sql = "UPDATE usuarios SET nome='$nome', email = '$email' WHERE id_user = $_SESSION[idUser] AND senha = md5('$password')";
+                $sql = "UPDATE usuarios SET nome='$nome', email = '$email' WHERE id_user = $_SESSION[idUser] AND senha = md5('$confirmPassword')";
             
                 $return = pg_query($conecta, $sql);
                 $qtde= pg_affected_rows($return);
 
                 if ($qtde > 0){
 
-                    echo "<script type='text/javascript'>alert('DEU TUDO CERTO! Dados alterados !!!')</script>";
                     header('location: ../public/views/user.php');
                     exit;
-
                 }
                 else{
-                    echo "<script type='text/javascript'>alert('Erro na alteração de dados !!! <br>')</script>";
+                    header('location: ../public/views/user.php?error=1');
+                    exit;
                 }
             }
         }
 
     }
     else{
-        echo "<script type='text/javascript'>alert('Ocorreu um problema no seu login, tente sair e entrar da conta!!!')</script>";
-        header('location: ../public/views/home.php');
+        header('location: ../public/views/login.php');
         exit;
     }
 ?>

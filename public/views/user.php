@@ -55,6 +55,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/menu.css">
     <link rel="stylesheet" href="../css/user.css">
+
 </head>
 <body>
     <!-- Header -->
@@ -107,11 +108,16 @@
                     <div class="field">Valor em Estoque</div>
                     <?php echo"<span class='full-screen'>R$ ".$valor."</span>";?>
     
-                    <div class="field">Tipos em Estoque</div>
+                    <div class="field" id="showTypes">Tipos em Estoque</div>
                     <?php 
                     echo"<span class='full-screen'>";
-                    foreach($tipo as $i){
-                        echo$i['tipoprod'].", ";
+                    if( empty($i) ) echo "Tipos Vazio";
+                    else{
+                        foreach($tipo as $i){
+                            if( !empty($i['tipoprod']) ){
+                                echo$i['tipoprod'].", ";
+                            }
+                        }
                     }
                     echo"</span>";
                     ?>
@@ -121,7 +127,7 @@
                     <?php
                     echo "<span>".$numRegistros."</span>";
                     echo "<span>R$ ".$valor."</span>";
-                    echo "<span>"; foreach($tipo as $i){ echo$i['tipoprod'].", "; }"</span>";
+                    //echo "<span>"; foreach($tipo as $i){ echo$i['tipoprod'].", "; }"</span>";
                     ?>
                 </div>
             </div>
@@ -131,17 +137,20 @@
             <div class="top">
                 <h1>Alterar Dados</h1>
             </div>
-
-            <form action="../../php/alterUserData.php" onsubmit="return registerValidate(event)" method="POST">
+            <?php
+            if(isset($_GET['error'])){
+            echo "<div class='error-edit'>"; if($_GET['error'] == 0) echo"Seus dados não podem ser alterados!</div>"; else echo"Senha incorreta ou alteração mal sucedida!</div>";} //"; 
+            ?>
+            <form action="../../php/alterUserData.php" onsubmit="return userEditValidate(event)" method="POST">
                 <?php 
                 echo"<div class='little-title'>Nome</div>";
-                echo"<input type='text' name='name' id='name' value='$nome' maxlength='40'>";
+                echo"<input type='text' name='name' id='name' value='$nome' maxlength='40' required>";
                 echo"<div class='little-title'>Email</div>";
-                echo"<input type='email' name='email' id='email' value='$email' maxlength='128'>";
-                echo"<input type='password' name='password' id='password' placeholder='Senha'>";
-                echo"<input type='password' name='confirmPassword' id='confirmPassword' placeholder='Confirmar senha'>";
+                echo"<input type='email' name='email' id='email' value='$email' maxlength='128' required>";
+                echo"<div class='clear'></div>";
+                echo"<input type='password' name='confirmPassword' id='confirmPassword' placeholder='Confirmar senha' required>";
                 ?>
-                <input type="submit" class="submitBtn" value="Salvar">
+                <input type="submit" class="submitBtn" value="Salvar Alterações">
             </form>
         </div>
     </div>
@@ -160,6 +169,6 @@
 
     <script src="../scripts/menuShow.js"></script>
     <script src="../scripts/formValidate.js"></script>
-    <script src="../scripts/registerValidate.js"></script>
+    <script src="../scripts/userEditValidate.js"></script>
 </body>
 </html>

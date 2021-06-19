@@ -29,15 +29,15 @@
         </div>
         <?php 
             if($_GET['erro'] == 1)
-                echo "<div class='error-login'>Login ou senha estão invalidos!</div>";
+                echo "<div class='error-login'>Insira dados corretos!</div>";
             if($_GET['erro'] == 2)
-                echo "<div class='error-login'>Email já cadastrado! <a class='btn' href='login.php'>Faça login</a></div>";
+                echo "<div class='error-login'>Email já cadastrado! <a class='btn-error' href='login.php'>Faça login</a></div>";
         ?>
         <form action="" onsubmit="return registerValidate(event)" method="POST">
-            <input type="text" name="name" id="name" placeholder="Nome"  maxlength='40'>
+            <input type="text" name="name" id="name" placeholder="Nome" maxlength='40'>
             <input type="email" name="email" id="email" placeholder="Email" maxlength='128'>
-            <input type="password" name="password" id="password" placeholder="Senha">
-            <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirmar senha">
+            <input type="password" name="password" id="password" placeholder="Senha" maxlength='128'>
+            <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirmar senha" maxlength='128'>
             <input type="submit" class="submitBtn" value="Cadastrar-se">
         </form>
 

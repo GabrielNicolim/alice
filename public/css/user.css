@@ -112,6 +112,17 @@
     font-weight: 800;
 }
 
+.container .error-edit {
+    margin: 2em auto;
+    padding: 15px;
+    width: 70%;
+    color: white;
+    background:rgb(224, 24, 64);
+    text-align: center;
+    margin-bottom: 2em;
+    border-radius: 8px;
+}
+
 @media only screen and (max-width: 767px) {
     .container {
         display: block;
@@ -121,7 +132,7 @@
 
     .container .left {
         width: 100%;
-        padding: 30px 5px;
+        padding: 30px 30px;
     }
 
     .container .left .welcome {
@@ -130,8 +141,8 @@
 
     .container .left .statics .field {
         margin-top: 0;
-        width: 30%;
-        font-size: .8em;
+        width: 40%;
+        font-size: 1em;
         padding: 5px;
         border-radius: 8px;
         display: flex;
@@ -148,6 +159,10 @@
         display: none;
     }
 
+    .container .left #showTypes{
+        display: none;
+    }
+
     .responsive {
         visibility: unset;
         margin-top: 5px;
@@ -157,7 +172,7 @@
     }
 
     .responsive span {
-        width: 30%;
+        width: 40%;
         text-align: center;
         font-size: .8em;
     }
@@ -178,6 +193,10 @@
 
     .container input,
     .submitBtn {
+        width: 100%;
+    }
+
+    .container .error-edit {
         width: 100%;
     }
 }

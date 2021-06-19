@@ -1,5 +1,6 @@
 <?php
     define("Host","host=localhost port=5432 dbname=a06felipeestevanatto user=a06felipeestevanatto password=cti");
+    
     $conecta = pg_connect(Host);
     if (!$conecta){
         echo "Não foi possível estabelecer conexão com o banco de dados! Contate um admin<br><br>";
@@ -12,7 +13,7 @@
 
     function cleanString($string) {
         $badWords = array('DROP','TABLE','GROUP BY');      
-        return pg_escape_string(preg_replace('/[^A-Za-z0-9\@\.\,\s]/', '', str_replace($badWords, '', $string)));
+        return pg_escape_string(preg_replace('/[^A-Za-zà-úÀ-Ú0-9\@\.\,\s]/', '', str_replace($badWords, '', $string)));
     }
 
     function cleanNumber($string) {

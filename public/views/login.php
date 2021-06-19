@@ -36,11 +36,11 @@
             echo "<div class='error-login'>Login ou senha estão invalidos!</div>"; 
         ?>
         <form action="" onsubmit="return loginValidate(event)" method="POST">
-            <input type="email" name="email" id="email" placeholder="Email">
-            <input type="password" name="password" id="password" placeholder="Senha">
+            <input type="email" name="email" id="email" placeholder="Email" maxlength='128'>
+            <input type="password" name="password" id="password" placeholder="Senha" maxlength='128'>
 
             <div onclick="showPassword()">
-                <input type="checkbox" name="showPassword" id="showPassword">
+                <input type="checkbox" name="showPassword" id="showPassword" maxlength='128'>
                 <label for="showPassword">Apresentar senha</label>
             </div>
             <input type="submit" class="submitBtn" value="Entrar">

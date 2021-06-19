@@ -1,18 +1,16 @@
-function registerValidate(event) {
+function userEditValidate(event) {
     let valid = true; 
 
     let name = event.target.name
     let email = event.target.email
-    let password = event.target.password
     let secondPassword = event.target.confirmPassword
 
     let nameValue = name.value.trim()
     let emailValue = email.value.trim()
-    let passwordValue = password.value.trim()
     let confirmPasswordValue = secondPassword.value.trim()
 
     // Name 
-    if(voidCheck(nameValue) || nameValue.Value.lenght > 128) {
+    if(voidCheck(nameValue)) {
         name.classList = 'error'
         valid = false 
     }
@@ -21,7 +19,7 @@ function registerValidate(event) {
     }
 
     // Email
-    if(voidCheck(emailValue) || emailValidate(emailValue) || emailValue.Value.lenght > 128) {
+    if(voidCheck(emailValue) || emailValidate(emailValue)) {
         email.classList = 'error'
         valid = false 
     }
@@ -29,21 +27,8 @@ function registerValidate(event) {
         email.classList = 'normal'
     }
 
-    // Password
-    if(voidCheck(passwordValue) || passwordValue.Value.length > 128) {
-        password.classList = 'error'
-        valid = false 
-    }
-    else {
-        password.classList = 'normal'
-    }
-
     // Confirm password 
-    if(voidCheck(confirmPasswordValue || confirmPasswordValue.Value.length > 128)) {
-        secondPassword.classList = 'error'
-        valid = false 
-    }
-    else if(confirmPasswordValue !== passwordValue) {
+    if(voidCheck(confirmPasswordValue)) {
         secondPassword.classList = 'error'
         valid = false 
     }
