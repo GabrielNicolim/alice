@@ -14,11 +14,11 @@ session_start();
         
         $_SESSION['ids'] = 0;
 
-        if(!empty($restricao['typeSearch'])){
+        if( !empty($restricao['typeSearch']) ){
             $sql = $sql."AND tipoprod = '".$restricao['typeSearch']."'";
         }
 
-        if(!empty($restricao['textSearch'])){
+        if( !empty(cleanString($restricao['textSearch'])) && $restricao['textSearch'] != ' '){
             $sql = $sql."AND nomeprod = '".$restricao['textSearch']."'";
         }
 
@@ -52,7 +52,7 @@ session_start();
                         echo"<div class='type'>";
                             echo"Tipo";
                         echo"</div>";
-                        echo"<span id='typ".$obj['idregistro']."'>".$obj['tipoprod']."</span>";
+                        echo"<span id='typ".$obj['idregistro']."'>".$obj['tipoprod']; if(empty($obj['tipoprod']))echo"Tipo Vazio"; echo"</span>";
 
                         echo"</div>";
 

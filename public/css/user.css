@@ -128,11 +128,12 @@
         display: block;
         width: 100vw;
         margin: 0;
+        padding: 0;
     }
 
     .container .left {
         width: 100%;
-        padding: 30px 30px;
+        padding: 30px;
     }
 
     .container .left .welcome {

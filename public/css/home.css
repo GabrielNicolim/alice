@@ -50,8 +50,8 @@
 .add .right form #typeSearch,
 .add .right form #textSearch{
     color: white;
-    background: rgb(51, 89, 226);
-    border: 2px solid rgb(32, 69, 202);
+    background: rgb(70, 99, 206);
+    border: 2px solid rgb(46, 82, 214);
 }
 
 .add .right form #textSearch::placeholder{
@@ -64,6 +64,7 @@
     justify-content: center;
     width: 50px;
     cursor: pointer;
+    border: 2px solid rgba(49, 49, 49, 0.52);
 }
 
 .add .right form label:hover{

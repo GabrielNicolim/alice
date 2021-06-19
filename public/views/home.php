@@ -78,7 +78,7 @@
                         $array = pg_fetch_all($return);
                         
                         foreach($array as $i){
-                            echo"<option value='".$i['tipoprod']."'> Tipo ".$i['tipoprod']."</option>";
+                            echo"<option value='".$i['tipoprod']."'> Tipo ".$i['tipoprod']; if(empty($i['tipoprod'])){echo"Vazio";} echo"</option>";
                         }
 
                         $restricao = $_POST;
