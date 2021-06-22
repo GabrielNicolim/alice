@@ -4,13 +4,18 @@ Baseado no termo da área de informática CRUD (acrónimo do inglês Create, Rea
 Delete) surgiu a ideia de nomear a atividade de ALICE (acrônimo de Alteração, Login, Inclusão,
 Consulta e Exclusão).
 
+## Proposta 
 
-- Vocês devem modelar 2 tabelas que possuem um relacionamento UM-PARA-MUITOS. A tabela que recebe a chave do relacionamento deve ter pelo menos 4 campos, e deve ser escolhida para manipulação pelo PHP.
-- Por exemplo, para o sistema registrar a venda de produtos, os dados dos produtos precisam estar
-armazenados previamente. Sendo assim, haverá um programa que Altera, Loga, Inclui, Consulta
+- Modelar 2 tabelas que possuem um relacionamento UM-PARA-MUITOS. A tabela que recebe a chave do relacionamento deve ter pelo menos 4 campos, e deve ser escolhida para manipulação pelo PHP.
+- Para o sistema registrar a venda de produtos, os dados dos produtos precisam estar armazenados previamente. Sendo assim, haverá um programa que Altera, Loga, Inclui, Consulta
 e Exclui os dados dos produtos, daí o acrônimo A.L.I.C.E.
 
-Prazo de entrega: <b>18 de jun. 23:59</b>
+## Tecnologias 
 
-Link de acesso no <a href="https://gabrielnicolim.github.io/ALICE">Github</a><br>
-No servidor da <a href="http://200.145.153.175/felipeestevanatto/trab2bimPHP/ALICE/">escola</a>
+Para a construção desta aplicação utilizamos PHP, JavaScript e o PostgreSQL. Trabalhamos em conjunto, a fim de nos desenvolvermos nas respectivas técnologias. A parte visual do site foi construída utilizando CSS puro, em conjunto com o JavaScript para a manipulação da DOM.
+
+## Visualização 
+
+... 
+
+<a href="http://200.145.153.175/felipeestevanatto/trab2bimPHP/ALICE/">Visualizar</a> projeto 
