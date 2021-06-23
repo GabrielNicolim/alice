@@ -16,6 +16,8 @@ Para a construção desta aplicação utilizamos PHP, JavaScript e o PostgreSQL.
 
 ## Visualização 
 
-... 
+![image](https://user-images.githubusercontent.com/69210720/123141339-a9f63080-d42e-11eb-9eea-4e1524f3e29c.png)
+
+<br>
 
 <a href="http://200.145.153.175/felipeestevanatto/trab2bimPHP/ALICE/">Visualizar</a> projeto 
