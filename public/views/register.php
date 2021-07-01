@@ -70,11 +70,13 @@ if(!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['password'
                 exit();
             }else{
 
-                    $sql = "INSERT INTO usuarios VALUES(DEFAULT,'$nomeU','$emailU',md5('$senhaU') )";
+                    $senhaU = password_hash($senhaU, PASSWORD_DEFAULT);
+
+                    $sql = "INSERT INTO usuarios VALUES(DEFAULT,'$nomeU','$emailU','$senhaU' )";
                     $return = pg_query($conecta, $sql);
 
                     if($return){
-                        $sql = "SELECT id_user FROM usuarios WHERE email ='$emailU' AND senha = md5('$senhaU')";
+                        $sql = "SELECT id_user FROM usuarios WHERE email ='$emailU' AND senha = '$senhaU' ";
                         
                         $linha = pg_fetch_array(pg_query($conecta, $sql));
 

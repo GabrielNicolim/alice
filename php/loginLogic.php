@@ -1,35 +1,35 @@
 <?php
-//print_r($_POST);
-//Provar que funcionou mostrando os dados que você enviou
+//print_r($_POST); //Para debug
 if(!empty($_POST['email']) && !empty($_POST['password'])){
-    require_once("conexao.php");
-    
-    $emailU = pg_escape_string( cleanString($_POST['email']) );
-    $senhaU = pg_escape_string( cleanString($_POST['password']) );
+    require_once("../../php/conexao.php");
+
+    $emailU = strtolower( cleanString($_POST['email']));
+    $senhaU = cleanString($_POST['password']);
 
     //Se os campos não estiverem vazios depois da limpeza:
     if(!empty($emailU) && !empty($senhaU)){
         try {
 
-            $sql = "SELECT * FROM usuario WHERE email ='{$emailU}' AND senha = md5('{$senhaU}')";
+            $sql = "SELECT * FROM usuarios WHERE email ='$emailU' ";
             
-            $resultado = pg_query($conecta, $sql);  echo $resultado;
-            $login_check = pg_num_rows($resultado);
-            
+            $return = pg_query($conecta, $sql);
+            $login_check = pg_num_rows($return);
+
             if($login_check > 0){ 
+
+                $linha = pg_fetch_array($return);
                 
-                //echo "<br>Login Successfully";
-                unset($_SESSION['OLD_DATA']);
-                $_SESSION['usuario'] = $emailU;
-                $_SESSION['isAuth'] = true;
-        
-                //redireciona a pessoa para a home     
-                header("Location: ../public/views/home.html");
-                exit();
-        
+                if( password_verify($senhaU, $linha['senha']) ){
+
+                    $_SESSION['isAuth'] = TRUE; 
+                    $_SESSION['idUser'] = $linha['id_user'];
+
+                    header("Location: home.php");
+                    exit();
+                }
+
             }else{  
-                //echo "<br>Invalid Details";
-                header("Location: ../public/views/login.html");
+                header("Location: login.php?erro=1");
                 exit();
             }
         } catch (PDOException $e) {
@@ -37,7 +37,4 @@ if(!empty($_POST['email']) && !empty($_POST['password'])){
         }
     }
 }
-
 ?>
-</body>
-</html>

@@ -19,7 +19,10 @@
                 header("Location: ../public/views/user.php?error=0");
                 exit();
             }else{
-                $sql = "UPDATE usuarios SET nome='$nome', email = '$email' WHERE id_user = $_SESSION[idUser] AND senha = md5('$confirmPassword')";
+
+                $confirmPassword = password_hash($senhaU, PASSWORD_DEFAULT);
+
+                $sql = "UPDATE usuarios SET nome='$nome', email = '$email' WHERE id_user = $_SESSION[idUser] AND senha = '$confirmPassword' ";
             
                 $return = pg_query($conecta, $sql);
                 $qtde= pg_affected_rows($return);

@@ -57,7 +57,7 @@
 </html>
 
 <?php
-//Provar que funcionou mostrando os dados que você enviou
+//print_r($_POST); //Para debug
 if(!empty($_POST['email']) && !empty($_POST['password'])){
     require_once("../../php/conexao.php");
 
@@ -68,23 +68,25 @@ if(!empty($_POST['email']) && !empty($_POST['password'])){
     if(!empty($emailU) && !empty($senhaU)){
         try {
 
-            $sql = "SELECT * FROM usuarios WHERE email ='$emailU' AND senha = md5('$senhaU')";
+            $sql = "SELECT * FROM usuarios WHERE email ='$emailU' ";
             
             $return = pg_query($conecta, $sql);
             $login_check = pg_num_rows($return);
-            
+
             if($login_check > 0){ 
-                
+
                 $linha = pg_fetch_array($return);
+                
+                if( password_verify($senhaU, $linha['senha']) ){
 
-                $_SESSION['isAuth'] = TRUE; 
-                $_SESSION['idUser'] = $linha['id_user'];
+                    $_SESSION['isAuth'] = TRUE; 
+                    $_SESSION['idUser'] = $linha['id_user'];
 
-                header("Location: home.php");
-                exit();
-        
+                    header("Location: home.php");
+                    exit();
+                }
+
             }else{  
-                //echo Invalid Details
                 header("Location: login.php?erro=1");
                 exit();
             }
@@ -93,5 +95,4 @@ if(!empty($_POST['email']) && !empty($_POST['password'])){
         }
     }
 }
-
 ?>

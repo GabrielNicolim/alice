@@ -10,7 +10,6 @@
         //echo "Conexão estabelecida com o banco de dados!<br><br>";
     }
         
-
     function cleanString($string) {
         $badWords = array('DROP','TABLE','GROUP BY');      
         return trim(pg_escape_string(preg_replace('/[^A-Za-zà-úÀ-Ú0-9\@\.\,\s]/', '', str_replace($badWords, '', $string))));

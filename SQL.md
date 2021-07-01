@@ -4,8 +4,10 @@
 CREATE TABLE usuarios (
 id_user SERIAL PRIMARY KEY NOT NULL,
 nome VARCHAR(40) NOT NULL,
-email VARCHAR(128) NOT NULL,
-senha CHAR(32) NOT NULL
+email VARCHAR(128) NOT NULL UNIQUE,
+senha VARCHAR(255) NOT NULL,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+nivelAcesso INT NOT NULL DEFAULT 0
 );
 </pre>
 
@@ -26,5 +28,5 @@ FOREIGN KEY (fk_user) REFERENCES usuarios (id_user)
 <h2>Dropar tabelas</h2>
 
 <pre>
-DROP TABLE registros; DROP TABLE usuarios;
+DROP TABLE registros, usuarios;
 </pre>
