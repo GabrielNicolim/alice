@@ -1,5 +1,5 @@
 <?php
-    define("Host","host=localhost port=5432 dbname=a06felipeestevanatto user=a06felipeestevanatto password=cti");
+    define("Host","host=localhost port=3306 dbname=alice_db user=root password=");
     
     $conecta = pg_connect(Host);
     if (!$conecta){
