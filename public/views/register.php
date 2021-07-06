@@ -28,12 +28,14 @@
             </div>
         </div>
         <?php 
-            if($_GET['erro'] == 1)
-                echo "<div class='error-login'>Insira dados corretos!</div>";
-            if($_GET['erro'] == 2)
-                echo "<div class='error-login'>Email já cadastrado! <a class='btn-error' href='login.php'>Faça login</a></div>";
+            if(isset($_GET['error'])) {
+                if($_GET['error'] == 1)
+                    echo "<div class='error-login'>Insira dados corretos!</div>";
+                if($_GET['error'] == 2)
+                    echo "<div class='error-login'>Email já cadastrado! <a class='btn-error' href='login.php'>Faça login</a></div>";
+            }
         ?>
-        <form action="" onsubmit="return registerValidate(event)" method="POST">
+        <form action="../../php/registerLogic.php" onsubmit="return registerValidate(event)" method="POST">
             <input type="text" name="name" id="name" placeholder="Nome" maxlength='40'>
             <input type="email" name="email" id="email" placeholder="Email" maxlength='128'>
             <input type="password" name="password" id="password" placeholder="Senha" maxlength='128'>
@@ -46,54 +48,7 @@
         </div>
     </div>
 
-    <script src="../scripts/formValidate.js"></script>
-    <script src="../scripts/registerValidate.js"></script>
+    <script type="text/javascript" src="../scripts/formValidate.js"></script>
+    <script type="text/javascript" src="../scripts/registerValidate.js"></script>
 </body>
 </html>
-
-<?php
-
-if(!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['password']) ){
-
-        require_once("../../php/conexao.php");
-
-        $nomeU = cleanString($_POST['name']) ;
-        $emailU = cleanString($_POST['email']) ;
-        $senhaU = cleanString($_POST['password']) ;
-
-        if(!empty($emailU) && !empty($senhaU) && !empty($nomeU) ){
-
-            $emailcheck = pg_query($conecta,"SELECT * FROM usuarios where email='$emailU' ");
-            $count = pg_num_rows($emailcheck);
-            if($count > 0){
-                header("Location: register.php?erro=2");
-                exit();
-            }else{
-
-                    $senhaU = password_hash($senhaU, PASSWORD_DEFAULT);
-
-                    $sql = "INSERT INTO usuarios VALUES(DEFAULT,'$nomeU','$emailU','$senhaU' )";
-                    $return = pg_query($conecta, $sql);
-
-                    if($return){
-                        $sql = "SELECT id_user FROM usuarios WHERE email ='$emailU' AND senha = '$senhaU' ";
-                        
-                        $linha = pg_fetch_array(pg_query($conecta, $sql));
-
-                        //print_r( "Data saved Successfully");
-                        $_SESSION['isAuth'] = TRUE;
-                        $_SESSION['idUser'] = $linha['id_user'];
-                        header("Location: home.php");
-                        exit();
-                    }else{
-                        //print_r(  "Something Went Wrong");
-                        header("Location: register.php?erro=1");
-                        exit();
-                    }
-            }   
-        }else{  
-                header("Location: register.php?erro=1");
-                exit();
-        }
-}
-?>

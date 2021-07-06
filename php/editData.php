@@ -2,22 +2,23 @@
 
     session_start();
     require_once("loginValidation.php");
-    require_once("conexao.php");
+    require_once("connect.php");
+    require_once("functions.php");
 
     if(checkAuth()){
         
         if(!empty($_POST['name']) && !empty($_POST['quantity']) && !empty($_POST['price']) && !empty($_POST['price']) ){
             
-            $idescolhido = $_POST['editInput'];
+            $choosen_id = $_POST['editInput'];
 
             $nome = cleanString($_POST['name']); 
             $qnt = cleanNumber($_POST['quantity']);
             $valor = cleanNumber($_POST['price']);
             $tipo = cleanString($_POST['type']);
         
-            $sql = "UPDATE registros SET nomeprod='$nome', qntprod = $qnt, tipoprod = '$tipo', valorprod = $valor WHERE fk_user = $_SESSION[idUser] AND idregistro = $idescolhido";
+            $sql = "UPDATE user_records SET name_record='$nome', quantity_record = $qnt, type_record = '$tipo', price_record = $valor WHERE fk_user = $_SESSION[idUser] AND id_record = $choosen_id";
 
-            $return = pg_query($conecta, $sql);
+            $return = $conn -> query($sql);
             $qtde= pg_affected_rows($return);
 
             if ($qtde > 0){

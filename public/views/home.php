@@ -1,9 +1,9 @@
 <?php
     session_start();
     require_once("../../php/loginValidation.php");
-    require_once("../../php/conexao.php");
+    require_once("../../php/connect.php");
     require_once("../../php/showData.php");
-?>
+?> 
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/menu.css">
     <link rel="stylesheet" href="../css/home.css">
- 
 </head>
 <body>
     <!-- Header -->
@@ -72,16 +71,19 @@
                 <select name="typeSearch" id="typeSearch">
                     <option value="">Tipo</option>
                     <?php
-                        $sql = "SELECT idregistro,nomeprod,qntprod,tipoprod FROM registros WHERE $_SESSION[idUser] = fk_user AND excluido = 'FALSE'";
+                        $query = "SELECT id_record,name_record,quantity_record,type_record FROM user_records WHERE $_SESSION[idUser] = fk_user AND deleted = 'FALSE'";
 
-                        $return = pg_query($conecta, $sql);
-                        $array = pg_fetch_all($return);
+                        $stmt = $conn -> query($query);
+
+                        $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
                         
-                        foreach($array as $i){
-                            echo"<option value='".$i['tipoprod']."'> Tipo ".$i['tipoprod']; if(empty($i['tipoprod'])){echo"Vazio";} echo"</option>";
+                        foreach($result as $i){
+                             echo"<option value='".$i['type_record']."'> Tipo ".$i['type_record']; 
+                             if(empty($i['type_record'])){echo"Vazio";} echo"</option>";
                         }
 
-                        $restricao = $_POST;
+                        $restriction = $_POST;
+                        print_r ($restriction);
                     ?>
                 </select>
                 <input type="text" name="textSearch" id="textSearch" placeholder="Pesquisa">
@@ -93,13 +95,13 @@
     </div>
 
     <div class="container">
-        <!-- Base box -->
+
         <?php
-            showBoxes($restricao);
+            showBoxes($restriction);
         ?>
-        <!-- End Base box -->
+
             
-    </div>
+    </div>  
 
     <footer>
         <div class="left"></div>
@@ -175,9 +177,9 @@
         </form>
     </div>
 
-    <script src="../scripts/menuShow.js"></script>
-    <script src="../scripts/modalShow.js"></script>
-    <script src="../scripts/formValidate.js"></script>
-    <script src="../scripts/createValidate.js"></script>
+    <script type="text/javascript" src="../scripts/menuShow.js"></script>
+    <script type="text/javascript" src="../scripts/modalShow.js"></script>
+    <script type="text/javascript" src="../scripts/formValidate.js"></script>
+    <script type="text/javascript" src="../scripts/createValidate.js"></script>
 </body>
 </html>

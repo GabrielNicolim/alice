@@ -6,7 +6,8 @@
         exit();
     }
 
-    require_once("conexao.php");
+    require_once("connect.php");
+    require_once("functions.php");
     
     if(!empty($_POST['name']) && !empty($_POST['quantity']) && !empty($_POST['price']) && !empty($_POST['type']) ){
         
@@ -18,9 +19,9 @@
             $tipo = cleanString($_POST['type']);
 
             //INSERT INTO registros VALUES(DEFAULT,'nomeprod',qntprod,'tipoprod',valorprod ,'FALSE', NULL, fk_user)
-            $sql = "INSERT INTO registros VALUES(DEFAULT,'$nome',$qnt,'$tipo',$preco,'FALSE', NULL ,$_SESSION[idUser] )";
+            $sql = "INSERT INTO user_records VALUES(DEFAULT,'$nome',$qnt,'$tipo',$preco,'FALSE', NULL ,$_SESSION[idUser] )";
 
-            $return = pg_query($conecta, $sql);
+            $return = $conn -> query($sql);
 
             if($return){       
                 unset($_POST);

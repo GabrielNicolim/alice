@@ -1,7 +1,8 @@
 <?php
     session_start();
     require_once("loginValidation.php");
-    require_once("conexao.php");
+    require_once("connect.php");
+    require_once("functions.php");
 
     if(checkAuth()){
 
@@ -12,7 +13,7 @@
             echo"coisa $exclusao e $data <br>";
             $sql = "UPDATE registros SET excluido= 'TRUE', data_exclusao = '$data' WHERE idregistro = $exclusao AND fk_user = $_SESSION[idUser] ";
 
-            $return = pg_query($conecta, $sql);
+            $return = $conn -> query($sql);
             $qtde= pg_affected_rows($return);
 
             if ($qtde > 0){

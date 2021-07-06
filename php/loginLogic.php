@@ -1,39 +1,43 @@
 <?php
-//print_r($_POST); //Para debug
+
+session_start();
+
 if(!empty($_POST['email']) && !empty($_POST['password'])){
-    require_once("../../php/conexao.php");
 
-    $emailU = strtolower( cleanString($_POST['email']));
-    $senhaU = cleanString($_POST['password']);
+    require_once("connect.php");
+    require_once("functions.php");
 
-    //Se os campos não estiverem vazios depois da limpeza:
-    if(!empty($emailU) && !empty($senhaU)){
-        try {
+    $email_user = strtolower( cleanString($_POST['email']) );
+    $password_user = cleanString($_POST['password']);
 
-            $sql = "SELECT * FROM usuarios WHERE email ='$emailU' ";
-            
-            $return = pg_query($conecta, $sql);
-            $login_check = pg_num_rows($return);
+    if(!empty($email_user) && !empty($password_user)){
 
-            if($login_check > 0){ 
+        $query = "SELECT id_user, email_user, password_user FROM users WHERE email_user = :email_user";
 
-                $linha = pg_fetch_array($return);
+        $stmt = $conn -> prepare($query);
+
+        $stmt -> bindValue(':email_user', $email_user);
+
+        $stmt -> execute(); 
+
+        $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+
+        if(count($result) > 0) {
+            if(password_verify($password_user, $result[0]['password_user'])) {
                 
-                if( password_verify($senhaU, $linha['senha']) ){
+                $_SESSION['isAuth'] = TRUE; 
+                $_SESSION['idUser'] = $result[0]['id_user'];
 
-                    $_SESSION['isAuth'] = TRUE; 
-                    $_SESSION['idUser'] = $linha['id_user'];
-
-                    header("Location: home.php");
-                    exit();
-                }
-
-            }else{  
-                header("Location: login.php?erro=1");
+                header("Location: ../public/views/home.php");
                 exit();
             }
-        } catch (PDOException $e) {
-            echo "Error: '.$e->getCode()' Mensagem: ' .$e->getMessage()'";
+            else {
+                header("Location: ../public/views/login.php?error=1");
+                exit();
+            }
+        }else{  
+            header("Location: ../public/views/login.php?error=1");
+            exit();
         }
     }
 }

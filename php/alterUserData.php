@@ -2,17 +2,18 @@
 
     session_start();
     require_once("loginValidation.php");
-    require_once("conexao.php");
+    require_once("connect.php");
+    require_once("functions.php");
 
     if(checkAuth()){
 
-        $nome = cleanString($_POST['name']); 
-        $email = cleanString($_POST['email']);
+        $name_user = cleanString($_POST['name']); 
+        $email_user = cleanString($_POST['email']);
         $confirmPassword = cleanString($_POST['confirmPassword']);
         //echo"aaaaa";
         if(!empty($confirmPassword)){
             
-            $emailcheck = pg_query($conecta,"SELECT * FROM usuarios WHERE email = '$email' EXCEPT id_user = $_SESSION[idUser] ");
+            $emailcheck = $conn -> query("SELECT * FROM users WHERE email_user = '$email_user' EXCEPT id_user = $_SESSION[idUser] ");
             $count = pg_num_rows($emailcheck);
 
             if($count > 0){
@@ -22,9 +23,9 @@
 
                 $confirmPassword = password_hash($senhaU, PASSWORD_DEFAULT);
 
-                $sql = "UPDATE usuarios SET nome='$nome', email = '$email' WHERE id_user = $_SESSION[idUser] AND senha = '$confirmPassword' ";
+                $sql = "UPDATE users SET name_user='$name_user', email_user = '$email_user' WHERE id_user = $_SESSION[idUser] AND password_user = '$confirmPassword' ";
             
-                $return = pg_query($conecta, $sql);
+                $return = $conn -> query($sql);
                 $qtde= pg_affected_rows($return);
 
                 if ($qtde > 0){

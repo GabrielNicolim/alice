@@ -1,62 +1,61 @@
 <?php
+    function showBoxes($restriction){
 
-session_start();
+        require_once("connect.php");
+        require_once("functions.php");
 
-    function showBoxes($restricao){
-
-        require_once("conexao.php");
-        define("Host","host=localhost port=5432 dbname=a06felipeestevanatto user=a06felipeestevanatto password=cti");
-        
-        $conecta = pg_connect(Host);
-        
-        //print_r($restricao);
-        $sql = "SELECT idregistro,nomeprod,qntprod,tipoprod,valorprod FROM registros WHERE $_SESSION[idUser] = fk_user AND excluido = 'FALSE' ";
+        $query = "SELECT * FROM user_records WHERE :id_user = fk_user AND deleted = 'FALSE' ";
         
         $_SESSION['ids'] = 0;
 
-        if( !empty($restricao['typeSearch']) ){
-            $sql = $sql."AND tipoprod = '".$restricao['typeSearch']."'";
+        if( !empty($restriction['typeSearch']) ){
+            $query = $query."AND type_record = '".$restriction['typeSearch']."'";
         }
 
-        if( !empty(cleanString($restricao['textSearch'])) && $restricao['textSearch'] != ' '){
-            $sql = $sql."AND nomeprod = '".$restricao['textSearch']."'";
+        if( !empty( cleanString($restriction['textSearch']) ) && $restriction['textSearch'] != ' '){
+            $query = $query."AND name_record = '".$restriction['textSearch']."'";
         }
 
-        //echo$sql;
-            $return = pg_query($conecta, $sql);
-            $_SESSION['ids'] = pg_fetch_all($return);
+        $stmt = $conn -> prepare($query);
+
+        $stmt -> bindValue(':id_user', $_SESSION['idUser']);
+
+        $stmt = $conn -> query($query);
+
+        $_SESSION['ids'] = $stmt -> fetchAll(PDO::FETCH_ASSOC);
         
-            //Irá instanciar a matriz com os registros e seus arrays internos de dados, printando a informação na tela
+        //Irá instanciar a matriz com os registros e seus arrays internos de dados, printando a informação na tela
         if( !empty($_SESSION['ids']) )
+
             foreach($_SESSION['ids'] as $obj){
                 echo"<div class='box'>";
                     echo"<div class='title'>";
-                            echo"<span id='name".$obj['idregistro']."'>"; 
-                            echo $obj['nomeprod']; if( $obj['nomeprod'] == '' || $obj['nomeprod'] == ' ' || $obj['nomeprod'] == null) echo"Registro #".$obj['idregistro']; 
+                            echo"<span id='name".$obj['id_record']."'>"; 
+                            echo $obj['name_record']; if( $obj['name_record'] == '' || $obj['name_record'] == ' ' || $obj['name_record'] == null) echo"Registro #".$obj['id_record']; 
                             echo "</span>";
 
-                            echo"<i class='fas fa-trash-alt trash' onclick='openExclude(".$obj['idregistro'].")'></i>";
+                            echo"<i class='fas fa-trash-alt trash' onclick='openExclude(".$obj['id_record'].")'></i>";
                     echo"</div>";
 
                     echo"<div class='data'>";
                         echo"<div class='quantity'>";
                             echo"Quantidade";
                         echo"</div>";
-                        echo"<span id='qnt".$obj['idregistro']."'>".$obj['qntprod']."</span>";
+                        echo"<span id='qnt".$obj['id_record']."'>".$obj['quantity_record']."</span>";
 
                         echo"<div class='type'>";
                             echo"Valor";
                         echo"</div>";
-                        echo"<span id='val".$obj['idregistro']."'>R$ ".$obj['valorprod']."</span>";
+                        echo"<span id='val".$obj['id_record']."'>R$ ".$obj['price_record']."</span>";
 
                         echo"<div class='type'>";
                             echo"Tipo";
                         echo"</div>";
-                        echo"<span id='typ".$obj['idregistro']."'>".$obj['tipoprod']; if(empty($obj['tipoprod']))echo"Tipo Vazio"; echo"</span>";
+                        echo"<span id='typ".$obj['id_record']."'>".$obj['type_record']; if(empty($obj['type_record']))echo"Tipo Vazio"; echo"</span>";
 
                         echo"</div>";
 
-                        echo"<div class='edit' onclick='openEdit(".$obj['idregistro'].")'>";
+                        echo"<div class='edit' onclick='openEdit(".$obj['id_record'].")'>";
                             echo"Editar";
                     echo"</div>";
                 echo"</div>";

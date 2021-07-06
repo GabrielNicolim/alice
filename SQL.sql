@@ -1,30 +1,29 @@
-/* Usuários */
-CREATE TABLE usuarios (
-id_user SERIAL PRIMARY KEY NOT NULL,
-nome VARCHAR(40) NOT NULL,
-email VARCHAR(128) NOT NULL UNIQUE,
-senha VARCHAR(255) NOT NULL,
-created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-nivelAcesso INT NOT NULL DEFAULT 0
-);
-
-/* Registros */
-CREATE TABLE registros (
-idRegistro SERIAL PRIMARY KEY NOT NULL,
-nomeProd VARCHAR(100),
-qntProd INT NOT NULL,
-tipoProd VARCHAR(20),
-valorProd DECIMAL(10,2),
-excluido BOOLEAN NOT NULL,
-data_exclusao DATE,
-fk_user BIGINT UNSIGNED NOT NULL,
-FOREIGN KEY (fk_user) REFERENCES usuarios (id_user)
-);
-
-/* Criar tabelas */
-
+/* CREATE DATABASE  */
 CREATE DATABASE alice_db;
 
-/* Dropar tabelas */
+/* USERS TABLE */
+CREATE TABLE users (
+id_user SERIAL PRIMARY KEY NOT NULL,
+name_user VARCHAR(40) NOT NULL,
+email_user VARCHAR(128) NOT NULL UNIQUE,
+password_user VARCHAR(72) NOT NULL,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+clearance INT NOT NULL DEFAULT 0
+);
 
-/* DROP TABLE registros, usuarios; */
+/* RECORDS TABLE */
+CREATE TABLE user_records (
+id_record SERIAL PRIMARY KEY NOT NULL,
+name_record VARCHAR(100),
+quantity_record INT NOT NULL,
+type_record VARCHAR(20),
+price_record DECIMAL(10,2),
+deleted BOOLEAN NOT NULL,
+timeDeleted DATE,
+fk_user BIGINT UNSIGNED NOT NULL,
+FOREIGN KEY (fk_user) REFERENCES users (id_user)
+);
+
+/* DROP TABLE */
+
+/* DROP TABLE users_records , users; */
