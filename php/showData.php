@@ -1,67 +1,84 @@
 <?php
+    function showBoxes($restriction){
 
-session_start();
+        require("connect.php");
+        require("functions.php");
 
-    function showBoxes($restricao){
-
-        require_once("conexao.php");
-        define("Host","host=localhost port=5432 dbname=a06felipeestevanatto user=a06felipeestevanatto password=cti");
+        $query = "SELECT * FROM user_records WHERE :id_user = fk_user AND deleted = 'FALSE' ";
         
-        $conecta = pg_connect(Host);
-        
-        //print_r($restricao);
-        $sql = "SELECT idregistro,nomeprod,qntprod,tipoprod,valorprod FROM registros WHERE $_SESSION[idUser] = fk_user AND excluido = 'FALSE' ";
-        
-        $_SESSION['ids'] = 0;
+        if( isset($restriction['typeSearch']) ){
+            $restriction['typeSearch'] = cleanString($restriction['typeSearch']);
 
-        if( !empty($restricao['typeSearch']) ){
-            $sql = $sql."AND tipoprod = '".$restricao['typeSearch']."'";
-        }
-
-        if( !empty(cleanString($restricao['textSearch'])) && $restricao['textSearch'] != ' '){
-            $sql = $sql."AND nomeprod = '".$restricao['textSearch']."'";
-        }
-
-        //echo$sql;
-            $return = pg_query($conecta, $sql);
-            $_SESSION['ids'] = pg_fetch_all($return);
-        
-            //Irá instanciar a matriz com os registros e seus arrays internos de dados, printando a informação na tela
-        if( !empty($_SESSION['ids']) )
-            foreach($_SESSION['ids'] as $obj){
-                echo"<div class='box'>";
-                    echo"<div class='title'>";
-                            echo"<span id='name".$obj['idregistro']."'>"; 
-                            echo $obj['nomeprod']; if( $obj['nomeprod'] == '' || $obj['nomeprod'] == ' ' || $obj['nomeprod'] == null) echo"Registro #".$obj['idregistro']; 
-                            echo "</span>";
-
-                            echo"<i class='fas fa-trash-alt trash' onclick='openExclude(".$obj['idregistro'].")'></i>";
-                    echo"</div>";
-
-                    echo"<div class='data'>";
-                        echo"<div class='quantity'>";
-                            echo"Quantidade";
-                        echo"</div>";
-                        echo"<span id='qnt".$obj['idregistro']."'>".$obj['qntprod']."</span>";
-
-                        echo"<div class='type'>";
-                            echo"Valor";
-                        echo"</div>";
-                        echo"<span id='val".$obj['idregistro']."'>R$ ".$obj['valorprod']."</span>";
-
-                        echo"<div class='type'>";
-                            echo"Tipo";
-                        echo"</div>";
-                        echo"<span id='typ".$obj['idregistro']."'>".$obj['tipoprod']; if(empty($obj['tipoprod']))echo"Tipo Vazio"; echo"</span>";
-
-                        echo"</div>";
-
-                        echo"<div class='edit' onclick='openEdit(".$obj['idregistro'].")'>";
-                            echo"Editar";
-                    echo"</div>";
-                echo"</div>";
+            if( !empty($restriction['typeSearch']) && $restriction['typeSearch'] != null){
+                $query .= "AND type_record = '$restriction[typeSearch]' ";
             }
-        else{
+        }
+        
+        $stmt = $conn -> prepare($query);
+
+        $stmt -> bindValue(':id_user', $_SESSION['idUser']);
+
+        $stmt -> execute();
+
+        $_SESSION['ids'] = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+
+
+        if(!empty($_SESSION['ids']) ) {
+            $arr = [];
+            if(!empty($restriction['textSearch'])  && cleanString($restriction['textSearch']) != '') {
+                
+                $text = strtolower(cleanString($restriction['textSearch']));
+    
+                foreach( $_SESSION['ids'] as $value) {
+                    if( str_contains(strtolower($value['name_record']), $text) ) {
+                        array_push($arr, $value);
+                    }
+                }
+            }
+            else {
+                $arr = $_SESSION['ids'];
+            }
+
+            if( !empty($arr) ) {
+                foreach($arr as $obj) {
+                    echo"<div class='box'>";
+                        echo"<div class='title'>";
+                                echo"<span id='name".$obj['id_record']."'>"; 
+                                echo $obj['name_record']; if( $obj['name_record'] == '' || $obj['name_record'] == ' ' || $obj['name_record'] == null) echo"Registro #".$obj['id_record']; 
+                                echo "</span>";
+
+                                echo"<i class='fas fa-trash-alt trash' onclick='openExclude(".$obj['id_record'].")'></i>";
+                        echo"</div>";
+
+                        echo"<div class='data'>";
+                            echo"<div class='quantity'>";
+                                echo"Quantidade";
+                            echo"</div>";
+                            echo"<span id='qnt".$obj['id_record']."'>".$obj['quantity_record']."</span>";
+
+                            echo"<div class='type'>";
+                                echo"Valor";
+                            echo"</div>";
+                            echo"<span id='val".$obj['id_record']."'>R$ ".$obj['price_record']."</span>";
+
+                            echo"<div class='type'>";
+                                echo"Tipo";
+                            echo"</div>";
+                            echo"<span id='typ".$obj['id_record']."'>".$obj['type_record']; if(empty($obj['type_record']))echo"Tipo Vazio"; echo"</span>";
+
+                            echo"</div>";
+
+                            echo"<div class='edit' onclick='openEdit(".$obj['id_record'].")'>";
+                                echo"Editar";
+                        echo"</div>";
+                    echo"</div>";
+                }
+            }
+            else {
+                echo"<div id='void'>Nenhum Registro encontrado!</div>";
+            }
+        }
+        else {
             echo"<div id='void'>Nenhum Registro encontrado!</div>";
         }
     }

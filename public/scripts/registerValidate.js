@@ -12,7 +12,7 @@ function registerValidate(event) {
     let confirmPasswordValue = secondPassword.value.trim()
 
     // Name 
-    if(voidCheck(nameValue) || nameValue.Value.lenght > 128) {
+    if(voidCheck(nameValue) || nameValue.lenght > 128) {
         name.classList = 'error'
         valid = false 
     }
@@ -21,7 +21,7 @@ function registerValidate(event) {
     }
 
     // Email
-    if(voidCheck(emailValue) || emailValidate(emailValue) || emailValue.Value.lenght > 128) {
+    if(voidCheck(emailValue) || emailValidate(emailValue) || emailValue.lenght > 128) {
         email.classList = 'error'
         valid = false 
     }
@@ -30,7 +30,7 @@ function registerValidate(event) {
     }
 
     // Password
-    if(voidCheck(passwordValue) || passwordValue.Value.length > 128) {
+    if(voidCheck(passwordValue) || passwordValue.lenght > 128) {
         password.classList = 'error'
         valid = false 
     }
@@ -39,12 +39,13 @@ function registerValidate(event) {
     }
 
     // Confirm password 
-    if(voidCheck(confirmPasswordValue || confirmPasswordValue.Value.length > 128)) {
+    if(voidCheck(confirmPasswordValue) || confirmPasswordValue.lenght > 128) {
         secondPassword.classList = 'error'
         valid = false 
     }
     else if(confirmPasswordValue !== passwordValue) {
         secondPassword.classList = 'error'
+        
         valid = false 
     }
     else {

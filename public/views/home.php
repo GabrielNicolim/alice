@@ -1,9 +1,9 @@
 <?php
     session_start();
     require_once("../../php/loginValidation.php");
-    require_once("../../php/conexao.php");
+    require_once("../../php/connect.php");
     require_once("../../php/showData.php");
-?>
+?> 
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/menu.css">
     <link rel="stylesheet" href="../css/home.css">
- 
 </head>
 <body>
     <!-- Header -->
@@ -72,16 +71,24 @@
                 <select name="typeSearch" id="typeSearch">
                     <option value="">Tipo</option>
                     <?php
-                        $sql = "SELECT idregistro,nomeprod,qntprod,tipoprod FROM registros WHERE $_SESSION[idUser] = fk_user AND excluido = 'FALSE'";
+                        $query = "SELECT id_record,name_record,quantity_record,type_record FROM user_records WHERE fk_user = :id AND deleted = 'FALSE'";
 
-                        $return = pg_query($conecta, $sql);
-                        $array = pg_fetch_all($return);
+                        $stmt = $conn -> prepare($query);
+
+                        $stmt -> bindValue(':id',$_SESSION['idUser']);
+
+                        $stmt -> execute();
+
+                        $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
                         
-                        foreach($array as $i){
-                            echo"<option value='".$i['tipoprod']."'> Tipo ".$i['tipoprod']; if(empty($i['tipoprod'])){echo"Vazio";} echo"</option>";
+                        foreach($result as $i){
+                             echo"<option value='".$i['type_record']."'>
+                                Tipo ".$i['type_record']; 
+                                if(empty($i['type_record']))echo"Vazio";
+                             echo"</option>";
                         }
 
-                        $restricao = $_POST;
+                        $restriction = $_POST;
                     ?>
                 </select>
                 <input type="text" name="textSearch" id="textSearch" placeholder="Pesquisa">
@@ -93,13 +100,10 @@
     </div>
 
     <div class="container">
-        <!-- Base box -->
         <?php
-            showBoxes($restricao);
-        ?>
-        <!-- End Base box -->
-            
-    </div>
+            showBoxes($restriction);
+        ?>      
+    </div>  
 
     <footer>
         <div class="left"></div>
@@ -143,13 +147,9 @@
         </div>
         <form action="../../php/editData.php" onsubmit="return createValidate(event)" method="POST">
             <input type="text" class="hidden" name="editInput" id="editInput">
-            Nome:
             <input type="text" name="name" id="editName" placeholder="Nome" maxlength="20">
-            Quantidade:
             <input type="number" name="quantity" id="editQuantity" placeholder="Quantidade" min="0" max="9999999999">
-            Preço:
             <input type="number" name="price" min="0" step=".01" id="editPrice" placeholder="Preço" min="0" max="9999999999">
-            Tipo:
             <input type="text" name="type" id="editType" placeholder="Tipo" maxlength="20">
             <input type="submit" class="submitBtn" value="Salvar Edição">
         </form>
@@ -175,9 +175,9 @@
         </form>
     </div>
 
-    <script src="../scripts/menuShow.js"></script>
-    <script src="../scripts/modalShow.js"></script>
-    <script src="../scripts/formValidate.js"></script>
-    <script src="../scripts/createValidate.js"></script>
+    <script type="text/javascript" src="../scripts/menuShow.js"></script>
+    <script type="text/javascript" src="../scripts/modalShow.js"></script>
+    <script type="text/javascript" src="../scripts/formValidate.js"></script>
+    <script type="text/javascript" src="../scripts/createValidate.js"></script>
 </body>
 </html>

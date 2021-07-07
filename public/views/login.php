@@ -32,10 +32,13 @@
             </div>
         </div>
 		<?php
-            if($_GET['erro'])
-            echo "<div class='error-login'>Login ou senha estão invalidos!</div>"; 
+            if(isset($_GET['error'])) {
+                if($_GET['error']) {
+                    echo "<div class='error-login'>Login invalido!</div>"; 
+                }
+            }
         ?>
-        <form action="" onsubmit="return loginValidate(event)" method="POST">
+        <form action="../../php/loginLogic.php" onsubmit="return loginValidate(event)" method="POST">
             <input type="email" name="email" id="email" placeholder="Email" maxlength='128'>
             <input type="password" name="password" id="password" placeholder="Senha" maxlength='128'>
 
@@ -51,48 +54,7 @@
         </div>
     </div>
 
-    <script src="../scripts/formValidate.js"></script>
-    <script src="../scripts/loginValidate.js"></script>
+    <script type="text/javascript" src="../scripts/formValidate.js"></script>
+    <script type="text/javascript" src="../scripts/loginValidate.js"></script>
 </body>
 </html>
-
-<?php
-//print_r($_POST); //Para debug
-if(!empty($_POST['email']) && !empty($_POST['password'])){
-    require_once("../../php/conexao.php");
-
-    $emailU = strtolower( cleanString($_POST['email']));
-    $senhaU = cleanString($_POST['password']);
-
-    //Se os campos não estiverem vazios depois da limpeza:
-    if(!empty($emailU) && !empty($senhaU)){
-        try {
-
-            $sql = "SELECT * FROM usuarios WHERE email ='$emailU' ";
-            
-            $return = pg_query($conecta, $sql);
-            $login_check = pg_num_rows($return);
-
-            if($login_check > 0){ 
-
-                $linha = pg_fetch_array($return);
-                
-                if( password_verify($senhaU, $linha['senha']) ){
-
-                    $_SESSION['isAuth'] = TRUE; 
-                    $_SESSION['idUser'] = $linha['id_user'];
-
-                    header("Location: home.php");
-                    exit();
-                }
-
-            }else{  
-                header("Location: login.php?erro=1");
-                exit();
-            }
-        } catch (PDOException $e) {
-            echo "Error: '.$e->getCode()' Mensagem: ' .$e->getMessage()'";
-        }
-    }
-}
-?>

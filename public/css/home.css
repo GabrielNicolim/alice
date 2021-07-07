@@ -43,8 +43,8 @@
     font-weight: 500;
 }
 
-.add .right form select{
-    width: 60px;
+.add .right form #typeSearch, option {
+    cursor: pointer;
 }
 
 .add .right form #typeSearch,
@@ -289,7 +289,7 @@
     }
 }
 
-@media only screen and (max-width: 508px) {
+@media only screen and (max-width: 600px) {
     .add{
         display: block;
     }
@@ -311,6 +311,10 @@
 
     .add .right form select{
         width: 50%;
+    }
+
+    .add .right form label{
+        width: 100px;
     }
 
     .container {

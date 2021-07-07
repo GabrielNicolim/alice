@@ -2,46 +2,71 @@
 
     session_start();
     require_once("loginValidation.php");
-    require_once("conexao.php");
+    require_once("connect.php");
+    require_once("functions.php");
 
-    if(checkAuth()){
+    $name_user = cleanString($_POST['name']); 
+    $email_user = cleanString($_POST['email']);
+    $confirmPassword = cleanString($_POST['confirmPassword']);
 
-        $nome = cleanString($_POST['name']); 
-        $email = cleanString($_POST['email']);
-        $confirmPassword = cleanString($_POST['confirmPassword']);
-        //echo"aaaaa";
-        if(!empty($confirmPassword)){
+    if(!empty($name_user) && !empty($email_user) && !empty($confirmPassword)){
+        $query = "SELECT email_user, id_user FROM users WHERE email_user = :email";
+
+        $stmt = $conn -> prepare($query);
+
+        $stmt -> bindValue(':email', $email_user);
+
+        $stmt -> execute();
+
+        $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+
+        $emailcheck = count($result);
+
+        if($emailcheck > 0 && $result[0]['id_user'] != $_SESSION['idUser'] ){
+            header("Location: ../public/views/user.php?error=0");
+            exit();
+        }
+        else {
+
+            $query = "SELECT * FROM users WHERE id_user = :id";
+
+            $stmt = $conn -> prepare($query);
+
+            $stmt -> bindValue(':id', $_SESSION['idUser']);
+
+            $stmt -> execute();
+
+            $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
             
-            $emailcheck = pg_query($conecta,"SELECT * FROM usuarios WHERE email = '$email' EXCEPT id_user = $_SESSION[idUser] ");
-            $count = pg_num_rows($emailcheck);
+            if(password_verify($confirmPassword, $result[0]['password_user'])){
 
-            if($count > 0){
-                header("Location: ../public/views/user.php?error=0");
-                exit();
-            }else{
+                $query = "UPDATE users SET name_user = '$name_user', email_user = '$email_user' WHERE id_user = :id";
+                
+                $stmt = $conn -> prepare($query);
 
-                $confirmPassword = password_hash($senhaU, PASSWORD_DEFAULT);
+                $stmt -> bindValue(':id', $_SESSION['idUser']);
 
-                $sql = "UPDATE usuarios SET nome='$nome', email = '$email' WHERE id_user = $_SESSION[idUser] AND senha = '$confirmPassword' ";
-            
-                $return = pg_query($conecta, $sql);
-                $qtde= pg_affected_rows($return);
-
-                if ($qtde > 0){
-
+                $return = $stmt -> execute(); 
+                
+                if ($return){   
                     header('location: ../public/views/user.php');
                     exit;
                 }
                 else{
-                    header('location: ../public/views/user.php?error=1');
-                    exit;
+                    // Alteração mal sucedida
+                    //header('location: ../public/views/user.php?error=1');
+                    //exit;
                 }
+            } 
+            else {
+                // Senha incorreta 
+                header('location: ../public/views/user.php?error=1');
+                exit;
             }
         }
-
     }
-    else{
-        header('location: ../public/views/login.php');
-        exit;
+    else {
+        header("Location: ../public/views/user.php?error=0");
+        exit();
     }
 ?>
