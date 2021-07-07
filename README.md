@@ -1,4 +1,4 @@
-# Projeto ALICE
+# ALICE
 
 Baseado no termo da área de informática CRUD (acrónimo do inglês Create, Read, Update e
 Delete) surgiu a ideia de nomear a atividade de ALICE (acrônimo de Alteração, Login, Inclusão,
