@@ -73,7 +73,10 @@
                     <?php
                         $query = "SELECT id_record,name_record,quantity_record,type_record FROM user_records WHERE fk_user = :id AND deleted = 'FALSE'";
 
-                        $stmt = $conn -> prepare($_SESSION['idUser']);
+                        $stmt = $conn -> prepare($query);
+
+                        $stmt -> bindValue(':id',$_SESSION['idUser']);
+
                         $stmt -> execute();
 
                         $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
