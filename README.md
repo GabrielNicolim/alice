@@ -20,6 +20,8 @@ Para a construção desta aplicação utilizamos PHP e JavaScript. A parte visua
 
 O projeto apresenta uma tela inicial, além de páginas de login e cadastro com feedback visual de erro. Assim que o login é realizado a home é apresentada, está possui interação com o usuário nas principais operações da aplicação por meio de modais. A tela de usuário apresenta algumas informações a respeito do usuário e possibilita alterações no perfil. 
 
+Caso deseje visualizar nosso projeto de forma rápida **[clique aqui](http://200.145.153.175/felipeestevanatto/Projetos/ALICE/).**
+
 ### Instalação 
 #### Conexão 
 
@@ -80,6 +82,3 @@ fk_user BIGINT NOT NULL,
 FOREIGN KEY (fk_user) REFERENCES users (id_user)
 );
 ```
-## View
-
-Caso deseje visualizar nosso projeto de forma rápida [clique aqui](http://200.145.153.175/felipeestevanatto/Projetos/ALICE/). 
