@@ -13,13 +13,12 @@
         
         if(checkAuth()){
 
-            $nome = cleanString($_POST['name']); 
+            $name = cleanString($_POST['name']); 
             $qnt = cleanString($_POST['quantity']);
-            $preco = cleanString($_POST['price']);
-            $tipo = cleanString($_POST['type']);
+            $price = cleanString($_POST['price']);
+            $type = cleanString($_POST['type']);
 
-            //INSERT INTO registros VALUES(DEFAULT,'nomeprod',qntprod,'tipoprod',valorprod ,'FALSE', NULL, fk_user)
-            $sql = "INSERT INTO user_records VALUES(DEFAULT,'$nome',$qnt,'$tipo',$preco,'FALSE', NULL ,$_SESSION[idUser] )";
+            $sql = "INSERT INTO user_records VALUES(DEFAULT,'$name',$qnt,'$type',$price,'FALSE', NULL ,$_SESSION[idUser] )";
 
             $return = $conn -> query($sql);
 

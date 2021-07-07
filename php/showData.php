@@ -1,26 +1,28 @@
 <?php
     function showBoxes($restriction){
 
-        require_once("connect.php");
-        require_once("functions.php");
+        require("connect.php");
+        require("functions.php");
 
         $query = "SELECT * FROM user_records WHERE :id_user = fk_user AND deleted = 'FALSE' ";
         
         $_SESSION['ids'] = 0;
 
         if( !empty($restriction['typeSearch']) ){
-            $query = $query."AND type_record = '".$restriction['typeSearch']."'";
+            $query = $query."AND type_record = '$restriction[typeSearch]' ";
         }
 
-        if( !empty( cleanString($restriction['textSearch']) ) && $restriction['textSearch'] != ' '){
-            $query = $query."AND name_record = '".$restriction['textSearch']."'";
+        $restriction['textSearch'] = cleanString($restriction['textSearch']);
+
+        if( !empty( $restriction['textSearch'] ) && $restriction['textSearch'] != ' '  && $restriction['textSearch'] != null){
+            $query = $query."AND name_record = '$restriction[textSearch]' ";
         }
 
         $stmt = $conn -> prepare($query);
 
         $stmt -> bindValue(':id_user', $_SESSION['idUser']);
 
-        $stmt = $conn -> query($query);
+        $stmt -> execute();
 
         $_SESSION['ids'] = $stmt -> fetchAll(PDO::FETCH_ASSOC);
         

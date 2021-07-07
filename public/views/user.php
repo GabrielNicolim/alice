@@ -3,38 +3,42 @@
     require_once("../../php/connect.php");
     require("../../php/loginValidation.php");
     
-    $query = "SELECT * FROM users WHERE id_user = $_SESSION[idUser] ";
+    $query = "SELECT id_user, name_user, email_user, password_user FROM users WHERE id_user = $_SESSION[idUser] ";
 
     $stmt = $conn -> query($query);
 
-    $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+    $data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+    
+    if(count($data) > 0){
 
-    //$login_check = pg_num_rows($return);
+        print_r($data);
 
-    if(count($result) > 0){
-          
-        $data = pg_fetch_array($return);
-
-        $nome = $data['nome'];
+        $nome = $data[0]['name_user'];
         $idUser = $_SESSION['idUser'];
-        $email = $data['email'];
+        $email = $data[0]['email_user'];
 
         //Quantidade de registros
-        $sql = "SELECT COUNT(*) FROM user_records WHERE $idUser = fk_user AND deleted = 'FALSE'";
-        $return = pg_fetch_row(pg_query($conecta, $sql));    
-        $numRegistros = $return[0];
+
+        $query = "SELECT * FROM user_records WHERE fk_user = $_SESSION[idUser] AND deleted = 'FALSE' "; 
+
+        $stmt = $conn -> query($query);
+        $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+        $numRegistros = $return[0] = count($result);
 
         //Calcular o valor total do estoque
-        $sql = "SELECT price_record, quantity_record FROM user_records WHERE $idUser = fk_user AND deleted = 'FALSE'";
-        $return = pg_fetch_all(pg_query($conecta, $sql));
+        $query = "SELECT price_record, quantity_record FROM user_records WHERE $idUser = fk_user AND deleted = 'FALSE'";
+        $return = $stmt = $conn -> query($query);
         $valor = 0;
         foreach($return as $i){
             $valor = $valor + $i['price_record']*$i['quantity_record'];
         }
 
         //Monta os tipos
-        $sql = "SELECT type_record FROM user_records WHERE $idUser = fk_user AND deleted = 'FALSE' GROUP BY type_record ORDER BY type_record";
-        $tipo = pg_fetch_all(pg_query($conecta, $sql));
+        $query = "SELECT type_record FROM user_records WHERE $idUser = fk_user AND deleted = 'FALSE' GROUP BY type_record ORDER BY type_record";
+        
+        $stmt = $conn -> query($query);
+        
+        $tipo = $stmt -> fetchAll(PDO::FETCH_ASSOC);
 
     }else{
         echo "<script type='text/javascript'>alert('Ocorreu um problema no seu login, tente sair e entrar da conta!!!')</script>";
@@ -141,24 +145,29 @@
                 <h1>Alterar Dados</h1>
             </div>
             <?php
+
             if(isset($_GET['error'])){
-            echo "<div class='error-edit'>"; if($_GET['error'] == 0) echo"Seus dados não podem ser alterados!</div>"; else echo"Senha incorreta ou alteração mal sucedida!</div>";} //"; 
-            ?>
-            <form action="../../php/alterUserData.php" onsubmit="return userEditValidate(event)" method="POST">
-                <? 
-                $forms = "
+                echo "<div class='error-edit'>"; 
+                if($_GET['error'] == 0) 
+                    echo"Seus dados não podem ser alterados!</div>";
+                else 
+                    echo"Senha incorreta ou alteração mal sucedida!</div>";
+            }
+            
+            $forms = "
+            <form action='../../php/alterUserData.php' onsubmit='return userEditValidate(event)' method='POST'>
                 <div class='little-title'>Nome</div>
                     <input type='text' name='name' id='name' value='$nome' maxlength='40' required>
                 <div class='little-title'>Email</div>
                     <input type='email' name='email' id='email' value='$email' maxlength='128' required>
                 <div class='clear'></div>
-                    <input type='password' name='confirmPassword' id='confirmPassword' placeholder='Confirmar senha' required>
-                ";
-
-                echo$forms;
-                ?>
-                <input type="submit" class="submitBtn" value="Salvar Alterações">
+                    <input type='password' name='confirmPassword' id='confirmPassword' placeholder='Confirmar senha' maxlength='128' required>
+                    <input type='submit' class='submitBtn' value='Salvar Alterações'>
             </form>
+            ";
+            echo$forms;
+            ?>
+            
         </div>
     </div>
 

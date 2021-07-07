@@ -19,7 +19,7 @@ quantity_record INT NOT NULL,
 type_record VARCHAR(20),
 price_record DECIMAL(10,2),
 deleted BOOLEAN NOT NULL,
-timeDeleted DATE,
+timeDeleted TIMESTAMP DEFAULT NULL,
 fk_user BIGINT UNSIGNED NOT NULL,
 FOREIGN KEY (fk_user) REFERENCES users (id_user)
 );

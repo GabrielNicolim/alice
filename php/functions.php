@@ -1,6 +1,5 @@
 <?php
-    require_once("connect.php");
-
+    
     function cleanString($string){
         $badWords = array('DROP','TABLE','GROUP BY');      
         return trim(trim(preg_replace('/[^A-Za-zà-úÀ-Ú0-9\@\.\,\s]/', '', str_replace($badWords, '', $string))));
@@ -12,10 +11,15 @@
 
     function checkAuth(){
 
-        $sql = "SELECT * FROM usuarios WHERE id_user = $_SESSION[idUser] ";
+        require("connect.php");
 
-        $return = $conn -> query($sql);
-        $login_check = mysqli_num_rows($return);
+        $query= "SELECT email_user FROM users WHERE id_user = $_SESSION[idUser] ";
+
+        $stmt = $conn -> query($query);
+
+        $login_check = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+
+        $login_check= count($login_check);
 
         if($login_check > 0) return true;
         else return false;

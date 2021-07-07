@@ -97,6 +97,7 @@
     <div class="container">
 
         <?php
+            $restriction['textSearch'] = null;
             showBoxes($restriction);
         ?>
 

@@ -16,16 +16,19 @@
             $valor = cleanNumber($_POST['price']);
             $tipo = cleanString($_POST['type']);
         
-            $sql = "UPDATE user_records SET name_record='$nome', quantity_record = $qnt, type_record = '$tipo', price_record = $valor WHERE fk_user = $_SESSION[idUser] AND id_record = $choosen_id";
+            $query = "UPDATE user_records SET name_record='$nome', quantity_record = $qnt, type_record = '$tipo',
+            price_record = $valor WHERE fk_user = $_SESSION[idUser] AND id_record = $choosen_id";
 
-            $return = $conn -> query($sql);
-            $qtde= pg_affected_rows($return);
+            $return = $conn -> query($query);
 
-            if ($qtde > 0){
-                //echo "<script type='text/javascript'>alert('DEU TUDO CERTO! Dados alterados !!!')</script>";
+            $return= $return -> fetchAll(PDO::FETCH_ASSOC);
+
+            $qtde= count($return);
+
+            //Se deu tudo certo
+            if (!$qtde){
                 header('location: ../public/views/home.php');
                 exit;
-
             }
             else{
                 echo "<script type='text/javascript'>alert('Erro na alteração de dados !!! <br>')</script>";
