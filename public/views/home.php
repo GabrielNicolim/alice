@@ -71,15 +71,18 @@
                 <select name="typeSearch" id="typeSearch">
                     <option value="">Tipo</option>
                     <?php
-                        $query = "SELECT id_record,name_record,quantity_record,type_record FROM user_records WHERE $_SESSION[idUser] = fk_user AND deleted = 'FALSE'";
+                        $query = "SELECT id_record,name_record,quantity_record,type_record FROM user_records WHERE fk_user = :id AND deleted = 'FALSE'";
 
-                        $stmt = $conn -> query($query);
+                        $stmt = $conn -> prepare($_SESSION['idUser']);
+                        $stmt -> execute();
 
                         $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
                         
                         foreach($result as $i){
-                             echo"<option value='".$i['type_record']."'> Tipo ".$i['type_record']; 
-                             if(empty($i['type_record'])){echo"Vazio";} echo"</option>";
+                             echo"<option value='".$i['type_record']."'>
+                                Tipo ".$i['type_record']; 
+                                if(empty($i['type_record']))echo"Vazio";
+                             echo"</option>";
                         }
 
                         $restriction = $_POST;
@@ -94,12 +97,9 @@
     </div>
 
     <div class="container">
-
         <?php
             showBoxes($restriction);
-        ?>
-
-            
+        ?>      
     </div>  
 
     <footer>

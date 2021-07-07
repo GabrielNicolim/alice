@@ -20,13 +20,13 @@ if(!empty($_POST['email']) && !empty($_POST['password'])){
 
         $stmt -> execute(); 
 
-        $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+        $return= $stmt -> fetchAll(PDO::FETCH_ASSOC);
 
-        if(count($result) > 0) {
-            if(password_verify($password_user, $result[0]['password_user'])) {
+        if(count($return) > 0) {
+            if(password_verify($password_user, $return[0]['password_user'])) {
                 
                 $_SESSION['isAuth'] = TRUE; 
-                $_SESSION['idUser'] = $result[0]['id_user'];
+                $_SESSION['idUser'] = $return[0]['id_user'];
 
                 header("Location: ../public/views/home.php");
                 exit();

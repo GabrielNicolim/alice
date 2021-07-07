@@ -40,7 +40,7 @@
             }
 
             if( !empty($arr) ) {
-                foreach($arr as $obj){
+                foreach($arr as $obj) {
                     echo"<div class='box'>";
                         echo"<div class='title'>";
                                 echo"<span id='name".$obj['id_record']."'>"; 

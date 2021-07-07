@@ -22,13 +22,13 @@ if(!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['password'
 
         $stmt -> execute(); 
 
-        $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+        $return = $stmt -> fetchAll(PDO::FETCH_ASSOC);
 
-        if(count($result) == 0) {    
+        if(count($return) == 0) {    
 
             $password_user = password_hash($password_user, PASSWORD_BCRYPT);
 
-            $query = "INSERT INTO users VALUES(DEFAULT, :name_user , :email_user , :password_user, DEFAULT, 0)";
+            $query = "INSERT INTO users VALUES(DEFAULT, :name_user , :email_user , :password_user, DEFAULT)";
 
             $stmt = $conn -> prepare($query);
     
@@ -46,10 +46,10 @@ if(!empty($_POST['name']) && !empty($_POST['email']) && !empty($_POST['password'
 
                 $stmt -> execute(); 
 
-                $result = $stmt -> fetch(PDO::FETCH_ASSOC);
+                $return = $stmt -> fetch(PDO::FETCH_ASSOC);
                 
                 $_SESSION['isAuth'] = TRUE;
-                $_SESSION['idUser'] = $result['id_user'];
+                $_SESSION['idUser'] = $return['id_user'];
 
                 header("Location: ../public/views/home.php");
             } 

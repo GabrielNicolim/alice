@@ -5,54 +5,68 @@
     require_once("connect.php");
     require_once("functions.php");
 
-    if(checkAuth()){
+    $name_user = cleanString($_POST['name']); 
+    $email_user = cleanString($_POST['email']);
+    $confirmPassword = cleanString($_POST['confirmPassword']);
 
-        $name_user = cleanString($_POST['name']); 
-        $email_user = cleanString($_POST['email']);
-        $confirmPassword = cleanString($_POST['confirmPassword']);
-        
-        if(!empty($name_user) && !empty($email_user) && !empty($confirmPassword)){
-            print_r($_POST);
+    if(!empty($name_user) && !empty($email_user) && !empty($confirmPassword)){
+        $query = "SELECT * FROM users WHERE email_user = :email";
 
-            $sql = "SELECT * FROM users WHERE email_user = '$email_user' AND id_user != $_SESSION[idUser] ";
+        $stmt = $conn -> prepare($query);
 
-            $emailcheck = $conn -> query($sql);
+        $stmt -> bindValue(':email', $email_user);
 
-            $result = $emailcheck -> fetchAll(PDO::FETCH_ASSOC);
-            $emailcheck = count($result);
-            print_r($result);
-            if($emailcheck > 0){
-                header("Location: ../public/views/user.php?error=0");
-                exit();
-            }else{
+        $stmt -> execute();
 
-                if( password_verify($confirmPassword, $result['password_user'])){
+        $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
 
-                    $confirmPassword = password_hash($confirmPassword, PASSWORD_BCRYPT);
+        $emailcheck = count($result);
 
-                    $query = "UPDATE users SET name_user='$name_user', email_user = '$email_user' WHERE id_user = $_SESSION[idUser] ";
-                    
-                    $return = $conn -> query($query);
+        if($emailcheck > 0){
+            header("Location: ../public/views/user.php?error=0");
+            exit();
+        }
+        else {
 
-                    $return = $return -> fetchAll(PDO::FETCH_ASSOC);
-                    echo$confirmPassword;
-                    if (count($return) > 0){
-                        
-                        //header('location: ../public/views/user.php');
-                        //exit;
-                    }
-                    else{
-                        //Senha incorreta ou alteração mal sucedida
-                        header('location: ../public/views/user.php?error=1');
-                        exit;
-                    }
-                } 
+            $query = "SELECT * FROM users WHERE id_user = :id";
+
+            $stmt = $conn -> prepare($query);
+
+            $stmt -> bindValue(':id', $_SESSION['idUser']);
+
+            $stmt -> execute();
+
+            $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+
+            if(password_verify($confirmPassword, $result[0]['password_user'])){
+
+                $query = "UPDATE users SET name_user='$name_user', email_user = '$email_user' WHERE id_user = :id";
+                
+                $stmt = $conn -> prepare($query);
+
+                $stmt -> bindValue(':id', $_SESSION['idUser']);
+
+                $return = $stmt -> execute(); 
+
+                if ($return){   
+                    header('location: ../public/views/user.php');
+                    exit;
+                }
+                else{
+                    // Alteração mal sucedida
+                    header('location: ../public/views/user.php?error=1');
+                    exit;
+                }
+            } 
+            else {
+                // Senha incorreta 
+                header('location: ../public/views/user.php?error=1');
+                exit;
             }
         }
-
     }
-    else{
-        header('location: ../public/views/login.php');
-        exit;
+    else {
+        header("Location: ../public/views/user.php?error=0");
+        exit();
     }
 ?>

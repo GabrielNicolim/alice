@@ -10,8 +10,7 @@
     $data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
     
     if(count($data) > 0){
-
-        print_r($data);
+        //  print_r($data);
 
         $nome = $data[0]['name_user'];
         $idUser = $_SESSION['idUser'];
