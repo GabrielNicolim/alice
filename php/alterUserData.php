@@ -54,8 +54,8 @@
                 }
                 else{
                     // Alteração mal sucedida
-                    //header('location: ../public/views/user.php?error=1');
-                    //exit;
+                    header('location: ../public/views/user.php?error=1');
+                    exit;
                 }
             } 
             else {

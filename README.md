@@ -21,6 +21,7 @@ Para a construção desta aplicação utilizamos PHP e JavaScript. A parte visua
 O projeto apresenta uma tela inicial, além de páginas de login e cadastro com feedback visual de erro. Assim que o login é realizado a home é apresentada, está possui interação com o usuário nas principais operações da aplicação por meio de modais. A tela de usuário apresenta algumas informações a respeito do usuário e possibilita alterações no perfil. 
 
 ### Instalação 
+#### Conexão 
 
 O projeto pode ser aberto em sua máquina por meio da instalação em um servidor local, para tal é necessário a alteração do arquivo ```connect.php```. Para que a instalação funcione corretamente é necessário alterar as informações de conexão segundo seu servidor, adicionando seu usuário, senha e o tipo do banco de dados desejado. 
 
@@ -45,6 +46,40 @@ O projeto pode ser aberto em sua máquina por meio da instalação em um servido
 
 Nesse caso utilizamos o banco de dados ```MySQL``` em ```localhost```, com o usuário ```root``` e a senha vazia. Assim, a conexão foi feita com o banco de dados ```alice_db``` onde as informações puderam ser armazenadas. 
 
-### Host
+#### SQL
+
+Para recebermos os dados devemos preparar nosso banco de dados, o código pronto pode ser encontrado no arquivo ```SQL.sql``` ou logo em seguida: 
+
+**Criação do Banco de Dados**
+```sql
+CREATE DATABASE alice_db;
+```
+
+**Criação da Tabela de Usuários**
+```sql
+CREATE TABLE users (
+id_user SERIAL PRIMARY KEY NOT NULL,
+name_user VARCHAR(40) NOT NULL,
+email_user VARCHAR(128) NOT NULL UNIQUE,
+password_user VARCHAR(72) NOT NULL,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+**Criação da Tabela de Registros**
+```sql 
+CREATE TABLE user_records (
+id_record SERIAL PRIMARY KEY NOT NULL,
+name_record VARCHAR(100),
+quantity_record INT NOT NULL,
+type_record VARCHAR(20),
+price_record DECIMAL(10,2),
+deleted BOOLEAN NOT NULL,
+timeDeleted TIMESTAMP,
+fk_user BIGINT NOT NULL,
+FOREIGN KEY (fk_user) REFERENCES users (id_user)
+);
+```
+## View
 
 Caso deseje visualizar nosso projeto de forma rápida [clique aqui](http://200.145.153.175/felipeestevanatto/Projetos/ALICE/). 
