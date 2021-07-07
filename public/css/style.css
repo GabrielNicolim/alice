@@ -10,7 +10,7 @@
 body {
     width: 100vw;
     min-height: 100vh;
-    background: rgb(197, 197, 197);
+    background: rgb(230, 230, 230);
     overflow-x: hidden;
 }
 
@@ -43,7 +43,6 @@ header .left {
 }
 
 .btn {
-    font-size: 1.4em;
     color: rgb(0, 0, 0);
     font-weight: 500;
 }

@@ -2,7 +2,7 @@
     
     function cleanString($string){
         $badWords = array('DROP','TABLE','GROUP BY');      
-        return trim(trim(preg_replace('/[^A-Za-zà-úÀ-Ú0-9\@\.\,\s]/', '', str_replace($badWords, '', $string))));
+        return trim(preg_replace('/[^A-Za-zà-úÀ-Ú0-9\@\.\,\s]/', '', str_replace($badWords, '', $string)));
     }
 
     function cleanNumber($string) {

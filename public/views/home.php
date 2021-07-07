@@ -83,7 +83,6 @@
                         }
 
                         $restriction = $_POST;
-                        print_r ($restriction);
                     ?>
                 </select>
                 <input type="text" name="textSearch" id="textSearch" placeholder="Pesquisa">
@@ -97,7 +96,6 @@
     <div class="container">
 
         <?php
-            $restriction['textSearch'] = null;
             showBoxes($restriction);
         ?>
 
@@ -146,13 +144,9 @@
         </div>
         <form action="../../php/editData.php" onsubmit="return createValidate(event)" method="POST">
             <input type="text" class="hidden" name="editInput" id="editInput">
-            Nome:
             <input type="text" name="name" id="editName" placeholder="Nome" maxlength="20">
-            Quantidade:
             <input type="number" name="quantity" id="editQuantity" placeholder="Quantidade" min="0" max="9999999999">
-            Preço:
             <input type="number" name="price" min="0" step=".01" id="editPrice" placeholder="Preço" min="0" max="9999999999">
-            Tipo:
             <input type="text" name="type" id="editType" placeholder="Tipo" maxlength="20">
             <input type="submit" class="submitBtn" value="Salvar Edição">
         </form>

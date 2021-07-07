@@ -34,7 +34,7 @@
 		<?php
             if(isset($_GET['error'])) {
                 if($_GET['error']) {
-                    echo "<div class='error-login'>Login ou senha são invalidos!</div>"; 
+                    echo "<div class='error-login'>Login invalido!</div>"; 
                 }
             }
         ?>
