@@ -71,7 +71,7 @@
                 <select name="typeSearch" id="typeSearch">
                     <option value="">Tipo</option>
                     <?php
-                        $query = "SELECT id_record,name_record,quantity_record,type_record FROM user_records WHERE fk_user = :id AND deleted = 'FALSE'";
+                        $query = "SELECT id_record,name_record,quantity_record,type_record FROM user_records WHERE fk_user = :id AND deleted = 'FALSE' GROUP BY type_record";
 
                         $stmt = $conn -> prepare($query);
 

@@ -30,7 +30,7 @@
                 $text = strtolower(cleanString($restriction['textSearch']));
     
                 foreach( $_SESSION['ids'] as $value) {
-                    if( str_contains(strtolower($value['name_record']), $text) ) {
+                    if( strpos(strtolower($value['name_record']), $text) !== false ) {
                         array_push($arr, $value);
                     }
                 }
