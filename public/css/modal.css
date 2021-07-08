@@ -1,0 +1,131 @@
+#editUser #uploadfile-label {
+    width: 100%;
+    display: block;
+    padding: 15px 10px;
+    font-size: 1.2em;
+    border-radius: 8px;
+    background: black;
+    color: white;
+    cursor: pointer;
+    outline: 0;
+    margin: 1.5em 0 ;
+}
+
+#editUser input:last-child {
+    margin-top: 1.5em;
+}
+
+/* Create */
+
+#shadow {
+    background: rgba(0, 0, 0, 0.397);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.modal {
+    position: fixed;
+    left: 30%;
+    margin-left: -50px;
+    width: 50%;
+    background: rgb(255, 255, 255);
+    top: 15%;
+    z-index: 99999;
+    padding: 2em;
+    border-radius: 8px;
+}
+
+.modal .top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.8em;
+    width: 80%;
+    margin: .5em auto;
+}
+
+.modal .top h3 {
+    color: rgb(224, 24, 64);
+}
+
+.modal form {
+    width: 80%;
+    margin: 1em auto;
+}
+
+.modal form input {
+    width: 100%;
+}
+
+.modal input,
+.submitBtn {
+    width: 100%;
+    padding: 15px 10px;
+    font-size: 1.2em;
+    border-radius: 8px;
+    border: 2px solid rgb(219, 219, 219);
+    outline: 0;
+}
+
+#exclude input:disabled {
+    background: rgb(226, 226, 226);
+}
+
+.modal input:not(:last-child) {
+    margin-bottom: 1.5em;
+}
+
+.modal .submitBtn  {
+    font-weight: 500;
+    text-align: center;
+}
+
+.modal .submitBtn:hover {
+    background: rgb(224, 24, 64);
+    border: 2px solid rgb(224, 24, 64);
+    color: white;
+    transition: 400ms;
+    cursor: pointer;
+}
+
+/* Error */
+
+.error {
+    border: 2px solid rgb(224, 24, 64) !important; 
+}
+
+.error::placeholder {
+    color: rgb(224, 24, 64);
+    font-size: .9em;
+}
+
+@media only screen and (max-width: 750px){
+    .modal {
+        left: 10%;
+        width: 90%;
+        padding: 2em 1em;
+        margin-left: -30px;
+    }    
+
+    .modal .top {
+        width: 90%;
+    }
+    
+    .modal form {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 600px)  {
+    .modal {
+        width: 100%;
+        height: 100%;
+        margin-left: .1em;
+        padding: 1em 1.5em;
+        top: 0;
+        left: 0;
+        border-radius: 0;
+    } 
+}

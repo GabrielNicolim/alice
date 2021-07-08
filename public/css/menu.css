@@ -36,7 +36,7 @@
     transition: 200ms;
 }
 
-@media only screen and (max-width: 508px) {
+@media only screen and (max-width: 600px) {
     #menu {
         width: 100% 
     }

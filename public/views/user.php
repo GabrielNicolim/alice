@@ -61,7 +61,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/menu.css">
     <link rel="stylesheet" href="../css/user.css">
-
+    <link rel="stylesheet" href="../css/modal.css">
 </head>
 <body>
     <!-- Header -->
@@ -102,15 +102,36 @@
     <div class="container">
         <div class="left">
             <div class="welcome">
-            <?php echo"Olá ".$nome; 
-                if(empty($nome)) echo"Usuário".$_SESSION['idUser'];
-                echo"!";
-
+            <?php 
+            
                 $query = "SELECT filename FROM user_picture WHERE fk_user = ".$_SESSION['idUser'];
         
                 $stmt = $conn -> query($query);
                 
                 $filename = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+            
+            //$aaa = $_SERVER['DOCUMENT_ROOT']."ALICE/public/profile_pictures/".$filename[0]['filename'];
+                //If user has an uploaded photo and it is in the files
+                //&& file_exists($aaa)
+                echo "<div class='photo'>";
+
+                if(count($filename) > 0 ){
+                    //T_ECHO($_SERVER['DOCUMENT_ROOT']
+                    echo"<img src='../profile_pictures/".$filename[0]['filename']."' alt='".$filename[0]['filename']."' width='150px' height='150px'>";
+                 
+                } else {
+                     //Rollback photo
+                     echo"<i class='fas fa-user-circle'></i>";
+                }
+
+                echo "<i class='fas fa-edit' onclick='openEditUser(".$_SESSION['idUser'].")'></i>";
+                echo "</div>";
+            
+                echo"<span>Olá ".$nome; 
+                if(empty($nome)) echo"Usuário".$_SESSION['idUser'];
+                echo"!";
+
+                echo "</span>";
 
                 /*
                 $files = scandir('allfiles');
@@ -122,16 +143,6 @@
                     }
                 }
                 */
-
-                //If user has an uploaded photo and it is in the files
-                if($stmt && file_exists("../profile_pictures/".$filename[0]['filename']) ){
-
-                    echo"<img src='../profile_pictures/".$filename[0]['filename']."' alt='".$filename[0]['filename']."' width='150px' height='150px'>";
-                
-                }else{
-                    //Rollback photo
-                    echo"<i class='fas fa-user-circle'></i>";
-                }
                 
                 ?>
             </div>
@@ -174,37 +185,44 @@
             <div class="top">
                 <h1>Alterar Dados</h1>
             </div>
+            
             <?php
 
-            if(isset($_GET['error'])){
+            if(isset($_GET['error'])) {
+                
                 echo "<div class='error-edit'>"; 
-                if($_GET['error'] == 0) 
-                    echo"Seus dados não puderam ser alterados!</div>";
-                if($_GET['error'] == 1)
-                    echo"A foto de perfil não pode ser maior que 4MB!</div>";
-                if($_GET['error'] == 2)
-                    echo"Esse formato de arquivo não é suportado!</div>";
-                if($_GET['error'] == 3)
-                    echo"Esse formato de arquivo não é suportado!</div>";
-                else 
-                    echo"Senha incorreta ou alteração mal sucedida!</div>";
+
+                switch($_GET['error']){
+                    case 0:
+                        echo"Seus dados não puderam ser alterados!";
+                        break;
+                    case 1:
+                        echo"A foto de perfil não pode ser maior que 4MB!";
+                        break;
+                    case 2:
+                        echo"Esse formato de arquivo não é suportado!";
+                        break;
+                    case 3:
+                        echo"Ocorreu um erro no upload do seu arquivo!";
+                        break;
+                    default:
+                        echo"Senha incorreta ou alteração mal sucedida!";
+                        break;
+                }
+                
+                echo"</div>";
             }
-            
-            $forms = "
+            ?>
+
             <form action='../../php/alterUserData.php' onsubmit='return userEditValidate(event)' method='POST' enctype='multipart/form-data'>
                 <div class='little-title'>Nome</div>
-                    <input type='text' name='name' id='name' value='$nome' maxlength='40' required>
+                    <input type='text' name='name' id='name' value='<?php echo$nome; ?>' maxlength='40' required>
                 <div class='little-title'>Email</div>
-                    <input type='email' name='email' id='email' value='$email' maxlength='128' required>
+                    <input type='email' name='email' id='email' value='<?php echo$email; ?>' maxlength='128' required>
                 <div class='clear'></div>
                     <input type='password' name='confirmPassword' id='confirmPassword' placeholder='Confirmar senha' maxlength='128' required>
-                    <input type='file' name='uploadfile' accept='.png,.PNG,.JPG,.jpg,.JPEG,.webpm'/>
-                    <input type='submit' class='submitBtn' value='Salvar Alterações'>
-            
+                <input type='submit' class='submitBtn' value='Salvar Alterações'>
             </form>
-            ";
-            echo$forms;
-            ?>
             
         </div>
     </div>
@@ -221,8 +239,34 @@
         </div>
     </footer>
 
+    <div id="shadow" class="hidden" onclick="closeEditUser()"></div>
+
+    <!-- Exclude: Edição de imagem -->
+    <div id="editUser" class="hidden modal">
+        <div class="top">
+            <h3>Alterar Imagem</h3>
+
+            <div class="close" onclick="closeEditUser()">
+                <i class="fas fa-times-circle btn"></i>
+            </div>
+        </div>
+        
+        <form action="" method="POST">
+            <input type="text" class="hidden" name="user" id="userInput">
+
+            <input type='file' class="hidden" id="uploadfile" name='uploadfile' accept='.png,.PNG,.JPG,.jpg,.JPEG,.webpm'/>
+            <label id="uploadfile-label"for="uploadfile">
+                <span>Selecionar Imagem</span>
+                <i class="fas fa-upload"></i>
+            </label>
+
+            <input type="submit" class="submitBtn" value="Confirmar">
+        </form>
+    </div>
+
     <script type="text/javascript" src="../scripts/menuShow.js"></script>
     <script type="text/javascript" src="../scripts/formValidate.js"></script>
     <script type="text/javascript" src="../scripts/userEditValidate.js"></script>
+    <script type="text/javascript" src="../scripts/userModalShow.js"></script>
 </body>
 </html>

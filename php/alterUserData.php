@@ -62,19 +62,21 @@
 
                     $rename = 'Upload'.date('Ymd').$_SESSION['idUser']*100+rand(0,100000).".".end($extension);
 
-                    $query = "INSERT INTO user_picture VALUES(DEFAULT,'$rename', ".$_SESSION['idUser'].")";
-
-                    $stmt = $conn -> query($query);
+                    if (move_uploaded_file($tempname, $folder.$rename)){
                     
-                    //Se a inserção na tabela foi um sucesso
-                    if($stmt){
-                        
-                        if (!move_uploaded_file($tempname, $folder.$rename)){
-                            //Failed to upload image
+                        $query = "INSERT INTO user_picture VALUES(DEFAULT,'$rename', ".$_SESSION['idUser'].")";
 
+                        $stmt = $conn -> query($query);
+                    
+                        //Failed to insert into user_picture table
+                        if(!$stmt){
                             header('location: ../public/views/user.php?error=3');
                             exit;
                         }
+                    }else{
+                        //Failed to upload image
+                        header('location: ../public/views/user.php?error=3');
+                        exit;
                     }
                 }
 

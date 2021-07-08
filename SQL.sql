@@ -36,4 +36,4 @@ FOREIGN KEY (fk_user) REFERENCES users (id_user)
 
 /* DROP TABLE */
 
-/* DROP TABLE user_records , users, user_picture; */
+/* DROP TABLE user_records, user_picture, users; */
