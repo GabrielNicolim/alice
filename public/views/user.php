@@ -102,7 +102,38 @@
     <div class="container">
         <div class="left">
             <div class="welcome">
-                Olá <?php echo$nome; if(empty($nome))echo"Usuário".$_SESSION['idUser'];?>!
+            <?php echo"Olá ".$nome; 
+                if(empty($nome)) echo"Usuário".$_SESSION['idUser'];
+                echo"!";
+
+                $query = "SELECT filename FROM user_picture WHERE fk_user = ".$_SESSION['idUser'];
+        
+                $stmt = $conn -> query($query);
+                
+                $filename = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+
+                /*
+                $files = scandir('allfiles');
+
+                //strpos(strtolower($value['name_record']), $text) !== false
+                foreach ($files as $file) {
+                    if (strpos('to-dlkkl', $file) !== false) {
+                         //file found
+                    }
+                }
+                */
+
+                //If user has an uploaded photo and it is in the files
+                if($stmt && file_exists("../profile_pictures/".$filename[0]['filename']) ){
+
+                    echo"<img src='../profile_pictures/".$filename[0]['filename']."' alt='".$filename[0]['filename']."' width='150px' height='150px'>";
+                
+                }else{
+                    //Rollback photo
+                    echo"<i class='fas fa-user-circle'></i>";
+                }
+                
+                ?>
             </div>
 
             <div class="statics">
@@ -148,20 +179,28 @@
             if(isset($_GET['error'])){
                 echo "<div class='error-edit'>"; 
                 if($_GET['error'] == 0) 
-                    echo"Seus dados não podem ser alterados!</div>";
+                    echo"Seus dados não puderam ser alterados!</div>";
+                if($_GET['error'] == 1)
+                    echo"A foto de perfil não pode ser maior que 4MB!</div>";
+                if($_GET['error'] == 2)
+                    echo"Esse formato de arquivo não é suportado!</div>";
+                if($_GET['error'] == 3)
+                    echo"Esse formato de arquivo não é suportado!</div>";
                 else 
                     echo"Senha incorreta ou alteração mal sucedida!</div>";
             }
             
             $forms = "
-            <form action='../../php/alterUserData.php' onsubmit='return userEditValidate(event)' method='POST'>
+            <form action='../../php/alterUserData.php' onsubmit='return userEditValidate(event)' method='POST' enctype='multipart/form-data'>
                 <div class='little-title'>Nome</div>
                     <input type='text' name='name' id='name' value='$nome' maxlength='40' required>
                 <div class='little-title'>Email</div>
                     <input type='email' name='email' id='email' value='$email' maxlength='128' required>
                 <div class='clear'></div>
                     <input type='password' name='confirmPassword' id='confirmPassword' placeholder='Confirmar senha' maxlength='128' required>
+                    <input type='file' name='uploadfile' accept='.png,.PNG,.JPG,.jpg,.JPEG,.webpm'/>
                     <input type='submit' class='submitBtn' value='Salvar Alterações'>
+            
             </form>
             ";
             echo$forms;
