@@ -61,7 +61,10 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/menu.css">
     <link rel="stylesheet" href="../css/user.css">
-
+    <link rel="stylesheet" href="../css/modal.css">
+    <!-- Magic Ajax to make Image Preview-->
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
 </head>
 <body>
     <!-- Header -->
@@ -75,6 +78,7 @@
         </nav>
     </header>
 
+    <div id="bgMenu" onclick="closeMenu()" class="hidden"></div>
     <div id="menu" class="hidden">
         <div class="close" onclick="closeMenu()">
             <i class="fas fa-times-circle btn"></i>
@@ -102,7 +106,52 @@
     <div class="container">
         <div class="left">
             <div class="welcome">
-                Olá <?php echo$nome; if(empty($nome))echo"Usuário".$_SESSION['idUser'];?>!
+            <?php 
+            
+                $query = "SELECT filename FROM user_picture WHERE fk_user = ".$_SESSION['idUser'];
+        
+                $stmt = $conn -> query($query);
+                
+                $filename = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+            
+                echo "<div class='photo'>";
+  
+                    try{
+                        if(count($filename) > 0){
+
+                            $path = $_SERVER['DOCUMENT_ROOT']."/ALICE/public/profile_pictures/".$filename[0]['filename'];
+                            //If file exists in database but not in the folder
+                            if(!file_exists($path)){
+                                throw new Exception('Arquivo não foi encontrado na pasta de imagens');
+                            }
+    
+                            echo"<img src='../profile_pictures/".$filename[0]['filename']."' alt='".$filename[0]['filename']."' width='150px' height='150px'>";
+                            
+                        }else{
+                            throw new Exception('Arquivo não foi encontrado no DB');
+                        }
+                    }
+                    catch(Exception $e) {
+                        
+                        //Remove bugged photos from DB
+                        if(count($filename) > 0){
+                            $query = "DELETE FROM user_picture WHERE filename = '".$filename[0]['filename']."' AND fk_user = ".$_SESSION['idUser'];
+        
+                            $stmt = $conn -> query($query);
+                        }
+                        //Rollback photo
+                        echo"<i class='fas fa-user-circle'></i>";
+                    }
+
+                    echo "<i class='fas fa-edit' onclick='openEditUser(".$_SESSION['idUser'].")'></i>";
+                echo "</div>";
+            
+                echo"<span>Olá ".$nome; 
+                    if(empty($nome)) echo"Usuário".$_SESSION['idUser'];
+                    echo"!";
+                echo "</span>";
+                
+                ?>
             </div>
 
             <div class="statics">
@@ -133,7 +182,6 @@
                     <?php
                     echo "<span>".$numRegistros."</span>";
                     echo "<span>R$ ".$valor."</span>";
-                    //echo "<span>"; foreach($tipo as $i){ echo$i['tipoprod'].", "; }"</span>";
                     ?>
                 </div>
             </div>
@@ -143,29 +191,44 @@
             <div class="top">
                 <h1>Alterar Dados</h1>
             </div>
+            
             <?php
 
-            if(isset($_GET['error'])){
+            if(isset($_GET['error'])) {
+                
                 echo "<div class='error-edit'>"; 
-                if($_GET['error'] == 0) 
-                    echo"Seus dados não podem ser alterados!</div>";
-                else 
-                    echo"Senha incorreta ou alteração mal sucedida!</div>";
+
+                switch($_GET['error']){
+                    case 0:
+                        echo"Seus dados não puderam ser alterados!";
+                        break;
+                    case 1:
+                        echo"A foto de perfil não pode ser maior que 4MB!";
+                        break;
+                    case 2:
+                        echo"Esse formato de arquivo não é suportado!";
+                        break;
+                    case 3:
+                        echo"Ocorreu um erro no upload do seu arquivo!";
+                        break;
+                    default:
+                        echo"Senha incorreta ou alteração mal sucedida!";
+                        break;
+                }
+                
+                echo"</div>";
             }
-            
-            $forms = "
-            <form action='../../php/alterUserData.php' onsubmit='return userEditValidate(event)' method='POST'>
+            ?>
+
+            <form action='../../php/alterUserData.php' onsubmit='return userEditValidate(event)' method='POST' enctype='multipart/form-data'>
                 <div class='little-title'>Nome</div>
-                    <input type='text' name='name' id='name' value='$nome' maxlength='40' required>
+                    <input type='text' name='name' id='name' value='<?php echo$nome; ?>' maxlength='40' required>
                 <div class='little-title'>Email</div>
-                    <input type='email' name='email' id='email' value='$email' maxlength='128' required>
+                    <input type='email' name='email' id='email' value='<?php echo$email; ?>' maxlength='128' required>
                 <div class='clear'></div>
                     <input type='password' name='confirmPassword' id='confirmPassword' placeholder='Confirmar senha' maxlength='128' required>
-                    <input type='submit' class='submitBtn' value='Salvar Alterações'>
+                <input type='submit' class='submitBtn' value='Salvar Alterações'>
             </form>
-            ";
-            echo$forms;
-            ?>
             
         </div>
     </div>
@@ -182,8 +245,43 @@
         </div>
     </footer>
 
+    <div id="shadow" class="hidden" onclick="closeEditUser()"></div>
+
+    <!-- Exclude: Edição de imagem -->
+    <div id="editUser" class="hidden modal">
+        <div class="top">
+            <h3>Alterar Imagem</h3>
+
+            <div class="close" onclick="closeEditUser()">
+                <i class="fas fa-times-circle btn"></i>
+            </div>
+        </div>
+
+        <div class="image">
+            <img id="imagePreview" src="#" alt="your image" class="hidden"/>
+        </div>
+        
+        <form action="../../php/alterPicture.php" method="POST" enctype='multipart/form-data' id="fileForm">
+            <input type="text" class="hidden" name="user" id="userInput">
+
+            <input type='file' class="hidden" id="uploadfile" name='uploadfile' onchange="readURL(this);" accept='.png,.PNG,.JPG,.jpg,.JPEG,.webpm'/>
+            <label id="uploadfile-label" class="dark-btn" for="uploadfile">
+                <span>Adicionar Imagem</span>
+                <i class="fas fa-upload"></i>
+            </label>
+            <input type="checkbox" id='cleanfiles' name="removepictures" class="hidden" value="1">
+            <label id="removeimage-label" class="dark-btn" for="cleanfiles">
+                <span onclick="removeValidate()" Checked>Remover Imagem</span>
+                <i class="fas fa-minus-square"></i>
+            </label>
+            <input type="submit" class="submitBtn" value="Confirmar Alteração">
+        </form>
+    </div>
+
     <script type="text/javascript" src="../scripts/menuShow.js"></script>
     <script type="text/javascript" src="../scripts/formValidate.js"></script>
     <script type="text/javascript" src="../scripts/userEditValidate.js"></script>
+    <script type="text/javascript" src="../scripts/userModalShow.js"></script>
+    <script type="text/javascript" src="../scripts/userImage.js"></script>
 </body>
 </html>

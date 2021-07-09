@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/menu.css">
     <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/modal.css">
 </head>
 <body>
     <!-- Header -->
@@ -33,6 +34,7 @@
         </nav>
     </header>
 
+    <div id="bgMenu" onclick="closeMenu()" class="hidden"></div>
     <div id="menu" class="hidden">
         <div class="close" onclick="closeMenu()">
             <i class="fas fa-times-circle btn"></i>
@@ -119,7 +121,7 @@
 
     <!-- Create -->
     <div id="shadow" class="hidden" onclick="closeCreate(),closeEdit(), closeExclude()"></div>
-    <div id="create" class="hidden">
+    <div id="create" class="hidden modal">
         <div class="top">
             <h3>Criar</h3>
 
@@ -137,7 +139,7 @@
     </div>
 
     <!-- Edit -->
-    <div id="edit" class="hidden">
+    <div id="edit" class="hidden modal">
         <div class="top">
             <h3>Editar</h3>
 
@@ -156,7 +158,7 @@
     </div>
 
     <!-- Exclude: exclusão lógica-->
-    <div id="exclude" class="hidden">
+    <div id="exclude" class="hidden modal">
         <div class="top">
             <h3>Excluir</h3>
 
@@ -176,7 +178,7 @@
     </div>
 
     <script type="text/javascript" src="../scripts/menuShow.js"></script>
-    <script type="text/javascript" src="../scripts/modalShow.js"></script>
+    <script type="text/javascript" src="../scripts/homeModalShow.js"></script>
     <script type="text/javascript" src="../scripts/formValidate.js"></script>
     <script type="text/javascript" src="../scripts/createValidate.js"></script>
 </body>

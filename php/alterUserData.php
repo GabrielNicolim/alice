@@ -53,19 +53,20 @@
                     exit;
                 }
                 else{
-                    // Alteração mal sucedida
+                    // Failed to change user data
                     header('location: ../public/views/user.php?error=1');
                     exit;
                 }
             } 
             else {
-                // Senha incorreta 
+                // Incorrect password
                 header('location: ../public/views/user.php?error=1');
                 exit;
             }
         }
     }
     else {
+        //Empty fields
         header("Location: ../public/views/user.php?error=0");
         exit();
     }

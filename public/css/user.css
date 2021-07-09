@@ -18,10 +18,41 @@
     font-size: 1.7em;
     text-align: center;
     width: 100%;
-    height: 30%;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
+}
+
+.container .left .welcome span {
+    width: 100%;
+}
+
+.photo {
+    position: relative;
+}
+
+.container .left .welcome .fa-user-circle {
+    font-size: 4em;
+    margin: 20px 0;
+}
+
+.container .left .welcome img{
+    border-radius: 90%;
+    width: 5em;
+    height: 5em;
+}
+
+.container .left .welcome .fa-edit {
+    position: absolute;
+    bottom: 20px;
+    right: -30px;
+}
+
+.container .left .welcome .fa-edit:hover {
+    color: rgb(224, 24, 64);
+    cursor: pointer;
+    transition: 400ms;
 }
 
 .container .left .statics .field {
@@ -124,6 +155,7 @@
 }
 
 @media only screen and (max-width: 767px) {
+
     .container {
         display: block;
         width: 100vw;
