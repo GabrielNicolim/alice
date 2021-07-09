@@ -1,33 +1,32 @@
 # ALICE
 
-Baseado no termo da área de informática CRUD (acrónimo do inglês Create, Read, Update e
-Delete) surgiu a ideia de nomear a atividade de ALICE (acrônimo de Alteração, Login, Inclusão,
-Consulta e Exclusão).
+Based in the basic relational operations term CRUD (Create, Read, Update e Delete), emerged the idea to name this project ALICE (Alteration, Login, Include, Consult, Exclude). 
 
-## Proposta 
+## Proposal 
 
-- Modelar 2 tabelas que possuem um relacionamento UM-PARA-MUITOS. A tabela que recebe a chave do relacionamento deve ter pelo menos 4 campos, e deve ser escolhida para manipulação pelo PHP.
+- Create two tables with an relationship one-to-many. The table receiving the key of the relationship must contain at least four fields and to be chosen to manipulation in PHP. 
 
-- Para o sistema registrar a venda de produtos, os dados dos produtos precisam estar armazenados previamente. Sendo assim, haverá um programa que Altera, Loga, Inclui, Consulta e Exclui os dados dos produtos, daí o acrônimo A.L.I.C.E.
+- For the system to register the selling of the products, their data needs to be stored previously in the DB. There will be a program to Alter registered products, Login, Include , Consult and exclude (Delete) the data of the products, from this acronym, the name A.L.I.C.E
 
-## Tecnologias 
+## Technologies 
 
-Para a construção desta aplicação utilizamos PHP e JavaScript. A parte visual do site foi construída utilizando HTML e CSS puro, em conjunto com o JavaScript e JQuery para a manipulação da DOM. Trabalhamos em conjunto, a fim de nos desenvolvermos nas respectivas técnologias. 
+To construct this aplication, was used PHP and JavaScript with the DBMS Postgree 9.6.2 (and later ported over to MariaDB). The visual part of the website was built using HTML and pure CSS, in set with the JavaScript and JQuery to DOM manipulation. We worked together in order to develop our respective technologies (Back and Front).
 
-## Visualização 
+## View of the Project
 
 ![image](https://user-images.githubusercontent.com/69210720/123141339-a9f63080-d42e-11eb-9eea-4e1524f3e29c.png)
 
-O projeto apresenta uma tela inicial, além de páginas de login e cadastro com feedback visual de erro. Assim que o login é realizado a home é apresentada, está possui interação com o usuário nas principais operações da aplicação por meio de modais. A tela de usuário apresenta algumas informações do perfil e possibilita alterações das informações do usuário e da foto de perfil, entretanto essa ultima feature de alteração da foto não funciona no servidor abaixo, apenas em localhost.
+The project has a index startup screen, Login, Register and User page with visual error feedbacks. When the user performs the sign-in, he is redirected to the Home page, which has the interaction with the user to do the main operations of the application, insert, edit and exclude through modals and boxes. The User page alows the user to change their informations and profile picture. **The Profile Picute System won't work in the server version because of upload restrictions and old software**.
 
-Caso deseje visualizar nosso projeto de forma rápida **[clique aqui](http://200.145.153.175/felipeestevanatto/Projetos/ALICE/).**
+If you want to view our project quickly **[click on here](http://200.145.153.175/felipeestevanatto/Projetos/ALICE/).**
 
 ****
 
-### Instalação 
-#### Conexão 
+## Installation
 
-O projeto pode ser aberto em sua máquina por meio da instalação em um servidor local, para tal é necessário a alteração do arquivo ```connect.php```. Para que a instalação funcione corretamente é necessário alterar as informações de conexão segundo seu servidor, adicionando seu usuário, senha e o tipo do banco de dados desejado. 
+### Connection 
+
+The project can be Hosted in your machine through the instalation in an local server, to this is necessary just the alteration of the file ```connect.php```. Changing the informations of the connection according your server, user, password and database.
 
 **Exemplo:**
 
@@ -48,20 +47,22 @@ O projeto pode ser aberto em sua máquina por meio da instalação em um servido
 ?>
 ```
 
-Nesse caso utilizamos o banco de dados ```MySQL``` em ```localhost```, com o usuário ```root``` e a senha vazia. Assim, a conexão foi feita com o banco de dados ```alice_db``` onde as informações puderam ser armazenadas. 
+In this case we will use the ```MySQL``` DB in ```localhost``` with the user ```root``` and empty password, doing the connection with the database ```alice_db``` where all the information and tables will be inserted.
 
-#### SQL
+### SQL
 
-Para recebermos os dados devemos preparar nosso banco de dados, o código pronto pode ser encontrado no arquivo ```SQL.sql``` ou logo em seguida: 
+To receive the data, you need to prepare your Database with the correct tables, the SQL code can be found in the file ```SQL.sql``` or right bellow:
 
-**Criação do Banco de Dados**
+**Data Base Creation**
+
 ```sql
 CREATE DATABASE alice_db;
 ```
 
 ****
 
-**Criação da Tabela de Usuários**
+**Users Table Creation**
+
 ```sql
 CREATE TABLE users (
 id_user SERIAL PRIMARY KEY NOT NULL,
@@ -74,7 +75,8 @@ created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
 ****
 
-**Criação da Tabela de Registros**
+**User Records Table Creation**
+
 ```sql
 CREATE TABLE user_records (
 id_record SERIAL PRIMARY KEY NOT NULL,
@@ -91,7 +93,8 @@ FOREIGN KEY (fk_user) REFERENCES users (id_user)
 
 ****
 
-**Criação da Tabela de Fotos de Perfil**
+**User Profile Pictures Table Creation**
+
 ```sql
 CREATE TABLE user_picture(
 id_photo SERIAL PRIMARY KEY NOT NULL,
@@ -100,4 +103,5 @@ fk_user BIGINT UNSIGNED NOT NULL,
 FOREIGN KEY (fk_user) REFERENCES users (id_user)
 );
 ```
->Para criação dessas tabelas no PostGreSQL funcionar, é necessário remover o ```UNSIGNED``` da Tabela de Registros e de Fotos de Perfil.
+
+>For the Creation of this Tables in PostGreSQL to work, it's necessary to remove the ```UNSIGNED``` from the table ```user_records``` and ```user_picture``` because PostGree doesn't have the UNSIGNED attribute and it is needed in the MySQL/MariaDB version.
