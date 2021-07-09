@@ -12,13 +12,13 @@ Consulta e Exclusão).
 
 ## Tecnologias 
 
-Para a construção desta aplicação utilizamos PHP e JavaScript. A parte visual do site foi construída utilizando HTML e CSS puro, em conjunto com o JavaScript para a manipulação da DOM. Trabalhamos em conjunto, a fim de nos desenvolvermos nas respectivas técnologias. 
+Para a construção desta aplicação utilizamos PHP e JavaScript. A parte visual do site foi construída utilizando HTML e CSS puro, em conjunto com o JavaScript e JQuery para a manipulação da DOM. Trabalhamos em conjunto, a fim de nos desenvolvermos nas respectivas técnologias. 
 
 ## Visualização 
 
 ![image](https://user-images.githubusercontent.com/69210720/123141339-a9f63080-d42e-11eb-9eea-4e1524f3e29c.png)
 
-O projeto apresenta uma tela inicial, além de páginas de login e cadastro com feedback visual de erro. Assim que o login é realizado a home é apresentada, está possui interação com o usuário nas principais operações da aplicação por meio de modais. A tela de usuário apresenta algumas informações a respeito do usuário e possibilita alterações das informações do usuário e da foto de perfil. 
+O projeto apresenta uma tela inicial, além de páginas de login e cadastro com feedback visual de erro. Assim que o login é realizado a home é apresentada, está possui interação com o usuário nas principais operações da aplicação por meio de modais. A tela de usuário apresenta algumas informações do perfil e possibilita alterações das informações do usuário e da foto de perfil, entretanto essa ultima feature de alteração da foto não funciona no servidor abaixo, apenas em localhost.
 
 Caso deseje visualizar nosso projeto de forma rápida **[clique aqui](http://200.145.153.175/felipeestevanatto/Projetos/ALICE/).**
 
