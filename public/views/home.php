@@ -34,6 +34,7 @@
         </nav>
     </header>
 
+    <div id="bgMenu" onclick="closeMenu()" class="hidden"></div>
     <div id="menu" class="hidden">
         <div class="close" onclick="closeMenu()">
             <i class="fas fa-times-circle btn"></i>

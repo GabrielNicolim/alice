@@ -62,6 +62,9 @@
     <link rel="stylesheet" href="../css/menu.css">
     <link rel="stylesheet" href="../css/user.css">
     <link rel="stylesheet" href="../css/modal.css">
+    <!-- Magic Ajax to make Image Preview-->
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
 </head>
 <body>
     <!-- Header -->
@@ -75,6 +78,7 @@
         </nav>
     </header>
 
+    <div id="bgMenu" onclick="closeMenu()" class="hidden"></div>
     <div id="menu" class="hidden">
         <div class="close" onclick="closeMenu()">
             <i class="fas fa-times-circle btn"></i>
@@ -252,19 +256,23 @@
                 <i class="fas fa-times-circle btn"></i>
             </div>
         </div>
+
+        <div class="image">
+            <img id="imagePreview" src="#" alt="your image" class="hidden"/>
+        </div>
         
         <form action="../../php/alterPicture.php" method="POST" enctype='multipart/form-data' id="fileForm">
             <input type="text" class="hidden" name="user" id="userInput">
 
-            <input type='file' class="hidden" id="uploadfile" name='uploadfile' accept='.png,.PNG,.JPG,.jpg,.JPEG,.webpm'/>
-            <label id="uploadfile-label" for="uploadfile">
-                <span>Selecionar Imagem</span>
+            <input type='file' class="hidden" id="uploadfile" name='uploadfile' onchange="readURL(this);" accept='.png,.PNG,.JPG,.jpg,.JPEG,.webpm'/>
+            <label id="uploadfile-label" class="dark-btn" for="uploadfile">
+                <span>Adicionar Imagem</span>
                 <i class="fas fa-upload"></i>
             </label>
             <input type="checkbox" id='cleanfiles' name="removepictures" class="hidden" value="1">
-            <label id="removeimage-label" for="cleanfiles">
-                <span class="submitBtn" onclick="document.getElementById('cleanfiles').checked = true; 
-                document.getElementById('fileForm').submit();" Checked>Remover a imagem</span>
+            <label id="removeimage-label" class="dark-btn" for="cleanfiles">
+                <span onclick="removeValidate()" Checked>Remover Imagem</span>
+                <i class="fas fa-minus-square"></i>
             </label>
             <input type="submit" class="submitBtn" value="Confirmar Alteração">
         </form>
@@ -274,5 +282,6 @@
     <script type="text/javascript" src="../scripts/formValidate.js"></script>
     <script type="text/javascript" src="../scripts/userEditValidate.js"></script>
     <script type="text/javascript" src="../scripts/userModalShow.js"></script>
+    <script type="text/javascript" src="../scripts/userImage.js"></script>
 </body>
 </html>

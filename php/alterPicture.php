@@ -30,7 +30,7 @@
             $tempname = $_FILES["uploadfile"]["tmp_name"];   
             $folder = "../public/profile_pictures/";
     
-            $rename = 'Upload'.date('Ymd').$_SESSION['idUser']*100+rand(0,100000).".".end($extension);
+            $rename = $_SESSION['idUser'].'Upload'.date('Ymd').$_SESSION['idUser']*100+rand(0,100000).".".end($extension);
     
             if (move_uploaded_file($tempname, $folder.$rename)){
             
@@ -61,9 +61,9 @@
 
         include("connect.php");
 
-        $files = glob("../public/profile_pictures/Upload*.*"); // get all file names
+        //Pick only the files from the user
+        $files = glob("../public/profile_pictures/".$_SESSION['idUser']."Upload*.*");
 
-        $mask = $_SESSION['idUser']."Upload*.*";
         array_map('unlink', $files);
 
         $query = "DELETE FROM user_picture WHERE fk_user = ".$_SESSION['idUser'];
