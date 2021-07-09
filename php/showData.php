@@ -41,7 +41,7 @@
 
             if( !empty($arr) ) {
                 foreach($arr as $obj) {
-                    echo"<div class='box'>";
+                    echo"<div class='box'>";  //substituir multiplicos echos com: <<<END .... END;
                         echo"<div class='title'>";
                                 echo"<span id='name".$obj['id_record']."'>"; 
                                 echo $obj['name_record']; if( $obj['name_record'] == '' || $obj['name_record'] == ' ' || $obj['name_record'] == null) echo"Registro #".$obj['id_record']; 

@@ -37,6 +37,12 @@
     margin: 20px 0;
 }
 
+.container .left .welcome img{
+    border-radius: 90%;
+    width: 5em;
+    height: 5em;
+}
+
 .container .left .welcome .fa-edit {
     position: absolute;
     bottom: 20px;

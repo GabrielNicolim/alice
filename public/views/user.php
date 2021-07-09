@@ -110,39 +110,42 @@
                 
                 $filename = $stmt -> fetchAll(PDO::FETCH_ASSOC);
             
-            //$aaa = $_SERVER['DOCUMENT_ROOT']."ALICE/public/profile_pictures/".$filename[0]['filename'];
-                //If user has an uploaded photo and it is in the files
-                //&& file_exists($aaa)
                 echo "<div class='photo'>";
+  
+                    try{
+                        if(count($filename) > 0){
 
-                if(count($filename) > 0 ){
-                    //T_ECHO($_SERVER['DOCUMENT_ROOT']
-                    echo"<img src='../profile_pictures/".$filename[0]['filename']."' alt='".$filename[0]['filename']."' width='150px' height='150px'>";
-                 
-                } else {
-                     //Rollback photo
-                     echo"<i class='fas fa-user-circle'></i>";
-                }
+                            $path = $_SERVER['DOCUMENT_ROOT']."/ALICE/public/profile_pictures/".$filename[0]['filename'];
+                            //If file exists in database but not in the folder
+                            if(!file_exists($path)){
+                                throw new Exception('Arquivo não foi encontrado na pasta de imagens');
+                            }
+    
+                            echo"<img src='../profile_pictures/".$filename[0]['filename']."' alt='".$filename[0]['filename']."' width='150px' height='150px'>";
+                            
+                        }else{
+                            throw new Exception('Arquivo não foi encontrado no DB');
+                        }
+                    }
+                    catch(Exception $e) {
+                        
+                        //Remove bugged photos from DB
+                        if(count($filename) > 0){
+                            $query = "DELETE FROM user_picture WHERE filename = '".$filename[0]['filename']."' AND fk_user = ".$_SESSION['idUser'];
+        
+                            $stmt = $conn -> query($query);
+                        }
+                        //Rollback photo
+                        echo"<i class='fas fa-user-circle'></i>";
+                    }
 
-                echo "<i class='fas fa-edit' onclick='openEditUser(".$_SESSION['idUser'].")'></i>";
+                    echo "<i class='fas fa-edit' onclick='openEditUser(".$_SESSION['idUser'].")'></i>";
                 echo "</div>";
             
                 echo"<span>Olá ".$nome; 
-                if(empty($nome)) echo"Usuário".$_SESSION['idUser'];
-                echo"!";
-
+                    if(empty($nome)) echo"Usuário".$_SESSION['idUser'];
+                    echo"!";
                 echo "</span>";
-
-                /*
-                $files = scandir('allfiles');
-
-                //strpos(strtolower($value['name_record']), $text) !== false
-                foreach ($files as $file) {
-                    if (strpos('to-dlkkl', $file) !== false) {
-                         //file found
-                    }
-                }
-                */
                 
                 ?>
             </div>
@@ -175,7 +178,6 @@
                     <?php
                     echo "<span>".$numRegistros."</span>";
                     echo "<span>R$ ".$valor."</span>";
-                    //echo "<span>"; foreach($tipo as $i){ echo$i['tipoprod'].", "; }"</span>";
                     ?>
                 </div>
             </div>
@@ -251,16 +253,20 @@
             </div>
         </div>
         
-        <form action="" method="POST">
+        <form action="../../php/alterPicture.php" method="POST" enctype='multipart/form-data' id="fileForm">
             <input type="text" class="hidden" name="user" id="userInput">
 
             <input type='file' class="hidden" id="uploadfile" name='uploadfile' accept='.png,.PNG,.JPG,.jpg,.JPEG,.webpm'/>
-            <label id="uploadfile-label"for="uploadfile">
+            <label id="uploadfile-label" for="uploadfile">
                 <span>Selecionar Imagem</span>
                 <i class="fas fa-upload"></i>
             </label>
-
-            <input type="submit" class="submitBtn" value="Confirmar">
+            <input type="checkbox" id='cleanfiles' name="removepictures" class="hidden" value="1">
+            <label id="removeimage-label" for="cleanfiles">
+                <span class="submitBtn" onclick="document.getElementById('cleanfiles').checked = true; 
+                document.getElementById('fileForm').submit();" Checked>Remover a imagem</span>
+            </label>
+            <input type="submit" class="submitBtn" value="Confirmar Alteração">
         </form>
     </div>
 

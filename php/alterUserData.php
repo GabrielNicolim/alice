@@ -40,46 +40,6 @@
             
             if(password_verify($confirmPassword, $result[0]['password_user'])){
 
-                if(isset($_FILES)){
-                    
-                    if( $_FILES['uploadfile']['size'] >= 4194304 ){
-                        header('location: ../public/views/user.php?error=1');
-                        exit;
-                    }
-
-                    $permitedFormats = array("jpg","png","jpeg","webpm");
-                    $filetype = $_FILES['uploadfile']['type'];
-                    $extension = explode("/",$filetype);
-
-                    if( !in_array( end($extension) , $permitedFormats ) ){
-                        header('location: ../public/views/user.php?error=2');
-                        exit;
-                    }
-
-                    //$filename = $_FILES["uploadfile"]["name"];
-                    $tempname = $_FILES["uploadfile"]["tmp_name"];   
-                    $folder = "../public/profile_pictures/";
-
-                    $rename = 'Upload'.date('Ymd').$_SESSION['idUser']*100+rand(0,100000).".".end($extension);
-
-                    if (move_uploaded_file($tempname, $folder.$rename)){
-                    
-                        $query = "INSERT INTO user_picture VALUES(DEFAULT,'$rename', ".$_SESSION['idUser'].")";
-
-                        $stmt = $conn -> query($query);
-                    
-                        //Failed to insert into user_picture table
-                        if(!$stmt){
-                            header('location: ../public/views/user.php?error=3');
-                            exit;
-                        }
-                    }else{
-                        //Failed to upload image
-                        header('location: ../public/views/user.php?error=3');
-                        exit;
-                    }
-                }
-
                 $query = "UPDATE users SET name_user = '$name_user', email_user = '$email_user' WHERE id_user = :id";
                 
                 $stmt = $conn -> prepare($query);
