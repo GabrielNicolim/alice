@@ -34,5 +34,3 @@
         header("Location: ../public/views/home.php?erro=1");
         exit();
     }
-
-?>

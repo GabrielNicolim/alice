@@ -61,24 +61,33 @@
 
         include("connect.php");
 
-        //Pick only the files from the user
-        $files = glob("../public/profile_pictures/".$_SESSION['idUser']."Upload*.*");
+        try{
+            
+            //Pick only the files from the user
+            $files = glob("../public/profile_pictures/".$_SESSION['idUser']."Upload*.*");
 
-        array_map('unlink', $files);
+            array_map('unlink', $files);
 
-        $query = "DELETE FROM user_picture WHERE fk_user = ".$_SESSION['idUser'];
-        
-        $stmt = $conn -> query($query);
+            if( !empty(glob("../public/profile_pictures/".$_SESSION['idUser']."Upload*.*")) ){
+                
+                throw new Exception('Algo deu errado deletando as imagens do diretório');
+            }
 
-        //If removed fine from the DB and files
-        if($stmt){
-            unset($_FILES);
-            header('location: ../public/views/user.php' );
-            exit;
+            $query = "DELETE FROM user_picture WHERE fk_user = ".$_SESSION['idUser'];
+            
+            $stmt = $conn -> query($query);
 
-        }else{
-            //error while deleting data from DB
+            //If removed fine from the DB and files
+            if($stmt){
+                unset($_FILES);
+                header('location: ../public/views/user.php' );
+                exit;
+
+            }else{
+                throw new Exception('Algo deu errado deletando as imagens do BD');
+            }
+        }catch(Exception $e){
+            echo "<script type='text/javascript'>alert(' Exceção capturada: ".$e->getMessage()."')</script>";
         }
-
+        
     }
-?>

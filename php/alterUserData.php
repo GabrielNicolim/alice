@@ -18,11 +18,11 @@
 
         $stmt -> execute();
 
-        $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+        $return = $stmt -> fetchAll(PDO::FETCH_ASSOC);
 
-        $emailcheck = count($result);
+        $emailcheck = count($return);
 
-        if($emailcheck > 0 && $result[0]['id_user'] != $_SESSION['idUser'] ){
+        if($emailcheck > 0 && $return[0]['id_user'] != $_SESSION['idUser'] ){
             header("Location: ../public/views/user.php?error=0");
             exit();
         }
@@ -36,9 +36,9 @@
 
             $stmt -> execute();
 
-            $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+            $return = $stmt -> fetchAll(PDO::FETCH_ASSOC);
             
-            if(password_verify($confirmPassword, $result[0]['password_user'])){
+            if(password_verify($confirmPassword, $return[0]['password_user'])){
 
                 $query = "UPDATE users SET name_user = '$name_user', email_user = '$email_user' WHERE id_user = :id";
                 
@@ -70,4 +70,3 @@
         header("Location: ../public/views/user.php?error=0");
         exit();
     }
-?>

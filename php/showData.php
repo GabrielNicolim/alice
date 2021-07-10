@@ -22,7 +22,7 @@
 
         $_SESSION['ids'] = $stmt -> fetchAll(PDO::FETCH_ASSOC);
 
-
+        //If there are records in the user id
         if(!empty($_SESSION['ids']) ) {
             $arr = [];
             if(!empty($restriction['textSearch'])  && cleanString($restriction['textSearch']) != '') {
@@ -41,37 +41,43 @@
 
             if( !empty($arr) ) {
                 foreach($arr as $obj) {
-                    echo"<div class='box'>";  //substituir multiplicos echos com: <<<END .... END;
-                        echo"<div class='title'>";
-                                echo"<span id='name".$obj['id_record']."'>"; 
-                                echo $obj['name_record']; if( $obj['name_record'] == '' || $obj['name_record'] == ' ' || $obj['name_record'] == null) echo"Registro #".$obj['id_record']; 
-                                echo "</span>";
+                    echo "
+                    <div class='box'>
+                        <div class='title'>
+                            <span id='name".$obj['id_record']."'>
+                                $obj[name_record]";
+                    
+                                if( $obj['name_record'] == '' || $obj['name_record'] == ' ' || $obj['name_record'] == null) 
+                                echo"Registro #".$obj['id_record']; 
+                            echo "</span>
+                                <i class='fas fa-trash-alt trash' onclick='openExclude(".$obj['id_record'].")'></i>
+                        </div>
 
-                                echo"<i class='fas fa-trash-alt trash' onclick='openExclude(".$obj['id_record'].")'></i>";
-                        echo"</div>";
+                        <div class='data'>
+                            <div class='quantity'>
+                                Quantidade
+                            </div>
+                                <span id='qnt".$obj['id_record']."'>".$obj['quantity_record']."</span>
 
-                        echo"<div class='data'>";
-                            echo"<div class='quantity'>";
-                                echo"Quantidade";
-                            echo"</div>";
-                            echo"<span id='qnt".$obj['id_record']."'>".$obj['quantity_record']."</span>";
+                            <div class='type'>
+                                Valor
+                            </div>
+                            <span id='val".$obj['id_record']."'>R$ ".$obj['price_record']."</span>
 
-                            echo"<div class='type'>";
-                                echo"Valor";
-                            echo"</div>";
-                            echo"<span id='val".$obj['id_record']."'>R$ ".$obj['price_record']."</span>";
+                            <div class='type'>
+                                Tipo
+                            </div>
+                            <span id='typ".$obj['id_record']."'>".$obj['type_record']; 
+                            if(empty($obj['type_record']))
+                            echo"Tipo Vazio"; 
+                        echo"</span>
 
-                            echo"<div class='type'>";
-                                echo"Tipo";
-                            echo"</div>";
-                            echo"<span id='typ".$obj['id_record']."'>".$obj['type_record']; if(empty($obj['type_record']))echo"Tipo Vazio"; echo"</span>";
+                            </div>
 
-                            echo"</div>";
-
-                            echo"<div class='edit' onclick='openEdit(".$obj['id_record'].")'>";
-                                echo"Editar";
-                        echo"</div>";
-                    echo"</div>";
+                        <div class='edit' onclick='openEdit(".$obj['id_record'].")'>
+                            Editar
+                        </div>
+                    </div>";
                 }
             }
             else {
@@ -82,4 +88,3 @@
             echo"<div id='void'>Nenhum Registro encontrado!</div>";
         }
     }
-?>

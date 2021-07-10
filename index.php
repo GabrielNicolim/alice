@@ -2,7 +2,7 @@
     session_start();
     if(isset($_SESSION['isAuth'])){
         header("Location: public/views/home.php ");
-	exit();
+	    exit();
     }
 ?>
 
