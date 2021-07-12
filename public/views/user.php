@@ -3,47 +3,47 @@
     require_once("../../php/connect.php");
     require("../../php/loginValidation.php");
     
-    $query = "SELECT id_user, name_user, email_user, password_user FROM users WHERE id_user = $_SESSION[idUser] ";
-
-    $stmt = $conn -> query($query);
-
-    $data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
-    
-    if(count($data) > 0){
-        //  print_r($data);
-
-        $nome = $data[0]['name_user'];
-        $idUser = $_SESSION['idUser'];
-        $email = $data[0]['email_user'];
-
-        //Quantidade de registros
-
-        $query = "SELECT * FROM user_records WHERE fk_user = $_SESSION[idUser] AND deleted = 'FALSE' "; 
+    try{
+        //throw new Exception('Algo deu errado deletando as imagens do BD');
+        $query = "SELECT id_user, name_user, email_user, password_user FROM users WHERE id_user = $_SESSION[idUser] ";
 
         $stmt = $conn -> query($query);
-        $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
-        $numRegistros = $return[0] = count($result);
 
-        //Calcular o valor total do estoque
-        $query = "SELECT price_record, quantity_record FROM user_records WHERE $idUser = fk_user AND deleted = 'FALSE'";
-        $return = $stmt = $conn -> query($query);
-        $valor = 0;
-        foreach($return as $i){
-            $valor = $valor + $i['price_record']*$i['quantity_record'];
-        }
-
-        //Monta os tipos
-        $query = "SELECT type_record FROM user_records WHERE $idUser = fk_user AND deleted = 'FALSE' GROUP BY type_record ORDER BY type_record";
+        $data = $stmt -> fetchAll(PDO::FETCH_ASSOC);
         
-        $stmt = $conn -> query($query);
-        
-        $tipo = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+        if(count($data) > 0){
 
-    }else{
-        echo "<script type='text/javascript'>alert('Ocorreu um problema no seu login, tente sair e entrar da conta!!!')</script>";
-        //header('location: home.php');
-        //exit;
+            $nome = $data[0]['name_user'];
+            $idUser = $_SESSION['idUser'];
+            $email = $data[0]['email_user'];
+
+            //Quantity of records
+            $query = "SELECT * FROM user_records WHERE fk_user = $_SESSION[idUser] AND deleted = 'FALSE' "; 
+
+            $stmt = $conn -> query($query);
+            $return = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+            $numRegistros = count($return);
+
+            //Calculate the net worth of the stock
+            $query = "SELECT price_record, quantity_record FROM user_records WHERE $idUser = fk_user AND deleted = 'FALSE'";
+            $stmt = $conn -> query($query);
+            
+            $valor = 0;
+            foreach($stmt as $i){
+                $valor = $valor + $i['price_record']*$i['quantity_record'];
+            }
+
+            //Build the types
+            $query = "SELECT type_record FROM user_records WHERE $idUser = fk_user AND deleted = 'FALSE' GROUP BY type_record ORDER BY type_record";
+            $stmt = $conn -> query($query);
+            $tipos = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+
+        }else throw new Exception("Ocorreu um erro no seu login, tente entrar novamente");
+
+    }catch(Exception $e){
+        echo"Exceção capturada: ".$e->getMessage();
     }
+
 ?>
 
 <!DOCTYPE html>
@@ -132,7 +132,8 @@
                         }
                     }
                     catch(Exception $e) {
-                        
+                        //echo"Exceção capturada: ".$e->getMessage();
+
                         //Remove bugged photos from DB
                         if(count($filename) > 0){
                             $query = "DELETE FROM user_picture WHERE filename = '".$filename[0]['filename']."' AND fk_user = ".$_SESSION['idUser'];
@@ -143,13 +144,13 @@
                         echo"<i class='fas fa-user-circle'></i>";
                     }
 
-                    echo "<i class='fas fa-edit' onclick='openEditUser(".$_SESSION['idUser'].")'></i>";
-                echo "</div>";
+                    echo "<i class='fas fa-edit' onclick='openEditUser(".$_SESSION['idUser'].")'></i>
+                    </div>
             
-                echo"<span>Olá ".$nome; 
+                    <span>Olá ".$nome; 
                     if(empty($nome)) echo"Usuário".$_SESSION['idUser'];
-                    echo"!";
-                echo "</span>";
+                    echo"!
+                    </span>";
                 
                 ?>
             </div>
@@ -165,16 +166,15 @@
     
                     <div class="field" id="showTypes">Tipos em Estoque</div>
                     <?php 
-                    echo"<span class='full-screen'>";
-                    if( empty($i) ) echo "Tipos Vazio";
-                    else{
-                        foreach($tipo as $i){
-                            if( !empty($i['type_record']) ){
-                                echo$i['type_record'].", ";
+                        echo"<span class='full-screen'>";
+                        if( !empty($i) ){
+                            foreach($tipos as $i){
+                                if( !empty($i['type_record']) ){
+                                    echo$i['type_record'].", ";
+                                }
                             }
-                        }
-                    }
-                    echo"</span>";
+                        }else echo "Nenhum tipo";
+                        echo"</span>";
                     ?>
                 </div>
 

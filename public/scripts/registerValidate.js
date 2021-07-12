@@ -52,5 +52,5 @@ function registerValidate(event) {
         secondPassword.classList = 'normal'
     }
 
-    return valid 
+    return valid
 }

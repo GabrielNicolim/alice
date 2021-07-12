@@ -7,8 +7,8 @@
     $choosen_id= $_POST['exclude'];
     $data=date('d/m/Y');
 
-    try{ print_r($_SESSION);
-        //echo"coisa $exclusao e $data <br>";
+    try{
+ 
         $query = "UPDATE user_records SET deleted = TRUE, timeDeleted = NOW() WHERE id_record = $choosen_id AND fk_user = $_SESSION[idUser] ";
 
         $return = $conn -> query($query);
@@ -17,19 +17,14 @@
 
         $qtde= count($return);
 
-        //Se deu tudo certo
+        //If everything went okay
         if (!$qtde){
-            echo "<script type='text/javascript'>alert('DEU TUDO CERTO! Exclusão lógica OK !!!')</script>";
             header('location: ../public/views/home.php');
             exit;
         }
-        else{
-            echo "<script type='text/javascript'>alert('Erro na exclusao lógica !!! <br>')</script>";
-            //echo "<a href='../public/views/home.php'>Voltar</a>";
-        }
+        else throw new Exception('Seus dados não puderam ser alterados');
+
     }
     catch(Exception $e){
-        echo"Rolou um erro CABULOSO, contate o ademir";
+        echo "<script type='text/javascript'>alert(' Exceção capturada: ".$e->getMessage()."')</script>";
     }
-
-?>

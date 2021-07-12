@@ -36,5 +36,5 @@ function userEditValidate(event) {
         secondPassword.classList = 'normal'
     }
 
-    return valid 
+    return valid
 }

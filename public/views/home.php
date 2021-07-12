@@ -81,9 +81,9 @@
 
                         $stmt -> execute();
 
-                        $result = $stmt -> fetchAll(PDO::FETCH_ASSOC);
+                        $return = $stmt -> fetchAll(PDO::FETCH_ASSOC);
                         
-                        foreach($result as $i){
+                        foreach($return as $i){
                              echo"<option value='".$i['type_record']."'>
                                 Tipo ".$i['type_record']; 
                                 if(empty($i['type_record']))echo"Vazio";
