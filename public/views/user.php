@@ -235,18 +235,6 @@
         </div>
     </div>
 
-    <footer>
-        <div class="left"></div>
-
-        <div class="logo btn">
-            <a href="home.php"><i class="fas fa-box-open"></i></a>
-        </div>
-
-        <div class="right">
-            <a href="https://github.com/GabrielNicolim/ALICE">Sobre nós</a>
-        </div>
-    </footer>
-
     <div id="shadow" class="hidden" onclick="closeEditUser()"></div>
 
     <!-- Exclude: Edição de imagem -->
@@ -280,6 +268,18 @@
         </form>
     </div>
 
+    <footer>
+        <div class="left"></div>
+
+        <div class="logo btn">
+            <a href="home.php"><i class="fas fa-box-open"></i></a>
+        </div>
+
+        <div class="right">
+            <a href="https://github.com/GabrielNicolim/ALICE">Sobre nós</a>
+        </div>
+    </footer>
+    
     <script type="text/javascript" src="../scripts/menuShow.js"></script>
     <script type="text/javascript" src="../scripts/formValidate.js"></script>
     <script type="text/javascript" src="../scripts/userEditValidate.js"></script>

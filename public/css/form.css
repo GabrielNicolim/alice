@@ -2,6 +2,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
+    background: linear-gradient(45deg, rgb(206, 70, 70) 50%, white 50%);
 }
 
 .container {

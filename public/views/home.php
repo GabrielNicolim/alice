@@ -115,18 +115,6 @@
         ?>      
     </div>  
 
-    <footer>
-        <div class="left"></div>
-
-        <div class="logo btn">
-            <a href="#"><i class="fas fa-box-open"></i></a>
-        </div>
-
-        <div class="right">
-            <a href="https://github.com/GabrielNicolim/ALICE">Sobre nós</a>
-        </div>
-    </footer>
-
     <!-- Create -->
     <div id="shadow" class="hidden" onclick="closeCreate(),closeEdit(), closeExclude()"></div>
     <div id="create" class="hidden modal">
@@ -184,6 +172,18 @@
             <input type="submit" class="submitBtn" value="Confirmar">
         </form>
     </div>
+
+    <footer>
+        <div class="left"></div>
+
+        <div class="logo btn">
+            <a href="home.php"><i class="fas fa-box-open"></i></a>
+        </div>
+
+        <div class="right">
+            <a href="https://github.com/GabrielNicolim/ALICE">Sobre nós</a>
+        </div>
+    </footer>
 
     <script type="text/javascript" src="../scripts/menuShow.js"></script>
     <script type="text/javascript" src="../scripts/homeModalShow.js"></script>

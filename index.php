@@ -38,6 +38,23 @@
     <div id="hero">
         <span>Seu estoque na palma da mão</span>
     </div>
+
+    <div id="about">
+        <h2>Sobre Nós</h2>
+        <div class="content">
+            <div class="left">
+                <p>
+                    Somos uma inciativa independente de gerenciamento de estoque, possuímos diversas funcionalidades para a interação com o usuário. 
+                    Você pode se cadastrar de forma simplificada utilizando nosso formulário de registro, as informações do usuário podem ser facilmente
+                    atualizandas utilizando nosso sistema de gerenciamento de perfil. 
+                </p>
+            </div>
+
+            <div class="right">
+                <i class="fas fa-boxes"></i>
+            </div>
+        </div> 
+    </div>
     
     <div class="container">
         <h2>Nossos Usuários</h2>
@@ -49,7 +66,7 @@
     
             <div class="box">
                 <img src="public/images/people2.jpg" alt="">
-                <p>Estou muito satisfeito com o Storagesy. Além de um atendimento muito gentil e de fácil acesso, nunca vi um site para estoques com tamanha qualidade, e de maneira simplificada para quem não é muito bom com esse tipo de coisa (como eu). Estou feliz com essa empresa, e recomendo.</p>
+                <p>Estou muito satisfeito com o Storagesy. Além de um atendimento muito gentil e de fácil acesso, nunca vi um site para estoques com tamanha qualidade, e de maneira simplificada para quem não é muito bom com esse tipo de coisa. Estou feliz com essa empresa, e recomendo.</p>
             </div>
     
             <div class="box">
@@ -63,7 +80,7 @@
         <div class="left"></div>
 
         <div class="logo btn">
-            <a href="#"><i class="fas fa-box-open"></i></a>
+            <a href="index.php"><i class="fas fa-box-open"></i></a>
         </div>
 
         <div class="right">
