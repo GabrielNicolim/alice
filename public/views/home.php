@@ -101,9 +101,17 @@
         </div>
     </div>
 
+    <?php
+        if( isset($_GET['error']) && $_GET['error'] == 1){
+            echo"<div class'error-home'>Ocorreu algum problema na inserção do registro</div>";
+        }
+    ?>
+
     <div class="container">
         <?php
+         
             showBoxes($restriction);
+            
         ?>      
     </div>  
 

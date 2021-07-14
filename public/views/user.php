@@ -4,7 +4,7 @@
     require("../../php/loginValidation.php");
     
     try{
-        //throw new Exception('Algo deu errado deletando as imagens do BD');
+        
         $query = "SELECT id_user, name_user, email_user, password_user FROM users WHERE id_user = $_SESSION[idUser] ";
 
         $stmt = $conn -> query($query);
@@ -41,7 +41,9 @@
         }else throw new Exception("Ocorreu um erro no seu login, tente entrar novamente");
 
     }catch(Exception $e){
-        echo"Exceção capturada: ".$e->getMessage();
+        //echo"Exceção capturada: ".$e->getMessage();
+        header("Location: login.php ");
+        exit();
     }
 
 ?>

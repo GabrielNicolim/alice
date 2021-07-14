@@ -8,14 +8,18 @@
     if(!empty($_POST['name']) && !empty($_POST['quantity']) && !empty($_POST['price']) && !empty($_POST['type']) ){
         
         $name = cleanString($_POST['name']); 
-        $qnt = cleanString($_POST['quantity']);
-        $price = cleanString($_POST['price']);
+        $qnt = cleanString($_POST['quantity']);  
         $type = cleanString($_POST['type']);
+        $price = cleanString($_POST['price']);
 
-        $query = "INSERT INTO user_records VALUES(DEFAULT,'$name',$qnt,'$type',$price,'FALSE', NULL , :id)";
+        $query = "INSERT INTO user_records VALUES(DEFAULT, :nameprod , :qnt , :type, :price, 'FALSE', NULL , :id)";
 
         $stmt = $conn -> prepare($query);
 
+        $stmt -> bindValue(":nameprod", $name);
+        $stmt -> bindValue(":qnt", $qnt);
+        $stmt -> bindValue(":type", $type);
+        $stmt -> bindValue(":price", $price);
         $stmt -> bindValue(":id", $_SESSION['idUser']);
 
         $return = $stmt -> execute();
@@ -31,6 +35,6 @@
         } 
             
     }else{
-        header("Location: ../public/views/home.php?erro=1");
+        header("Location: ../public/views/home.php?error=1");
         exit();
     }

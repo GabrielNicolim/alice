@@ -1,4 +1,5 @@
 function loginValidate(event) {
+    
     let valid = true; 
 
     let email = event.target.email
