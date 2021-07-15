@@ -108,7 +108,7 @@
     <div class="container">
         <div class="left">
             <div class="welcome">
-            <?php 
+            <?php
             
                 $query = "SELECT filename FROM user_picture WHERE fk_user = ".$_SESSION['idUser'];
         
@@ -118,26 +118,26 @@
             
                 echo "<div class='photo'>";
   
-                    try{
-                        if(count($filename) > 0){
+                    try {
+                        if (count($filename) > 0) {
 
                             $path = $_SERVER['DOCUMENT_ROOT']."/ALICE/public/profile_pictures/".$filename[0]['filename'];
                             //If file exists in database but not in the folder
-                            if(!file_exists($path)){
+                            if (!file_exists($path)) {
                                 throw new Exception('Arquivo não foi encontrado na pasta de imagens');
                             }
     
                             echo"<img src='../profile_pictures/".$filename[0]['filename']."' alt='".$filename[0]['filename']."' width='150px' height='150px'>";
                             
-                        }else{
+                        } else {
                             throw new Exception('Arquivo não foi encontrado no DB');
                         }
                     }
-                    catch(Exception $e) {
+                    catch (Exception $e) {
                         //echo"Exceção capturada: ".$e->getMessage();
 
                         //Remove bugged photos from DB
-                        if(count($filename) > 0){
+                        if (count($filename) > 0) {
                             $query = "DELETE FROM user_picture WHERE filename = '".$filename[0]['filename']."' AND fk_user = ".$_SESSION['idUser'];
         
                             $stmt = $conn -> query($query);
@@ -150,7 +150,7 @@
                     </div>
             
                     <span>Olá ".$nome; 
-                    if(empty($nome)) echo"Usuário".$_SESSION['idUser'];
+                    if (empty($nome)) echo"Usuário".$_SESSION['idUser'];
                     echo"!
                     </span>";
                 
@@ -169,13 +169,13 @@
                     <div class="field" id="showTypes">Tipos em Estoque</div>
                     <?php 
                         echo"<span class='full-screen'>";
-                        if( !empty($i) ){
+                        if ( !empty($i) ) {
                             foreach($tipos as $i){
-                                if( !empty($i['type_record']) ){
+                                if ( !empty($i['type_record']) ) {
                                     echo$i['type_record'].", ";
                                 }
                             }
-                        }else echo "Nenhum tipo";
+                        } else echo "Nenhum tipo";
                         echo"</span>";
                     ?>
                 </div>
@@ -196,11 +196,11 @@
             
             <?php
 
-            if(isset($_GET['error'])) {
+            if (isset($_GET['error'])) {
                 
                 echo "<div class='error-edit'>"; 
 
-                switch($_GET['error']){
+                switch ($_GET['error']) {
                     case 0:
                         echo"Seus dados não puderam ser alterados!";
                         break;

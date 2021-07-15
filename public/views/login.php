@@ -1,7 +1,7 @@
 <?php
     session_start();
     
-    if(isset($_SESSION['isAuth'])){
+    if(isset($_SESSION['isAuth'])) {
         header("Location: home.php ");
 	    exit();
     }
@@ -33,10 +33,10 @@
             </div>
         </div>
 		<?php
-            if(isset($_GET['error'])) {
-                if($_GET['error'] == 0) {
+            if (isset($_GET['error'])) {
+                if ($_GET['error'] == 0) {
                     echo "<div class='error-login'>Campos vazios!</div>";
-                }else{
+                } else {
                     echo "<div class='error-login'>Login invalido!</div>";
                 }
             }

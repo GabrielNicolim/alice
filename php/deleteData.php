@@ -4,8 +4,7 @@
     require_once("connect.php");
     require_once("functions.php");
 
-    $choosen_id= $_POST['exclude'];
-    //$data=date('d/m/Y');
+    $choosen_id = $_POST['exclude'];
 
     $query = "UPDATE user_records SET deleted = TRUE, timeDeleted = NOW() WHERE id_record = :choosen_id AND fk_user = :id ";
 
@@ -17,12 +16,13 @@
     $return = $stmt -> execute();
 
     //If everything went okay
-    if ($return){
+    if ($return) {
+
         header('location: ../public/views/home.php');
         exit;
-    }
-    else{
-        echo "<script type='text/javascript'> 
+        
+    } else {
+        echo "<script type='text/javascript'>
             window.alert(' Exceção capturada: Seus dados não puderam ser alterados \\n Voltar para home?')
             window.location = '../public/views/home.php';
             </script>";

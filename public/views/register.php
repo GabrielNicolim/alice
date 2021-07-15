@@ -28,10 +28,10 @@
             </div>
         </div>
         <?php 
-            if(isset($_GET['error'])) {
-                if($_GET['error'] == 1)
+            if (isset($_GET['error'])) {
+                if ($_GET['error'] == 1)
                     echo "<div class='error-login'>Insira dados corretos!</div>";
-                if($_GET['error'] == 2)
+                if ($_GET['error'] == 2)
                     echo "<div class='error-login'>Email já cadastrado! <a class='btn-error' href='login.php'>Faça login</a></div>";
             }
         ?>

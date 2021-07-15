@@ -5,10 +5,10 @@
     require_once("connect.php");
     require_once("functions.php");
     
-    if(!empty($_POST['name']) && !empty($_POST['quantity']) && !empty($_POST['price']) && !empty($_POST['type']) ){
+    if (!empty($_POST['name']) && !empty($_POST['quantity']) && !empty($_POST['price']) && !empty($_POST['type']) ) {
         
-        $name = cleanString($_POST['name']); 
-        $qnt = cleanString($_POST['quantity']);  
+        $name = cleanString($_POST['name']);
+        $qnt = cleanString($_POST['quantity']);
         $type = cleanString($_POST['type']);
         $price = cleanString($_POST['price']);
 
@@ -24,17 +24,17 @@
 
         $return = $stmt -> execute();
 
-        if($return){       
+        if ($return) {
             unset($_POST);
             $_POST = array();
             header('location: ../public/views/home.php');
             exit;
-        }else{
+        } else {
             header("Location: ../public/views/home.php?error=1");
             exit();
         } 
-            
-    }else{
+        
+    } else {
         header("Location: ../public/views/home.php?error=1");
         exit();
     }
