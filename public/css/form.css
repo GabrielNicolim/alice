@@ -80,14 +80,6 @@ body {
     margin: 5px;
 }
 
-.forgot-my-password {
-    font-size: .9em;
-    font-style: italic;
-    color: rgb(70, 70, 70);
-    opacity: .8;
-    
-}
-
 .container input:not(:last-child),
 #password-error-box {
     margin-bottom: 1.5em;
@@ -166,15 +158,24 @@ body {
     font-size: .9em;
 }
 
+.forgot-my-password {
+    font-size: 1.1em;
+    color: rgb(32, 32, 32);
+    margin: -.5em 0 2em 5px;
+    opacity: .8;
+}
+
 .register {
     margin: 1em 0;
     text-align: center;
 }
 
+.forgot-my-password a,
 .register span a {
     color: rgb(75, 75, 75);
 }
 
+.forgot-my-password a:hover,
 .register span a:hover {
     color: rgb(224, 24, 64);
     transition: 400ms;
