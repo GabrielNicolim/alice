@@ -1,7 +1,6 @@
 .container {
-    width: 90vw;
+    width: 100vw;
     min-height: 100vh;
-    margin: 2em auto;
     display: flex;
     box-shadow: 0 5px 15px rgba(77, 77, 77, 0.555);
     background: white;
@@ -10,7 +9,7 @@
 .container .left {
     width: 35%;
     background: rgb(218, 218, 218);
-    padding: 10px 20px;
+    padding: 6em;
 }
 
 .container .left .welcome {
@@ -160,7 +159,7 @@
         display: block;
         width: 100vw;
         margin: 0;
-        padding: 0;
+        padding-bottom: 90px;
     }
 
     .container .left {

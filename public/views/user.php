@@ -69,6 +69,10 @@
     <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
 </head>
 <body>
+    <!-- NoScript -->
+    <noscript>
+            <h1>Você precisa do javascript habilitado</h1>
+    </noscript>
     <!-- Header -->
     <header>
         <div class="left">
@@ -134,7 +138,6 @@
                         }
                     }
                     catch (Exception $e) {
-                        //echo"Exceção capturada: ".$e->getMessage();
 
                         //Remove bugged photos from DB
                         if (count($filename) > 0) {

@@ -36,15 +36,15 @@
             }
         ?>
         <form action="../../php/registerLogic.php" onsubmit="return registerValidate(event)" method="POST">
-            <input type="text" name="name" id="name" placeholder="Nome" maxlength='40'>
-            <input type="email" name="email" id="email" placeholder="Email" maxlength='128'>
-            <input type="password" name="password" id="password" placeholder="Senha" maxlength='128' onkeyup="passwordValidate()">
+            <input type="text" name="name" id="name" placeholder="Nome" maxlength='40' required>
+            <input type="email" name="email" id="email" placeholder="Email" maxlength='128' required>
+            <input type="password" name="password" id="password" placeholder="Senha" maxlength='128' onkeyup="passwordValidate()" required>
 
             <div id="password-error-box">
                 
             </div>
 
-            <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirmar senha" maxlength='128'>
+            <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirmar senha" maxlength='128' required>
             <input type="submit" class="submitBtn" value="Cadastrar-se">
         </form>
 

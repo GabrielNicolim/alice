@@ -23,6 +23,11 @@
     <link rel="stylesheet" href="../css/modal.css">
 </head>
 <body>
+    <!-- NoScript -->
+    <noscript>
+            <h1>Você precisa do javascript habilitado</h1>
+    </noscript>
+    
     <!-- Header -->
     <header>
         <div class="left">
