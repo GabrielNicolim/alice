@@ -37,7 +37,7 @@
                 if ($_GET['error'] == 0) {
                     echo "<div class='error-login'>Campos vazios!</div>";
                 } else {
-                    echo "<div class='error-login'>Login invalido!</div>";
+                    echo "<div class='error-login'>Email ou senha invalidos!</div>";
                 }
             }
         ?>

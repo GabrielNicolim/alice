@@ -5,10 +5,12 @@ try {
     require_once("connect.php");
     require_once("functions.php");
 
-    $email_user = strtolower( cleanString($_POST['email']) );
+    $email_user = strtolower( cleanEmail($_POST['email']) );
     $password_user = cleanString($_POST['password']);
 
-    if (!empty($email_user) && !empty($password_user) && filter_var($email_user, FILTER_VALIDATE_EMAIL)) {
+    if (!empty($email_user) && !empty($password_user) ) {
+
+        $dbpassword = generateFakePassword();
 
         $query = "SELECT id_user, email_user, password_user FROM users WHERE email_user = :email_user";
 
@@ -18,23 +20,27 @@ try {
 
         $stmt -> execute();
 
-        $return= $stmt -> fetchAll(PDO::FETCH_ASSOC);
+        $return = $stmt -> fetchAll(PDO::FETCH_ASSOC);
 
         if (count($return) > 0) {
-            if ( password_verify($password_user, $return[0]['password_user']) ) {
+            
+            $password_user = cleanString($_POST['password']);
+            $dbpassword = $return[0]['password_user'];
+            
+        }
 
-                session_start();
-                session_regenerate_id(true);
+        if ( password_verify($password_user, $dbpassword) && count($return) > 0) {
 
-                $_SESSION['isAuth'] = true;
-                $_SESSION['idUser'] = $return[0]['id_user'];
+            session_start();
+            session_regenerate_id(true);
 
-                header("Location: ../public/views/home.php");
-                exit();
+            $_SESSION['isAuth'] = true;
+            $_SESSION['idUser'] = $return[0]['id_user'];
 
-            } else throw new Exception("?error=1"); // Wrong password
-  
-        } else throw new Exception("?error=1"); // Email not registered
+            header("Location: ../public/views/home.php");
+            exit();
+
+        } else throw new Exception("?error=1"); // Wrong password
 
     } else throw new Exception("?error=0"); // Campos vazios
 
