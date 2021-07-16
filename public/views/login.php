@@ -43,11 +43,13 @@
         ?>
         <form action="../../php/loginLogic.php" onsubmit="return loginValidate(event)" method="POST">
             <input type="email" name="email" id="email" placeholder="Email" maxlength='128'>
-            <input type="password" name="password" id="password" placeholder="Senha" maxlength='128'>
 
-            <div id="show" onclick="showPassword()">
-                <input type="checkbox" name="showPassword" id="showPassword" maxlength='128'>
-                <label for="showPassword">Apresentar senha</label>
+            <div id="password-box">
+                <input type="password" name="password" id="password" placeholder="Senha" maxlength='128'>
+                <img src="../images/eye-off.svg" id="icon" onclick="showPassword()">
+            </div>
+            <div class="forgot-my-password">
+                <span>Esqueceu sua senha? <a href="recover.php">Recupere-a</a></span>
             </div>
             <input type="submit" class="submitBtn" value="Entrar">
         </form>
@@ -56,12 +58,11 @@
             <span>Não tem uma conta? <a href="register.php">Cadastre-se</a></span>
         </div>
 
-        <div class="register">
-                <span>Esqueceu sua senha? <a href="recover.php">Recupere-a</a></span>
-        </div>
+        
     </div>
 
     <script type="text/javascript" src="../scripts/formValidate.js"></script>
     <script type="text/javascript" src="../scripts/loginValidate.js"></script>
+    <script type="text/javascript" src="../scripts/showPassword.js"></script>
 </body>
 </html>

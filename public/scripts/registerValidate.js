@@ -97,7 +97,7 @@ function passwordValidate() {
 
     //
 
-    if(passwordValue.length > 0) {
+    if(!voidCheck(passwordValue)) {
         if(passwordValue.length < 6) {
             error.innerText = 'A senha deve conter ao menos 6 caracteres'
         }

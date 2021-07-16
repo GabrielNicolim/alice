@@ -2,7 +2,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-
     background: linear-gradient(45deg, rgb(206, 70, 70) 50%, white 50%);
 }
 
@@ -58,6 +57,22 @@ body {
     margin-bottom: 0;
 }
 
+#password-box {
+    position: relative;
+    margin-bottom: 1.5em;
+}
+
+#password-box input {
+    padding-right: 3em;
+}
+
+#password-box img {
+    position: absolute;
+    cursor: pointer;
+    top: 1em;
+    right: 1em;
+}
+
 #password-error-box {
     color: rgb(92, 92, 92);
     font-size: 1em;
@@ -65,13 +80,17 @@ body {
     margin: 5px;
 }
 
+.forgot-my-password {
+    font-size: .9em;
+    font-style: italic;
+    color: rgb(70, 70, 70);
+    opacity: .8;
+    
+}
+
 .container input:not(:last-child),
 #password-error-box {
     margin-bottom: 1.5em;
-}
-
-#show {
-    margin-top: 1.5em;
 }
 
 .container input::placeholder {
@@ -99,7 +118,7 @@ body {
     cursor: pointer;
 }
 
-.container  input[type='checkbox']:before {
+.container input[type='checkbox']:before {
     content: "";
     display: block;
     position: absolute;
@@ -113,7 +132,7 @@ body {
     visibility: visible;
 }
 
-.container  input[type='checkbox']:checked:after {
+.container input[type='checkbox']:checked:after {
     content: "";
     display: block;
     width: 6px;

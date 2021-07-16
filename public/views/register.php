@@ -38,10 +38,12 @@
         <form action="../../php/registerLogic.php" onsubmit="return registerValidate(event)" method="POST">
             <input type="text" name="name" id="name" placeholder="Nome" maxlength='40' required>
             <input type="email" name="email" id="email" placeholder="Email" maxlength='128' required>
-            <input type="password" name="password" id="password" placeholder="Senha" maxlength='128' onkeyup="passwordValidate()" required>
 
-            <div id="password-error-box">
-                
+            <div id="password-box">
+                <input type="password" name="password" id="password" placeholder="Senha" maxlength='128' onkeypress="passwordValidate()">
+                <img src="../images/eye-off.svg" id="icon" onclick="showPassword()">
+
+                <div id="password-error-box"></div>
             </div>
 
             <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirmar senha" maxlength='128' required>
@@ -55,5 +57,6 @@
 
     <script type="text/javascript" src="../scripts/formValidate.js"></script>
     <script type="text/javascript" src="../scripts/registerValidate.js"></script>
+    <script type="text/javascript" src="../scripts/showPassword.js"></script>
 </body>
 </html>

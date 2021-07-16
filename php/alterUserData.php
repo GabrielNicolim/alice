@@ -7,7 +7,7 @@
 
     $name_user = cleanString($_POST['name']);
     $email_user = cleanString($_POST['email']);
-    $confirmPassword = cleanString($_POST['confirmPassword']);
+    $confirmPassword = cleanString($_POST['password']);
 
     try {
         if (!empty($name_user) && !empty($email_user) && !empty($confirmPassword)) {

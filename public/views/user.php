@@ -231,7 +231,12 @@
                 <div class='little-title'>Email</div>
                     <input type='email' name='email' id='email' value='<?php echo$email; ?>' maxlength='128' required>
                 <div class='clear'></div>
-                    <input type='password' name='confirmPassword' id='confirmPassword' placeholder='Confirmar senha' maxlength='128' required>
+
+                <div id="password-box">
+                    <input type="password" name="password" id="password" placeholder="Senha" maxlength='128' required>
+                    <img src="../images/eye-off.svg" id="icon" onclick="showPassword()">
+                </div>
+
                 <input type='submit' class='submitBtn' value='Salvar Alterações'>
             </form>
             
@@ -288,5 +293,6 @@
     <script type="text/javascript" src="../scripts/userEditValidate.js"></script>
     <script type="text/javascript" src="../scripts/userModalShow.js"></script>
     <script type="text/javascript" src="../scripts/userImage.js"></script>
+    <script type="text/javascript" src="../scripts/showPassword.js"></script>
 </body>
 </html>
