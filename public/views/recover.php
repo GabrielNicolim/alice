@@ -6,13 +6,14 @@
 	    exit();
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Recuperar Senha</title>
 
     <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon">
 
@@ -24,7 +25,7 @@
 <body>
     <div class="container">
         <div class="top">
-            <h1>Login</h1>
+            <h1>Recuperar Senha</h1>
 
             <div class="return">
                 <a href="../../index.php" class="btn">
@@ -33,22 +34,17 @@
             </div>
         </div>
 		<?php
-            if (isset($_GET['error'])) {
-                if ($_GET['error'] == 0) {
-                    echo "<div class='error-login'>Campos vazios!</div>";
-                } else {
-                    echo "<div class='error-login'>Email ou senha invalidos!</div>";
-                }
-            }
+            // if (isset($_GET['error'])) {
+            //     if ($_GET['error'] == 0) {
+            //         echo "<div class='error-login'>Campos vazios!</div>";
+            //     } else {
+            //         echo "<div class='error-login'>Email ou senha invalidos!</div>";
+            //     }
+            // }
         ?>
-        <form action="../../php/loginLogic.php" onsubmit="return loginValidate(event)" method="POST">
+        <form action="" onsubmit="return RecoverValidate(event)" method="POST">
             <input type="email" name="email" id="email" placeholder="Email" maxlength='128'>
-            <input type="password" name="password" id="password" placeholder="Senha" maxlength='128'>
 
-            <div id="show" onclick="showPassword()">
-                <input type="checkbox" name="showPassword" id="showPassword" maxlength='128'>
-                <label for="showPassword">Apresentar senha</label>
-            </div>
             <input type="submit" class="submitBtn" value="Entrar">
         </form>
 
@@ -57,11 +53,11 @@
         </div>
 
         <div class="register">
-                <span>Esqueceu sua senha? <a href="recover.php">Recupere-a</a></span>
+            <span>Já possui um cadastro? <a href="login.php">Entrar</a></span>
         </div>
     </div>
 
     <script type="text/javascript" src="../scripts/formValidate.js"></script>
-    <script type="text/javascript" src="../scripts/loginValidate.js"></script>
+    <script type="text/javascript" src="../scripts/recoverValidate.js"></script>
 </body>
 </html>

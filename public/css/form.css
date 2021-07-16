@@ -12,6 +12,7 @@ body {
     width: 40%;
     border-radius: 10px;
     box-shadow: 1px 1px 30px rgb(97, 97, 97);
+    min-height: 400px;
 }
 
 .container .top {
@@ -59,7 +60,7 @@ body {
 
 #password-error-box {
     color: rgb(92, 92, 92);
-    font-size: .9em;
+    font-size: 1em;
     min-height: 20px;
     margin: 5px;
 }
@@ -67,6 +68,10 @@ body {
 .container input:not(:last-child),
 #password-error-box {
     margin-bottom: 1.5em;
+}
+
+#show {
+    margin-top: 1.5em;
 }
 
 .container input::placeholder {

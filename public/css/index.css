@@ -7,7 +7,7 @@ body {
 }
 
 #hero {
-    background: url("../images/heroBg.jpg") no-repeat fixed center;
+    background: url("../images/images2.jpg") no-repeat fixed center;
     background-size: cover;
     height: 90vh;
     display: flex;
@@ -23,7 +23,8 @@ body {
     font-family: 'Oswald', sans-serif;
     letter-spacing: 2px;
     font-weight: 500;
-    color: rgb(247, 244, 244);
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px 2px black;
 }
 
 #about {
@@ -50,15 +51,13 @@ body {
     padding-right: 2em;
 }
 
-#about .content .right {
-    font-size: 15em;
-    color: rgb(206, 70, 70) ;
-}
-
 h2 {
     text-align: center;
     padding: 3em 0;
     font-size: 2em;
+    font-weight: 700;
+    color: rgb(17, 17, 17);
+    text-shadow: 1px 1px 2px black;
 }
 
 .container .slider {

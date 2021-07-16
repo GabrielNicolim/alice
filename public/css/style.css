@@ -37,6 +37,7 @@ header .left {
     font-size: 1.8em;
     color: rgb(224, 24, 64); 
     font-weight: bold;
+    text-shadow: 1px 1px 1px rgb(63, 63, 63);
 }
 
 .clear {
@@ -52,7 +53,7 @@ header .left {
 
 .btn:hover {
     color: rgb(224, 24, 64); 
-    transition: 400ms;
+    transition: 200ms;
     cursor: pointer;
 }
 

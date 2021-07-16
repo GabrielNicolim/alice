@@ -97,14 +97,19 @@ function passwordValidate() {
 
     //
 
-    if(passwordValue.length < 6) {
-        error.innerText = 'A senha deve conter ao menos 6 caracteres'
-    }
-    else if(letterCont < 1) {
-        error.innerText = 'A senha deve conter ao menos um caractere maiúsculo'
-    }
-    else if(numberCont < 1){
-        error.innerText = 'A senha deve conter ao menos um número'
+    if(passwordValue.length > 0) {
+        if(passwordValue.length < 6) {
+            error.innerText = 'A senha deve conter ao menos 6 caracteres'
+        }
+        else if(letterCont < 1) {
+            error.innerText = 'A senha deve conter ao menos um caractere maiúsculo'
+        }
+        else if(numberCont < 1){
+            error.innerText = 'A senha deve conter ao menos um número'
+        }
+        else {
+            error.innerText = ''
+        }
     }
     else {
         error.innerText = ''
