@@ -12,8 +12,31 @@ try {
     $password_user = cleanString($_POST['password']);
     $confirmPassword_user = cleanString($_POST['confirmPassword']);
 
+    // Contador 
+
+    $letterCount = 0; 
+    $numberCount = 0;
+
+    for($i = 0; $i < strlen($password_user); $i++) {
+
+        if( ctype_upper($password_user[$i]) ) {
+            $letterCount++;
+        }
+        else if ( is_numeric($password_user[$i]) ) {
+            $numberCount++;
+        }
+    }
+
+    // Validação 
+
+    if($letterCount < 1 || $numberCount < 1 || strlen($password_user) < 6) {
+        throw new Exception("?error=1");
+    }
+
+    //
+
     if (!empty($name_user) && !empty($email_user) && !empty($password_user) &&
-        !empty($confirmPassword_user) && $password_user == $confirmPassword_user ) {
+        !empty($confirmPassword_user) && $password_user == $confirmPassword_user) {
         
         $query = "SELECT email_user FROM users where email_user = :email_user ";
 

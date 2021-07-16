@@ -53,7 +53,19 @@ body {
     outline: 0;
 }
 
-.container input:not(:last-child) {
+.container #password {
+    margin-bottom: 0;
+}
+
+#password-error-box {
+    color: rgb(92, 92, 92);
+    font-size: .9em;
+    min-height: 20px;
+    margin: 5px;
+}
+
+.container input:not(:last-child),
+#password-error-box {
     margin-bottom: 1.5em;
 }
 
