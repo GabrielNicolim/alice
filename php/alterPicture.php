@@ -6,14 +6,14 @@
     require_once("functions.php");
     
 
-    if( isset($_POST['removepictures']) && $_POST['removepictures'] == '1' ){
+    if ( isset($_POST['removepictures']) && $_POST['removepictures'] == '1' ) {
         deletePictures();
-        exit;   
-    }else{
+        exit;
+    } else {
 
-        if(isset($_FILES)){
-
-            if( $_FILES['uploadfile']['size'] >= 4194304 ){
+        if (isset($_FILES)) {
+            
+            if ( $_FILES['uploadfile']['size'] >= 4194304 ) {
                 header('location: ../public/views/user.php?error=1');
                 exit;
             }
@@ -22,36 +22,36 @@
             $filetype = $_FILES['uploadfile']['type'];
             $extension = explode("/",$filetype);
     
-            if( !in_array( end($extension) , $permitedFormats ) ){
+            if ( !in_array( end($extension) , $permitedFormats ) ) {
                 header('location: ../public/views/user.php?error=2');
                 exit;
             }
     
-            $tempname = $_FILES["uploadfile"]["tmp_name"];   
+            $tempname = $_FILES["uploadfile"]["tmp_name"];
             $folder = "../public/profile_pictures/";
     
             $rename = $_SESSION['idUser'].'Upload'.date('Ymd').$_SESSION['idUser']*100+rand(0,100000).".".end($extension);
     
-            if (move_uploaded_file($tempname, $folder.$rename)){
+            if (move_uploaded_file($tempname, $folder.$rename)) {
             
                 $query = "INSERT INTO user_picture VALUES(DEFAULT,'$rename', ".$_SESSION['idUser'].")";
     
                 $stmt = $conn -> query($query);
             
-                if($stmt){
+                if ($stmt) {
                     header('location: ../public/views/user.php');
                     exit;
-                }else{
+                } else {
                     //Failed to insert into user_picture table
                     header('location: ../public/views/user.php?error=3');
                     exit;
                 }
-            }else{
+            } else {
                 //Failed to upload image
                 header('location: ../public/views/user.php?error=3');
                 exit;
             }
-        }else{
+        } else {
             header('location: ../public/views/user.php?error=3');
             exit;
         }
@@ -61,14 +61,14 @@
 
         include("connect.php");
 
-        try{
+        try {
             
             //Pick only the files from the user
             $files = glob("../public/profile_pictures/".$_SESSION['idUser']."Upload*.*");
 
             array_map('unlink', $files);
 
-            if( !empty(glob("../public/profile_pictures/".$_SESSION['idUser']."Upload*.*")) ){
+            if ( !empty(glob("../public/profile_pictures/".$_SESSION['idUser']."Upload*.*")) ) {
                 
                 throw new Exception('Algo deu errado deletando as imagens do diretório');
             }
@@ -78,15 +78,15 @@
             $stmt = $conn -> query($query);
 
             //If removed fine from the DB and files
-            if($stmt){
+            if ($stmt) {
                 unset($_FILES);
                 header('location: ../public/views/user.php' );
                 exit;
 
-            }else{
+            } else {
                 throw new Exception('Algo deu errado deletando as imagens do BD');
             }
-        }catch(Exception $e){
+        } catch(Exception $e) {
             echo "<script type='text/javascript'>alert(' Exceção capturada: ".$e->getMessage()."')</script>";
         }
         

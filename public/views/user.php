@@ -4,7 +4,7 @@
     require("../../php/loginValidation.php");
     
     try{
-        //throw new Exception('Algo deu errado deletando as imagens do BD');
+        
         $query = "SELECT id_user, name_user, email_user, password_user FROM users WHERE id_user = $_SESSION[idUser] ";
 
         $stmt = $conn -> query($query);
@@ -41,7 +41,9 @@
         }else throw new Exception("Ocorreu um erro no seu login, tente entrar novamente");
 
     }catch(Exception $e){
-        echo"Exceção capturada: ".$e->getMessage();
+        //echo"Exceção capturada: ".$e->getMessage();
+        header("Location: login.php ");
+        exit();
     }
 
 ?>
@@ -67,6 +69,10 @@
     <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
 </head>
 <body>
+    <!-- NoScript -->
+    <noscript>
+            <h1>Você precisa do javascript habilitado</h1>
+    </noscript>
     <!-- Header -->
     <header>
         <div class="left">
@@ -106,7 +112,7 @@
     <div class="container">
         <div class="left">
             <div class="welcome">
-            <?php 
+            <?php
             
                 $query = "SELECT filename FROM user_picture WHERE fk_user = ".$_SESSION['idUser'];
         
@@ -116,26 +122,25 @@
             
                 echo "<div class='photo'>";
   
-                    try{
-                        if(count($filename) > 0){
+                    try {
+                        if (count($filename) > 0) {
 
                             $path = $_SERVER['DOCUMENT_ROOT']."/ALICE/public/profile_pictures/".$filename[0]['filename'];
                             //If file exists in database but not in the folder
-                            if(!file_exists($path)){
+                            if (!file_exists($path)) {
                                 throw new Exception('Arquivo não foi encontrado na pasta de imagens');
                             }
     
                             echo"<img src='../profile_pictures/".$filename[0]['filename']."' alt='".$filename[0]['filename']."' width='150px' height='150px'>";
                             
-                        }else{
+                        } else {
                             throw new Exception('Arquivo não foi encontrado no DB');
                         }
                     }
-                    catch(Exception $e) {
-                        //echo"Exceção capturada: ".$e->getMessage();
+                    catch (Exception $e) {
 
                         //Remove bugged photos from DB
-                        if(count($filename) > 0){
+                        if (count($filename) > 0) {
                             $query = "DELETE FROM user_picture WHERE filename = '".$filename[0]['filename']."' AND fk_user = ".$_SESSION['idUser'];
         
                             $stmt = $conn -> query($query);
@@ -148,7 +153,7 @@
                     </div>
             
                     <span>Olá ".$nome; 
-                    if(empty($nome)) echo"Usuário".$_SESSION['idUser'];
+                    if (empty($nome)) echo"Usuário".$_SESSION['idUser'];
                     echo"!
                     </span>";
                 
@@ -167,13 +172,13 @@
                     <div class="field" id="showTypes">Tipos em Estoque</div>
                     <?php 
                         echo"<span class='full-screen'>";
-                        if( !empty($i) ){
+                        if ( !empty($i) ) {
                             foreach($tipos as $i){
-                                if( !empty($i['type_record']) ){
+                                if ( !empty($i['type_record']) ) {
                                     echo$i['type_record'].", ";
                                 }
                             }
-                        }else echo "Nenhum tipo";
+                        } else echo "Nenhum tipo";
                         echo"</span>";
                     ?>
                 </div>
@@ -194,11 +199,11 @@
             
             <?php
 
-            if(isset($_GET['error'])) {
+            if (isset($_GET['error'])) {
                 
                 echo "<div class='error-edit'>"; 
 
-                switch($_GET['error']){
+                switch ($_GET['error']) {
                     case 0:
                         echo"Seus dados não puderam ser alterados!";
                         break;
@@ -226,24 +231,17 @@
                 <div class='little-title'>Email</div>
                     <input type='email' name='email' id='email' value='<?php echo$email; ?>' maxlength='128' required>
                 <div class='clear'></div>
-                    <input type='password' name='confirmPassword' id='confirmPassword' placeholder='Confirmar senha' maxlength='128' required>
+
+                <div id="password-box">
+                    <input type="password" name="password" id="password" placeholder="Senha" maxlength='128' required>
+                    <img src="../images/eye-off.svg" id="icon" onclick="showPassword()">
+                </div>
+
                 <input type='submit' class='submitBtn' value='Salvar Alterações'>
             </form>
             
         </div>
     </div>
-
-    <footer>
-        <div class="left"></div>
-
-        <div class="logo btn">
-            <a href="home.php"><i class="fas fa-box-open"></i></a>
-        </div>
-
-        <div class="right">
-            <a href="https://github.com/GabrielNicolim/ALICE">Sobre nós</a>
-        </div>
-    </footer>
 
     <div id="shadow" class="hidden" onclick="closeEditUser()"></div>
 
@@ -278,10 +276,23 @@
         </form>
     </div>
 
+    <footer>
+        <div class="left"></div>
+
+        <div class="logo btn">
+            <a href="home.php"><i class="fas fa-box-open"></i></a>
+        </div>
+
+        <div class="right">
+            <a href="https://github.com/GabrielNicolim/ALICE">Sobre nós</a>
+        </div>
+    </footer>
+    
     <script type="text/javascript" src="../scripts/menuShow.js"></script>
     <script type="text/javascript" src="../scripts/formValidate.js"></script>
     <script type="text/javascript" src="../scripts/userEditValidate.js"></script>
     <script type="text/javascript" src="../scripts/userModalShow.js"></script>
     <script type="text/javascript" src="../scripts/userImage.js"></script>
+    <script type="text/javascript" src="../scripts/showPassword.js"></script>
 </body>
 </html>

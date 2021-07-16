@@ -38,22 +38,39 @@
     <div id="hero">
         <span>Seu estoque na palma da mão</span>
     </div>
+
+    <div id="about">
+        <h2>Sobre Nós</h2>
+        <div class="content">
+            <div class="left">
+                <p>
+                    Somos uma inciativa independente de gerenciamento de estoque, possuímos diversas funcionalidades para a interação com o usuário. 
+                    Você pode se cadastrar de forma simplificada utilizando nosso formulário de registro, as informações do usuário podem ser facilmente
+                    atualizandas utilizando nosso sistema de gerenciamento de perfil. 
+                </p>
+            </div>
+
+            <div class="right">
+                <img src="public/images/box.png" alt="Caixas">
+            </div>
+        </div> 
+    </div>
     
     <div class="container">
         <h2>Nossos Usuários</h2>
         <div class="slider">
             <div class="box">
-                <img src="public/images/people1.jpg" alt="">
+                <img src="public/images/people1.jpg">
                 <p>Minha empresa vinha procurando um estoque assim a meses, estamos muito felizes que achamos o Storagesy e muito contentes com o resultado. A taxa que é cobrada é a mais honesta no mercado, e a plataforma on-line é muito visual e fácil de manusear. Ótima qualidade!</p>
             </div>
     
             <div class="box">
-                <img src="public/images/people2.jpg" alt="">
-                <p>Estou muito satisfeito com o Storagesy. Além de um atendimento muito gentil e de fácil acesso, nunca vi um site para estoques com tamanha qualidade, e de maneira simplificada para quem não é muito bom com esse tipo de coisa (como eu). Estou feliz com essa empresa, e recomendo.</p>
+                <img src="public/images/people2.jpg">
+                <p>Estou muito satisfeito com o Storagesy. Além de um atendimento muito gentil e de fácil acesso, nunca vi um site para estoques com tamanha qualidade, e de maneira simplificada para quem não é muito bom com esse tipo de coisa. Estou feliz com essa empresa, e recomendo.</p>
             </div>
     
             <div class="box">
-                <img src="public/images/people3.jpg" alt="">
+                <img src="public/images/people3.jpg">
                 <p>Minha família vem procurando um estoque para armazenar nossos bens há anos! Uma pena que achei o Storagesy a pouco tempo. Sempre fui muito preocupada com confiabilidade e qualidade de atendimento, mas a Storagesy atendeu essas preocupações com facilidade. Eu e minha família recomendamos!</p>
             </div>
         </div>
@@ -63,7 +80,7 @@
         <div class="left"></div>
 
         <div class="logo btn">
-            <a href="#"><i class="fas fa-box-open"></i></a>
+            <a href="index.php"><i class="fas fa-box-open"></i></a>
         </div>
 
         <div class="right">

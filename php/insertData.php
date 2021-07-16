@@ -5,32 +5,36 @@
     require_once("connect.php");
     require_once("functions.php");
     
-    if(!empty($_POST['name']) && !empty($_POST['quantity']) && !empty($_POST['price']) && !empty($_POST['type']) ){
+    if (!empty($_POST['name']) && !empty($_POST['quantity']) && !empty($_POST['price']) && !empty($_POST['type']) ) {
         
-        $name = cleanString($_POST['name']); 
+        $name = cleanString($_POST['name']);
         $qnt = cleanString($_POST['quantity']);
-        $price = cleanString($_POST['price']);
         $type = cleanString($_POST['type']);
+        $price = cleanString($_POST['price']);
 
-        $query = "INSERT INTO user_records VALUES(DEFAULT,'$name',$qnt,'$type',$price,'FALSE', NULL , :id)";
+        $query = "INSERT INTO user_records VALUES(DEFAULT, :nameprod , :qnt , :type, :price, 'FALSE', NULL , :id)";
 
         $stmt = $conn -> prepare($query);
 
+        $stmt -> bindValue(":nameprod", $name);
+        $stmt -> bindValue(":qnt", $qnt);
+        $stmt -> bindValue(":type", $type);
+        $stmt -> bindValue(":price", $price);
         $stmt -> bindValue(":id", $_SESSION['idUser']);
 
         $return = $stmt -> execute();
 
-        if($return){       
+        if ($return) {
             unset($_POST);
             $_POST = array();
             header('location: ../public/views/home.php');
             exit;
-        }else{
+        } else {
             header("Location: ../public/views/home.php?error=1");
             exit();
         } 
-            
-    }else{
-        header("Location: ../public/views/home.php?erro=1");
+        
+    } else {
+        header("Location: ../public/views/home.php?error=1");
         exit();
     }

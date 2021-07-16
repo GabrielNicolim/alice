@@ -28,18 +28,25 @@
             </div>
         </div>
         <?php 
-            if(isset($_GET['error'])) {
-                if($_GET['error'] == 1)
+            if (isset($_GET['error'])) {
+                if ($_GET['error'] == 1)
                     echo "<div class='error-login'>Insira dados corretos!</div>";
-                if($_GET['error'] == 2)
+                if ($_GET['error'] == 2)
                     echo "<div class='error-login'>Email já cadastrado! <a class='btn-error' href='login.php'>Faça login</a></div>";
             }
         ?>
         <form action="../../php/registerLogic.php" onsubmit="return registerValidate(event)" method="POST">
-            <input type="text" name="name" id="name" placeholder="Nome" maxlength='40'>
-            <input type="email" name="email" id="email" placeholder="Email" maxlength='128'>
-            <input type="password" name="password" id="password" placeholder="Senha" maxlength='128'>
-            <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirmar senha" maxlength='128'>
+            <input type="text" name="name" id="name" placeholder="Nome" maxlength='40' required>
+            <input type="email" name="email" id="email" placeholder="Email" maxlength='128' required>
+
+            <div id="password-box">
+                <input type="password" name="password" id="password" placeholder="Senha" maxlength='128' onkeypress="passwordValidate()">
+                <img src="../images/eye-off.svg" id="icon" onclick="showPassword()">
+
+                <div id="password-error-box"></div>
+            </div>
+
+            <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirmar senha" maxlength='128' required>
             <input type="submit" class="submitBtn" value="Cadastrar-se">
         </form>
 
@@ -50,5 +57,6 @@
 
     <script type="text/javascript" src="../scripts/formValidate.js"></script>
     <script type="text/javascript" src="../scripts/registerValidate.js"></script>
+    <script type="text/javascript" src="../scripts/showPassword.js"></script>
 </body>
 </html>

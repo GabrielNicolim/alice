@@ -6,10 +6,10 @@
 
         $query = "SELECT * FROM user_records WHERE :id_user = fk_user AND deleted = 'FALSE' ";
         
-        if( isset($restriction['typeSearch']) ){
+        if ( isset($restriction['typeSearch']) ) {
             $restriction['typeSearch'] = cleanString($restriction['typeSearch']);
 
-            if( !empty($restriction['typeSearch']) && $restriction['typeSearch'] != null){
+            if ( !empty($restriction['typeSearch']) && $restriction['typeSearch'] != null) {
                 $query .= "AND type_record = '$restriction[typeSearch]' ";
             }
         }
@@ -23,23 +23,23 @@
         $_SESSION['ids'] = $stmt -> fetchAll(PDO::FETCH_ASSOC);
 
         //If there are records in the user id
-        if(!empty($_SESSION['ids']) ) {
+        if (!empty($_SESSION['ids']) ) {
             $arr = [];
-            if(!empty($restriction['textSearch'])  && cleanString($restriction['textSearch']) != '') {
+            if (!empty($restriction['textSearch'])  && cleanString($restriction['textSearch']) != '') {
                 
                 $text = strtolower(cleanString($restriction['textSearch']));
     
-                foreach( $_SESSION['ids'] as $value) {
-                    if( strpos(strtolower($value['name_record']), $text) !== false ) {
+                foreach ( $_SESSION['ids'] as $value) {
+                    if ( strpos(strtolower($value['name_record']), $text) !== false ) {
                         array_push($arr, $value);
                     }
                 }
-            }
-            else {
+
+            } else {
                 $arr = $_SESSION['ids'];
             }
 
-            if( !empty($arr) ) {
+            if ( !empty($arr) ) {
                 foreach($arr as $obj) {
                     echo "
                     <div class='box'>
@@ -47,7 +47,7 @@
                             <span id='name".$obj['id_record']."'>
                                 $obj[name_record]";
                     
-                                if( $obj['name_record'] == '' || $obj['name_record'] == ' ' || $obj['name_record'] == null) 
+                                if ( $obj['name_record'] == '' || $obj['name_record'] == ' ' || $obj['name_record'] == null) 
                                 echo"Registro #".$obj['id_record']; 
                             echo "</span>
                                 <i class='fas fa-trash-alt trash' onclick='openExclude(".$obj['id_record'].")'></i>
@@ -68,8 +68,7 @@
                                 Tipo
                             </div>
                             <span id='typ".$obj['id_record']."'>".$obj['type_record']; 
-                            if(empty($obj['type_record']))
-                            echo"Tipo Vazio"; 
+                            if (empty($obj['type_record'])) echo"Tipo Vazio"; 
                         echo"</span>
 
                             </div>
@@ -79,12 +78,10 @@
                         </div>
                     </div>";
                 }
-            }
-            else {
+            } else {
                 echo"<div id='void'>Nenhum Registro encontrado!</div>";
             }
-        }
-        else {
+        } else {
             echo"<div id='void'>Nenhum Registro encontrado!</div>";
         }
     }

@@ -1,7 +1,6 @@
 .container {
-    width: 90vw;
+    width: 100vw;
     min-height: 100vh;
-    margin: 2em auto;
     display: flex;
     box-shadow: 0 5px 15px rgba(77, 77, 77, 0.555);
     background: white;
@@ -10,7 +9,7 @@
 .container .left {
     width: 35%;
     background: rgb(218, 218, 218);
-    padding: 10px 20px;
+    padding: 6em;
 }
 
 .container .left .welcome {
@@ -87,18 +86,35 @@
 
 .container .right form {
     margin-top: 1em;
+    display: block;
+    margin: 0 auto;
+    width: 70%;
+}
+
+#password-box {
+    position: relative;
+    margin-bottom: .5em;
+}
+
+#password-box input {
+    padding-right: 3em;
+}
+
+#password-box img {
+    position: absolute;
+    cursor: pointer;
+    top: 1em;
+    right: 1em;
 }
 
 .container input,
 .submitBtn  {
-    width: 70%;
+    width: 100%;
     padding: 15px 10px;
     font-size: 1.2em;
     border-radius: 8px;
     border: 2px solid rgb(219, 219, 219);
     outline: 0;
-    display: block;
-    margin: 0 auto;
 }
 
 .container input:not(:last-child) {
@@ -139,8 +155,9 @@
 }
 
 .little-title{
-    margin-left: 15%;
-    font-weight: 800;
+    font-weight: 700;
+    margin-top: 1em;
+    margin-bottom: 5px;
 }
 
 .container .error-edit {
@@ -160,7 +177,7 @@
         display: block;
         width: 100vw;
         margin: 0;
-        padding: 0;
+        padding-bottom: 90px;
     }
 
     .container .left {
@@ -220,8 +237,8 @@
         width: 100%;
     }
 
-    .little-title{
-        margin-left: 1%;
+    .container .right form {
+        width: 100%;
     }
 
     .container input,

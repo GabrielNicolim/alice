@@ -4,27 +4,26 @@
     require_once("connect.php");
     require_once("functions.php");
 
-    $choosen_id= $_POST['exclude'];
-    $data=date('d/m/Y');
+    $choosen_id = $_POST['exclude'];
 
-    try{
- 
-        $query = "UPDATE user_records SET deleted = TRUE, timeDeleted = NOW() WHERE id_record = $choosen_id AND fk_user = $_SESSION[idUser] ";
+    $query = "UPDATE user_records SET deleted = TRUE, timeDeleted = NOW() WHERE id_record = :choosen_id AND fk_user = :id ";
 
-        $return = $conn -> query($query);
+    $stmt = $conn -> prepare($query);
+    
+    $stmt -> bindValue(":choosen_id", $choosen_id);
+    $stmt -> bindValue(":id", $_SESSION['idUser']);
 
-        $return= $return -> fetchAll(PDO::FETCH_ASSOC);
+    $return = $stmt -> execute();
 
-        $qtde= count($return);
+    //If everything went okay
+    if ($return) {
 
-        //If everything went okay
-        if (!$qtde){
-            header('location: ../public/views/home.php');
-            exit;
-        }
-        else throw new Exception('Seus dados não puderam ser alterados');
-
-    }
-    catch(Exception $e){
-        echo "<script type='text/javascript'>alert(' Exceção capturada: ".$e->getMessage()."')</script>";
+        header('location: ../public/views/home.php');
+        exit;
+        
+    } else {
+        echo "<script type='text/javascript'>
+            window.alert(' Exceção capturada: Seus dados não puderam ser alterados \\n Voltar para home?')
+            window.location = '../public/views/home.php';
+            </script>";
     }

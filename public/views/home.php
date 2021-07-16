@@ -23,6 +23,11 @@
     <link rel="stylesheet" href="../css/modal.css">
 </head>
 <body>
+    <!-- NoScript -->
+    <noscript>
+            <h1>Você precisa do javascript habilitado</h1>
+    </noscript>
+    
     <!-- Header -->
     <header>
         <div class="left">
@@ -83,10 +88,10 @@
 
                         $return = $stmt -> fetchAll(PDO::FETCH_ASSOC);
                         
-                        foreach($return as $i){
+                        foreach ($return as $i) {
                              echo"<option value='".$i['type_record']."'>
-                                Tipo ".$i['type_record']; 
-                                if(empty($i['type_record']))echo"Vazio";
+                                Tipo ".$i['type_record'];
+                                if (empty($i['type_record'])) echo"Vazio";
                              echo"</option>";
                         }
 
@@ -101,23 +106,19 @@
         </div>
     </div>
 
+    <?php
+        if( isset($_GET['error']) && $_GET['error'] == 1){
+            echo"<div class'error-home'>Ocorreu algum problema na inserção do registro</div>";
+        }
+    ?>
+
     <div class="container">
         <?php
+         
             showBoxes($restriction);
+            
         ?>      
     </div>  
-
-    <footer>
-        <div class="left"></div>
-
-        <div class="logo btn">
-            <a href="#"><i class="fas fa-box-open"></i></a>
-        </div>
-
-        <div class="right">
-            <a href="https://github.com/GabrielNicolim/ALICE">Sobre nós</a>
-        </div>
-    </footer>
 
     <!-- Create -->
     <div id="shadow" class="hidden" onclick="closeCreate(),closeEdit(), closeExclude()"></div>
@@ -176,6 +177,18 @@
             <input type="submit" class="submitBtn" value="Confirmar">
         </form>
     </div>
+
+    <footer>
+        <div class="left"></div>
+
+        <div class="logo btn">
+            <a href="home.php"><i class="fas fa-box-open"></i></a>
+        </div>
+
+        <div class="right">
+            <a href="https://github.com/GabrielNicolim/ALICE">Sobre nós</a>
+        </div>
+    </footer>
 
     <script type="text/javascript" src="../scripts/menuShow.js"></script>
     <script type="text/javascript" src="../scripts/homeModalShow.js"></script>

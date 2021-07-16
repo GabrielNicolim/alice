@@ -6,13 +6,14 @@
 	    exit();
     }
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Recuperar Senha</title>
 
     <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon">
 
@@ -24,7 +25,7 @@
 <body>
     <div class="container">
         <div class="top">
-            <h1>Login</h1>
+            <h1>Recuperar Senha</h1>
 
             <div class="return">
                 <a href="../../index.php" class="btn">
@@ -33,24 +34,14 @@
             </div>
         </div>
 		<?php
-            if (isset($_GET['error'])) {
-                if ($_GET['error'] == 0) {
-                    echo "<div class='error-login'>Campos vazios!</div>";
-                } else {
-                    echo "<div class='error-login'>Email ou senha invalidos!</div>";
-                }
+            if (isset($_GET['completed']) && $_GET['error'] == 0) {
+                echo "<div class='error-login'>Se esse email estiver cadastrado, enviaremos um email para ele!</div>";
             }
         ?>
-        <form action="../../php/loginLogic.php" onsubmit="return loginValidate(event)" method="POST">
+        
+        <form action="../../php/recoverLogic.php" onsubmit="return RecoverValidate(event)" method="POST">
             <input type="email" name="email" id="email" placeholder="Email" maxlength='128'>
 
-            <div id="password-box">
-                <input type="password" name="password" id="password" placeholder="Senha" maxlength='128'>
-                <img src="../images/eye-off.svg" id="icon" onclick="showPassword()">
-            </div>
-            <div class="forgot-my-password">
-                <span>Esqueceu sua senha? <a href="recover.php">Recupere-a</a></span>
-            </div>
             <input type="submit" class="submitBtn" value="Entrar">
         </form>
 
@@ -58,11 +49,12 @@
             <span>Não tem uma conta? <a href="register.php">Cadastre-se</a></span>
         </div>
 
-        
+        <div class="register">
+            <span>Já possui um cadastro? <a href="login.php">Entrar</a></span>
+        </div>
     </div>
 
     <script type="text/javascript" src="../scripts/formValidate.js"></script>
-    <script type="text/javascript" src="../scripts/loginValidate.js"></script>
-    <script type="text/javascript" src="../scripts/showPassword.js"></script>
+    <script type="text/javascript" src="../scripts/recoverValidate.js"></script>
 </body>
 </html>

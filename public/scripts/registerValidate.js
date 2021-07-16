@@ -12,7 +12,7 @@ function registerValidate(event) {
     let confirmPasswordValue = secondPassword.value.trim()
 
     // Name 
-    if(voidCheck(nameValue) || nameValue.lenght > 128) {
+    if(voidCheck(nameValue) || nameValue.length > 128) {
         name.classList = 'error'
         valid = false 
     }
@@ -21,7 +21,7 @@ function registerValidate(event) {
     }
 
     // Email
-    if(voidCheck(emailValue) || emailValidate(emailValue) || emailValue.lenght > 128) {
+    if(voidCheck(emailValue) || emailValidate(emailValue) || emailValue.length > 128) {
         email.classList = 'error'
         valid = false 
     }
@@ -29,8 +29,26 @@ function registerValidate(event) {
         email.classList = 'normal'
     }
 
+    // Contador 
+
+    const letterRegex = /^[A-Z]/;
+    const numberRegex = /^[0-9]/;
+
+    let letterCont = 0
+    let numberCont = 0
+    
+    for(let i = 0; i < passwordValue.length; i++) {
+        if(passwordValue[i].match(letterRegex)) {
+            letterCont++
+        }
+        else if(passwordValue[i].match(numberRegex)) {
+            numberCont++
+        }
+    }
+
     // Password
-    if(voidCheck(passwordValue) || passwordValue.lenght > 128) {
+    if(voidCheck(passwordValue) || passwordValue.length > 128 || passwordValue.length < 6 ||
+       letterCont < 1 || numberCont < 1) {
         password.classList = 'error'
         valid = false 
     }
@@ -39,7 +57,7 @@ function registerValidate(event) {
     }
 
     // Confirm password 
-    if(voidCheck(confirmPasswordValue) || confirmPasswordValue.lenght > 128) {
+    if(voidCheck(confirmPasswordValue) || confirmPasswordValue.length > 128) {
         secondPassword.classList = 'error'
         valid = false 
     }
@@ -53,4 +71,47 @@ function registerValidate(event) {
     }
 
     return valid
+}
+
+function passwordValidate() {
+    let password = window.document.getElementById('password')
+    let passwordValue = password.value.trim()
+    let error = window.document.getElementById('password-error-box')
+
+    // Contador 
+
+    const letterRegex = /^[A-Z]/;
+    const numberRegex = /^[0-9]/;
+
+    let letterCont = 0
+    let numberCont = 0
+    
+    for(let i = 0; i < passwordValue.length; i++) {
+        if(passwordValue[i].match(letterRegex)) {
+            letterCont++
+        }
+        else if(passwordValue[i].match(numberRegex)) {
+            numberCont++
+        }
+    }
+
+    //
+
+    if(!voidCheck(passwordValue)) {
+        if(passwordValue.length < 6) {
+            error.innerText = 'A senha deve conter ao menos 6 caracteres'
+        }
+        else if(letterCont < 1) {
+            error.innerText = 'A senha deve conter ao menos um caractere maiúsculo'
+        }
+        else if(numberCont < 1){
+            error.innerText = 'A senha deve conter ao menos um número'
+        }
+        else {
+            error.innerText = ''
+        }
+    }
+    else {
+        error.innerText = ''
+    }
 }

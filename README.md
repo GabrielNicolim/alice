@@ -1,16 +1,17 @@
 # ALICE
 
-Based in the basic relational operations term CRUD (Create, Read, Update e Delete), emerged the idea to name this project ALICE (Alteration, Login, Include, Consult, Exclude). 
+Based in the basic relational operations term CRUD (Create, Read, Update and Delete), emerged the idea to name this project ALICE (Alteration, Login, Include, Consult, Exclude). 
 
 ## Proposal 
 
 - Create two tables with an relationship one-to-many. The table receiving the key of the relationship must contain at least four fields and to be chosen to manipulation in PHP. 
 
-- For the system to register the selling of the products, their data needs to be stored previously in the DB. There will be a program to Alter registered products, Login, Include , Consult and exclude (Delete) the data of the products, from this acronym, the name A.L.I.C.E
+- For the system to register the selling of the products, their data needs to be stored previously in the DB. There will be a program to Alter registered products, Login, Include , Consult and exclude (Delete) the data of the products, from this acronym, the name A.L.I.C.E.
 
 ## Technologies 
 
 To construct this aplication, was used PHP and JavaScript with the DBMS Postgree 9.6.2 (and later ported over to MariaDB). The visual part of the website was built using HTML and pure CSS, in set with the JavaScript and JQuery to DOM manipulation. We worked together in order to develop our respective technologies (Back and Front).
+We implement all the basic security measures for the account creation and storage in the DB, a noscript warning.
 
 ## View of the Project
 

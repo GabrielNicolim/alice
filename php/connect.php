@@ -7,6 +7,6 @@
     try {
         $conn = new PDO($DB_dsn, $DB_user, $DB_password);
     }
-    catch(PDOException $e) {
-        echo 'Error: '.$e->getCode().' Message: '.$e->getMessage(); 
+    catch (PDOException $e) {
+        echo 'Error: '.$e->getCode().' Message: '.$e->getMessage();
     }
