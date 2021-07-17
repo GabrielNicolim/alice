@@ -149,6 +149,10 @@ body {
 
 /* Teste Erro */
 
+.valid {
+    color: rgb(12, 150, 58);
+}
+
 .error {
     border: 2px solid rgb(224, 24, 64) !important; 
 }
