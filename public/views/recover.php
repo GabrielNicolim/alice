@@ -34,15 +34,19 @@
             </div>
         </div>
 		<?php
-            if (isset($_GET['completed']) && $_GET['error'] == 0) {
-                echo "<div class='error-login'>Se esse email estiver cadastrado, enviaremos um email para ele!</div>";
+            if (isset($_GET['message'])) {
+                if ($_GET['message'] == 0) {
+                    echo "<div class='error-login'>Se esse email estiver cadastrado, enviaremos um email para ele!</div>";
+                } else {
+                    echo "<div class='error-login'>Campos vazios ou com caracteres não permitidos!</div>";
+                }
             }
         ?>
         
         <form action="../../php/recoverLogic.php" onsubmit="return RecoverValidate(event)" method="POST">
             <input type="email" name="email" id="email" placeholder="Email" maxlength='128'>
 
-            <input type="submit" class="submitBtn" value="Entrar">
+            <input type="submit" class="submitBtn" value="Recuperar senha">
         </form>
 
         <div class="register">
