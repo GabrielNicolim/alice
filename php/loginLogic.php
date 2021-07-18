@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 try {
 
     require_once("connect.php");
@@ -31,7 +33,6 @@ try {
 
         if ( password_verify($password_user, $dbpassword) && count($return) > 0) {
 
-            session_start();
             session_regenerate_id(true);
 
             $_SESSION['isAuth'] = true;

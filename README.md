@@ -12,7 +12,7 @@ Based in the basic relational operations term CRUD (Create, Read, Update and Del
 
 To construct this aplication, was used PHP and JavaScript with the DBMS Postgree 9.6.2 (and later ported over to MariaDB). The visual part of the website was built using HTML and pure CSS, in set with the JavaScript and JQuery to DOM manipulation. We worked together in order to develop our respective technologies (Back and Front).
 
-We implement all the basic security measures for the account creation and storage in the DB, a noscript warning.
+We implement all the basic security measures for the account creation and storage in the DB, a noscript warning, and the possibility of changing/recovering you password by email using PHPMailer + Composer.
 
 ## View of the Project
 

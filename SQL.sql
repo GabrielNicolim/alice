@@ -37,3 +37,14 @@ FOREIGN KEY (fk_user) REFERENCES users (id_user)
 /* DROP TABLE */
 
 /* DROP TABLE user_records, user_picture, users; */
+
+/*pwdReset BETA table 
+
+CREATE TABLE pwdReset (
+  id_pwdReset SERIAL PRIMARY KEY NOT NULL,
+  pwdResetEmail TEXT NOT NULL,
+  pwdResetSelector TEXT NOT NULL,
+  pwdResetToken TEXT NOT NULL,
+  pwdResetExpires TEXT NOT NULL
+  );
+*/

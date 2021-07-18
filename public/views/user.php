@@ -232,6 +232,7 @@
                     <input type='email' name='email' id='email' value='<?php echo$email; ?>' maxlength='128' required>
                 <div class='clear'></div>
 
+                <div class='little-title'>Para confirmar a alteração:</div>
                 <div id="password-box">
                     <input type="password" name="password" id="password" placeholder="Senha" maxlength='128' required>
                     <img src="../images/eye-off.svg" id="icon" onclick="showPassword()">
