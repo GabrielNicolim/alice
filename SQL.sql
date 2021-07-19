@@ -34,18 +34,21 @@ CREATE TABLE user_picture(
   FOREIGN KEY (fk_user) REFERENCES users (id_user)
 );
 
-/*pwdReset Table */
-CREATE TABLE pwdReset (
+/*pwdreset Table */
+
+CREATE TABLE pwdreset (
   id_pwdReset SERIAL PRIMARY KEY NOT NULL,
-  pwdResetEmail TEXT NOT NULL,
-  pwdResetSelector TEXT NOT NULL,
-  pwdResetToken TEXT NOT NULL,
+  ipRequest VARCHAR(46) NOT NULL,
+  dateRequest TIMESTAMP NOT NULL DEFAULT now(),
+  pwdResetEmail VARCHAR(128) NOT NULL,
+  pwdResetSelector VARCHAR(256) NOT NULL,
+  pwdResetToken VARCHAR(256) NOT NULL,
   pwdResetExpires TEXT NOT NULL
 );
 
 /* DROP TABLES */
 
-/* DROP TABLE user_records, user_picture, users, pwdReset; */
+/* DROP TABLE user_records, user_picture, users, pwdreset; */
 
 
 

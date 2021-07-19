@@ -40,6 +40,11 @@
                     echo "<div class='error-login'>Email ou senha invalidos!</div>";
                 }
             }
+            if (isset($_GET['newpwd'])) {
+                if ($_GET['newpwd'] == 'passwordupdated')
+                    echo "<div class='error-login'>Agora faça login com sua senha atualizada!</div>";
+            }
+
         ?>
         <form action="../../php/loginLogic.php" onsubmit="return loginValidate(event)" method="POST">
             <input type="email" name="email" id="email" placeholder="Email" maxlength='128'>

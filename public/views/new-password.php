@@ -28,6 +28,10 @@
             if ( !isset($_GET['selector']) || !isset($_GET['validator']) ) {
                 echo "<div class='error-login'>Não pudemos validar sua requisição!!</div>";
             } else {
+
+                if( isset($_GET['newpwd']) && $_GET['newpwd'] == 'error')
+                    echo "<div class='error-login'>Ocorreu um erro setando sua nova senha!!</div>";
+
                 $selector = $_GET['selector'];
                 $validator = $_GET['validator'];
                 
