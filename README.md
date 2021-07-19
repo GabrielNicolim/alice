@@ -16,7 +16,7 @@ We implement all the basic security measures for the account creation and storag
 
 ## View of the Project
 
-![image](https://user-images.githubusercontent.com/69210720/123141339-a9f63080-d42e-11eb-9eea-4e1524f3e29c.png)
+![image](https://user-images.githubusercontent.com/69210720/126088619-11e4d862-4a53-4cc9-b97e-08e66de33c45.png)
 
 The project has a index startup screen, Login, Register and User page with visual error feedbacks. When the user performs the sign-in, he is redirected to the Home page, which has the interaction with the user to do the main operations of the application, insert, edit and exclude through modals and boxes. The User page alows the user to change their informations and profile picture. **The Profile Picute System won't work in the server version because of upload restrictions and old software**.
 
