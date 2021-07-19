@@ -1,9 +1,3 @@
-<?php
-
-require("../../php/loginValidation.php");
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,33 +25,36 @@ require("../../php/loginValidation.php");
             </div>
         </div>
 		<?php
-            $selector = $_GET['selector'];
-            $validator = $_GET['validator'];
-            if (empty($selector) || empty($validator) ) {
+            if ( !isset($_GET['selector']) || !isset($_GET['validator']) ) {
                 echo "<div class='error-login'>Não pudemos validar sua requisição!!</div>";
-            } else if(ctype_xdigit($selector) !== false && ctype_xdigit($validator) !== false){
+            } else {
+                $selector = $_GET['selector'];
+                $validator = $_GET['validator'];
+                
+                if ( !empty($selector) && !empty($validator) && ctype_xdigit($selector) !== false && ctype_xdigit($validator) !== false) {   
             ?>
 
-            <form action="../../php/recoverLogic.php" onsubmit="return RecoverValidate(event)" method="POST">
+            <form action="../../php/changePasswordDB.php" onsubmit="return RecoverValidate(event)" method="POST">
                 <input type="hidden" name="selector" value="<?php echo$selector; ?>">
                 <input type="hidden" name="validator" value="<?php echo$validator; ?>">
 
                 <input type="password" name="pwd" id="pwd" placeholder="Senha" maxlength='128'>
-                <input type="password" name="pwd-repeat" id="pwd" placeholder="Repita a senha" maxlength='128'>
+                <input type="password" name="pwd-repeat" id="pwd-repeat" placeholder="Repita a senha" maxlength='128'>
 
-                <input type="submit" name="reset-password-submit" class="submitBtn" value="Recuperar senha">
+                <input type="submit" name="reset-password-submit" class="submitBtn" value="Alterar senha">
             </form>
 
-        <?php
+            <?php
+                }
             }
-        ?>
+            ?>
         
         <div class="register">
             <span>Não tem uma conta? <a href="register.php">Cadastre-se</a></span>
         </div>
 
         <div class="register">
-            <span>Já possui um cadastro? <a href="login.php">Entrar</a></span>
+            <span>Lembrou a senha? <a href="login.php">Entrar</a></span>
         </div>
     </div>
 

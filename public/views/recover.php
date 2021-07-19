@@ -41,9 +41,12 @@
                     echo "<div class='error-login'>Campos vazios ou com caracteres não permitidos!</div>";
                 }
             }
+            include("../../php/functions.php");
+            $ipRequest = getUserIP();
         ?>
         
         <form action="../../php/recoverLogic.php" onsubmit="return RecoverValidate(event)" method="POST">
+            <input type="hidden" name="ipRequest" value="<?php echo$ipRequest ?>">
             <input type="email" name="email" id="email" placeholder="Email" maxlength='128'>
 
             <input type="submit" class="submitBtn" value="Recuperar senha">
@@ -54,7 +57,7 @@
         </div>
 
         <div class="register">
-            <span>Já possui um cadastro? <a href="login.php">Entrar</a></span>
+            <span>Lembrou da senha? <a href="login.php">Entrar</a></span>
         </div>
     </div>
 
