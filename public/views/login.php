@@ -42,7 +42,7 @@
             }
             if (isset($_GET['newpwd'])) {
                 if ($_GET['newpwd'] == 'passwordupdated')
-                    echo "<div class='error-login'>Agora faça login com sua senha atualizada!</div>";
+                    echo "<div class='valid-login'>Agora faça login com sua senha atualizada!</div>";
             }
         ?>
         <form action="../../php/loginLogic.php" onsubmit="return loginValidate(event)" method="POST">

@@ -7,8 +7,8 @@ if (isset($_POST['reset-password-submit'])) {
     
     $selector = $_POST['selector'];
     $validator = $_POST['validator'];
-    $new_password = cleanString($_POST['pwd']);
-    $passwordRepeat = cleanString($_POST['pwd-repeat']);
+    $new_password = cleanString($_POST['password']);
+    $passwordRepeat = cleanString($_POST['password-repeat']);
 
     if ( empty($new_password) || empty($passwordRepeat) ) {
         header("location: ../public/views/new-password.php?selector=".$selector."&validator=".$validator."&newpwd=empty");

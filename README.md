@@ -123,3 +123,5 @@ pwdResetToken VARCHAR(256) NOT NULL,
 pwdResetExpires TEXT NOT NULL
 );
 ```
+
+>For the Password Recover System to work you will need to create you own file named 'env.php' based on the 'env_example.php' with it's own host, user, password and port

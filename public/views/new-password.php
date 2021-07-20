@@ -41,7 +41,7 @@
                             echo "<div class='error-login'>As senhas precisam ser iguais!!</div>";
                         break;
                         default:
-                            echo "<div class='error-login'>Ocooreu um erro brabo!!</div>";
+                            echo "<div class='error-login'>Ocorreu um erro brabo!!</div>";
                         break;
                     }
                 }   
@@ -56,8 +56,13 @@
                     <input type="hidden" name="selector" value="<?php echo$selector; ?>">
                     <input type="hidden" name="validator" value="<?php echo$validator; ?>">
 
-                    <input type="password" name="pwd" id="pwd" placeholder="Senha" maxlength='128'>
-                    <input type="password" name="pwd-repeat" id="pwd-repeat" placeholder="Repita a senha" maxlength='128'>
+                    <div id="password-box">
+                        <input type="password" name="password" id="password" placeholder="Senha" maxlength='128' onkeyup="passwordValidate()">
+                        <img src="../images/eye-off.svg" id="icon" onclick="showPassword()">
+
+                        <div id="password-error-box"></div>
+                    </div>
+                    <input type="password" name="password-repeat" id="pwd-repeat" placeholder="Confirme a nova senha" maxlength='128'>
 
                     <input type="submit" name="reset-password-submit" class="submitBtn" value="Alterar senha">
                 </form>
@@ -77,6 +82,7 @@
     </div>
 
     <script type="text/javascript" src="../scripts/formValidate.js"></script>
-    <script type="text/javascript" src="../scripts/recoverValidate.js"></script>
+    <script type="text/javascript" src="../scripts/registerValidate.js"></script>
+    <script type="text/javascript" src="../scripts/showPassword.js"></script>
 </body>
 </html>

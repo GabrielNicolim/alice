@@ -83,17 +83,19 @@
                         <h2 style='padding-top: 30px; padding-bottom: 30px;'>Storagesy</h2>
                     </div>
                     <h1>Recuperação de senha</h1>
-                        <p style='text-align: justify; padding-right: 10px; padding-left: 10px'>
+                        <p style='text-align: justify; padding: 0 16px; font-size: 1.2em;'>
                         Olá ".$name_user.", nós recebemos uma requisição de recuperação de senha da sua conta no Storagesy pelo IP ".getUserIP().", 
                         se você não foi o responsável por essa requisição, você pode ignorar completamente este email.<br><br>
                         Este link de autenticação vai ser valido para uso durante apenas 1 hora a partir do envio desse email.
                         Clique no botão para ser redirecionado para a página de recriação de senha ou no link abaixo:
                         </p><br>
                         <a href='".$url."'> 
-                        <button style='background-color:black;color: white;font-size: 2em; cursor: pointer;'>Redefinir senha</button>
-                        </a><br>
+                        <button style='background-color:black;color: white;font-size: 1.5em; cursor: pointer;padding: 1em;outline: none; border-radius: .5em; border: none;'>Redefinir senha</button>
+                        </a>
+                        <br>
+                        <br>
+                        <br>
                         <a href='".$url."'> ".$url." </a><br><br>
-                        <img src='https://safepackaginguk.com/wp-content/uploads/2020/05/CB-.jpg' alt='Imagem box' width='100%'/>
                     </body>
                 </html>
                 ";

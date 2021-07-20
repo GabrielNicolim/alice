@@ -40,7 +40,7 @@
             <input type="email" name="email" id="email" placeholder="Email" maxlength='128' required>
 
             <div id="password-box">
-                <input type="password" name="password" id="password" placeholder="Senha" maxlength='128' onkeypress="passwordValidate()">
+                <input type="password" name="password" id="password" placeholder="Senha" maxlength='128' onkeyup="passwordValidate()">
                 <img src="../images/eye-off.svg" id="icon" onclick="showPassword()">
 
                 <div id="password-error-box"></div>

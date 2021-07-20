@@ -33,7 +33,7 @@
 		<?php
             if (isset($_GET['message'])) {
                 if ($_GET['message'] == 0) {
-                    echo "<div class='error-login'>Se esse email estiver cadastrado, enviaremos um email para ele!</div>";
+                    echo "<div class='valid-login'>Se esse email estiver cadastrado, enviaremos um email para ele!</div>";
                 } else {
                     echo "<div class='error-login'>Campos vazios ou com caracteres não permitidos!</div>";
                 }
