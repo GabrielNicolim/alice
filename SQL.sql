@@ -34,7 +34,7 @@ CREATE TABLE user_picture(
   FOREIGN KEY (fk_user) REFERENCES users (id_user)
 );
 
-/*pwdreset Table */
+/* pwdreset Table */
 
 CREATE TABLE pwdreset (
   id_pwdReset SERIAL PRIMARY KEY NOT NULL,

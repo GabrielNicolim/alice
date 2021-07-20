@@ -29,8 +29,22 @@
                 echo "<div class='error-login'>Não pudemos validar sua requisição!!</div>";
             } else {
 
-                if( isset($_GET['newpwd']) && $_GET['newpwd'] == 'error')
-                    echo "<div class='error-login'>Ocorreu um erro setando sua nova senha!!</div>";
+                if( isset($_GET['newpwd'])) {
+                    switch ($_GET['newpwd']) {
+                        case 'error':
+                            echo "<div class='error-login'>Ocorreu um erro setando sua nova senha!!</div>";
+                        break;
+                        case 'invalid':
+                            echo "<div class='error-login'>Sua senha precisa ter pelo menos um numero, uma letra maiuscula e 6 caracteres!!</div>";
+                        break;
+                        case 'pwdnotsame':
+                            echo "<div class='error-login'>As senhas precisam ser iguais!!</div>";
+                        break;
+                        default:
+                            echo "<div class='error-login'>Ocooreu um erro brabo!!</div>";
+                        break;
+                    }
+                }   
 
                 $selector = $_GET['selector'];
                 $validator = $_GET['validator'];
@@ -38,15 +52,15 @@
                 if ( !empty($selector) && !empty($validator) && ctype_xdigit($selector) !== false && ctype_xdigit($validator) !== false) {   
             ?>
 
-            <form action="../../php/changePasswordDB.php" onsubmit="return RecoverValidate(event)" method="POST">
-                <input type="hidden" name="selector" value="<?php echo$selector; ?>">
-                <input type="hidden" name="validator" value="<?php echo$validator; ?>">
+                <form action="../../php/changePasswordDB.php" onsubmit="return RecoverValidate(event)" method="POST">
+                    <input type="hidden" name="selector" value="<?php echo$selector; ?>">
+                    <input type="hidden" name="validator" value="<?php echo$validator; ?>">
 
-                <input type="password" name="pwd" id="pwd" placeholder="Senha" maxlength='128'>
-                <input type="password" name="pwd-repeat" id="pwd-repeat" placeholder="Repita a senha" maxlength='128'>
+                    <input type="password" name="pwd" id="pwd" placeholder="Senha" maxlength='128'>
+                    <input type="password" name="pwd-repeat" id="pwd-repeat" placeholder="Repita a senha" maxlength='128'>
 
-                <input type="submit" name="reset-password-submit" class="submitBtn" value="Alterar senha">
-            </form>
+                    <input type="submit" name="reset-password-submit" class="submitBtn" value="Alterar senha">
+                </form>
 
             <?php
                 }

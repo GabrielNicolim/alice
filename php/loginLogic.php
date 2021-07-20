@@ -10,7 +10,7 @@ try {
     $email_user = strtolower( cleanEmail($_POST['email']) );
     $password_user = cleanString($_POST['password']);
 
-    if (!empty($email_user) && !empty($password_user) ) {
+    if (!empty($email_user) && !empty($password_user) && isset($_POST['login-user-submit']) ) {
 
         $dbpassword = generateFakePassword();
 

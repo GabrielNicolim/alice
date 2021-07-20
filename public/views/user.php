@@ -136,8 +136,7 @@
                         } else {
                             throw new Exception('Arquivo não foi encontrado no DB');
                         }
-                    }
-                    catch (Exception $e) {
+                    } catch (Exception $e) {
 
                         //Remove bugged photos from DB
                         if (count($filename) > 0) {

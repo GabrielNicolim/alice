@@ -7,25 +7,28 @@ if (isset($_POST['reset-password-submit'])) {
     
     $selector = $_POST['selector'];
     $validator = $_POST['validator'];
-    $password = cleanString($_POST['pwd']);
+    $new_password = cleanString($_POST['pwd']);
     $passwordRepeat = cleanString($_POST['pwd-repeat']);
 
-    if ( empty($password) || empty($passwordRepeat) ) {
-        header("location: ../public/views/new-password.php?newpwd=empty");
+    if ( empty($new_password) || empty($passwordRepeat) ) {
+        header("location: ../public/views/new-password.php?selector=".$selector."&validator=".$validator."&newpwd=empty");
         exit();
-    } else if ( $password !== $passwordRepeat ) {
-        header("location ../public/views/new-password.php?newpwd=pwdnotsame");
+    } else if ( $new_password !== $passwordRepeat ) {
+        header("location: ../public/views/new-password.php?selector=".$selector."&validator=".$validator."&newpwd=pwdnotsame");
+        exit();
+    } else if( !isPasswordSecure($new_password) ) {
+        header("location: ../public/views/new-password.php?selector=".$selector."&validator=".$validator."&newpwd=invalid");
         exit();
     }
     
     $currentDate = date("U");
 
-    $query = "SELECT * FROM pwdReset WHERE pwdResetSelector = :selector AND pwdResetExpires >= :expires";
+    $query = "SELECT * FROM pwdReset WHERE pwdResetSelector = :selector AND pwdResetExpires >= :currentTime";
 
     $stmt = $conn -> prepare($query);
 
     $stmt -> bindValue(":selector", $selector);
-    $stmt -> bindValue(":expires", $currentDate);
+    $stmt -> bindValue(":currentTime", $currentDate);
 
     $stmt -> execute();
 
@@ -35,11 +38,10 @@ if (isset($_POST['reset-password-submit'])) {
         header("location: ../public/views/new-password.php?newpwd=error");
         exit();
     }
-    echo"aaa";
-    
+
     $tokenBin = hex2bin($validator);
     $tokenCheck = password_verify($tokenBin, $row[0]["pwdResetToken"]);
-    print_r($row);
+
     if ($tokenCheck === false) {
         header("location: ../public/views/new-password.php?newpwd=error");
         exit();
@@ -59,11 +61,11 @@ if (isset($_POST['reset-password-submit'])) {
             exit();
         } else {
 
-            $newPassword = password_hash($password, PASSWORD_BCRYPT);
+            $new_Password = password_hash($new_password, PASSWORD_BCRYPT);
 
             $query = "UPDATE users SET password_user = :newpassword WHERE email_user = :email_user";
             $stmt = $conn -> prepare($query);
-            $stmt -> bindValue(":newpassword", $newPassword);
+            $stmt -> bindValue(":newpassword", $new_Password);
             $stmt -> bindValue(":email_user", $tokenEmail);
             $stmt -> execute();
 
@@ -72,14 +74,14 @@ if (isset($_POST['reset-password-submit'])) {
             $stmt2 -> bindValue(':email_user', $tokenEmail);
             $stmt2 -> execute();
 
-            if( !$stmt || !$stmt2) {
+            if ( !$stmt || !$stmt2) {
                 header("location: ../public/views/new-password.php?newpwd=error");
                 exit();
             } else {
                 header("location: ../public/views/login.php?newpwd=passwordupdated");
                 exit();
             }
-
+            echo"aaaaa";
         }
 
     }

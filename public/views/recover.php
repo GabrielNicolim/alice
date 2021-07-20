@@ -1,10 +1,7 @@
 <?php
+
     session_start();
-    
-    if(isset($_SESSION['isAuth'])) {
-        header("Location: home.php ");
-	    exit();
-    }
+
 ?>
 
 <!DOCTYPE html>

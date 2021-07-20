@@ -27,4 +27,25 @@
     
         return $ip;
     }
+
+    function isPasswordSecure($password_user) {
+        $letterCount = 0; 
+        $numberCount = 0;
+
+        for($i = 0; $i < strlen($password_user); $i++) {
+            if( ctype_upper($password_user[$i]) ) {
+                $letterCount++;
+            }
+            else if ( is_numeric($password_user[$i]) ) {
+                $numberCount++;
+            }
+        }
+        
+        if($letterCount < 1 || $numberCount < 1 || strlen($password_user) < 6 || strlen($password_user) > 256 ) {
+            return false;
+        } else {
+            return true;
+        }
+        
+    }
     

@@ -107,3 +107,19 @@ FOREIGN KEY (fk_user) REFERENCES users (id_user)
 ```
 
 >For the Creation of this Tables in PostGreSQL to work, it's necessary to remove the ```UNSIGNED``` from the table ```user_records``` and ```user_picture``` because PostGree doesn't have the UNSIGNED attribute and it is needed in the MySQL/MariaDB version.
+
+****
+
+**PasswordResset Table Creation**
+
+```sql
+CREATE TABLE pwdreset (
+id_pwdReset SERIAL PRIMARY KEY NOT NULL,
+ipRequest VARCHAR(46) NOT NULL,
+dateRequest TIMESTAMP NOT NULL DEFAULT now(),
+pwdResetEmail VARCHAR(128) NOT NULL,
+pwdResetSelector VARCHAR(256) NOT NULL,
+pwdResetToken VARCHAR(256) NOT NULL,
+pwdResetExpires TEXT NOT NULL
+);
+```
