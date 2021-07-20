@@ -48,11 +48,14 @@
 
             <input type="submit" class="submitBtn" value="Recuperar senha">
         </form>
-
-        <div class="register">
-            <span>Não tem uma conta? <a href="register.php">Cadastre-se</a></span>
-        </div>
-
+        
+        <?php 
+        if(!isset($_SESSION['isAuth'])) {
+            echo"<div class='register'>
+                    <span>Não tem uma conta? <a href='register.php'>Cadastre-se</a></span>
+                </div>";
+        }
+        ?>
         <div class="register">
             <span>Lembrou da senha? <a href="login.php">Entrar</a></span>
         </div>

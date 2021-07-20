@@ -139,6 +139,12 @@
     cursor: pointer;
 }
 
+.container .forgot-my-password {
+    width: 90%;
+    margin: 2em auto;
+    text-align: center;
+}
+
 /* Error */
 
 .error {

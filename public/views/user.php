@@ -239,7 +239,9 @@
 
                 <input type='submit' class='submitBtn' value='Salvar Alterações'>
             </form>
-            
+            <div class="forgot-my-password">
+                <span>Esqueceu sua senha? <a href="recover.php">Recupere-a</a></span>
+            </div>
         </div>
     </div>
 

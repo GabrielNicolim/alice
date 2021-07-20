@@ -18,7 +18,7 @@ We implement all the basic security measures for the account creation and storag
 
 ![image](https://user-images.githubusercontent.com/69210720/123141339-a9f63080-d42e-11eb-9eea-4e1524f3e29c.png)
 
-The project has a index startup screen, Login, Register and User page with visual error feedbacks. When the user performs the sign-in, he is redirected to the Home page, which has the interaction with the user to do the main operations of the application, insert, edit and exclude through modals and boxes. The User page alows the user to change their informations and profile picture. **The Profile Picute System won't work in the server version because of upload restrictions and old software**.
+The project has a index startup screen, Login, Register and User page with visual error feedbacks. When the user performs the sign-in, he is redirected to the Home page, which has the interaction with the user to do the main operations of the application, insert, edit and exclude through modals and boxes. The User page alows the user to change their informations and profile picture. **The Profile Picture and Recover Password Systems won't work in the server version because of upload restrictions and crappy old software**.
 
 If you want to view our project quickly **[click on here](http://200.145.153.175/felipeestevanatto/Projetos/ALICE/).**
 
@@ -124,4 +124,4 @@ pwdResetExpires TEXT NOT NULL
 );
 ```
 
->For the Password Recover System to work you will need to create you own file named 'env.php' based on the 'env_example.php' with it's own host, user, password and port
+>For the Password Recover System to work you will need to create you own file named 'env.php' based on the 'env_example.php' with it's own host, user, password and port.
