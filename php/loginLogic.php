@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 try {
 
     require_once("connect.php");
@@ -8,7 +10,7 @@ try {
     $email_user = strtolower( cleanEmail($_POST['email']) );
     $password_user = cleanString($_POST['password']);
 
-    if (!empty($email_user) && !empty($password_user) ) {
+    if (!empty($email_user) && !empty($password_user) && isset($_POST['login-user-submit']) ) {
 
         $dbpassword = generateFakePassword();
 
@@ -31,7 +33,6 @@ try {
 
         if ( password_verify($password_user, $dbpassword) && count($return) > 0) {
 
-            session_start();
             session_regenerate_id(true);
 
             $_SESSION['isAuth'] = true;

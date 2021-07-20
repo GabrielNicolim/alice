@@ -77,7 +77,7 @@
             
             $stmt = $conn -> query($query);
 
-            //If removed fine from the DB and files
+            //If removed file from the DB and files sucessfully
             if ($stmt) {
                 unset($_FILES);
                 header('location: ../public/views/user.php' );

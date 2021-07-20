@@ -54,10 +54,10 @@
                         header('location: ../public/views/user.php');
                         exit;
                     }
-                    else throw new Exception("error=1"); // Failed to change user data
+                    else throw new Exception("error=4"); // Failed to change user data
 
                 }
-                else throw new Exception("error=1"); // Incorrect password
+                else throw new Exception("error=4"); // Incorrect password
                     
             }
         }

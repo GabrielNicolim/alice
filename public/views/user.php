@@ -136,8 +136,7 @@
                         } else {
                             throw new Exception('Arquivo não foi encontrado no DB');
                         }
-                    }
-                    catch (Exception $e) {
+                    } catch (Exception $e) {
 
                         //Remove bugged photos from DB
                         if (count($filename) > 0) {
@@ -232,6 +231,7 @@
                     <input type='email' name='email' id='email' value='<?php echo$email; ?>' maxlength='128' required>
                 <div class='clear'></div>
 
+                <div class='little-title'>Para confirmar a alteração:</div>
                 <div id="password-box">
                     <input type="password" name="password" id="password" placeholder="Senha" maxlength='128' required>
                     <img src="../images/eye-off.svg" id="icon" onclick="showPassword()">
@@ -239,7 +239,9 @@
 
                 <input type='submit' class='submitBtn' value='Salvar Alterações'>
             </form>
-            
+            <div class="forgot-my-password">
+                <span>Esqueceu sua senha? <a href="recover.php">Recupere-a</a></span>
+            </div>
         </div>
     </div>
 

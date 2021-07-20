@@ -1,10 +1,7 @@
 <?php
+
     session_start();
-    
-    if(isset($_SESSION['isAuth'])) {
-        header("Location: home.php ");
-	    exit();
-    }
+
 ?>
 
 <!DOCTYPE html>
@@ -34,23 +31,33 @@
             </div>
         </div>
 		<?php
-            if (isset($_GET['completed']) && $_GET['error'] == 0) {
-                echo "<div class='error-login'>Se esse email estiver cadastrado, enviaremos um email para ele!</div>";
+            if (isset($_GET['message'])) {
+                if ($_GET['message'] == 0) {
+                    echo "<div class='valid-login'>Se esse email estiver cadastrado, enviaremos um email para ele!</div>";
+                } else {
+                    echo "<div class='error-login'>Campos vazios ou com caracteres não permitidos!</div>";
+                }
             }
+            include("../../php/functions.php");
+            $ipRequest = getUserIP();
         ?>
         
         <form action="../../php/recoverLogic.php" onsubmit="return RecoverValidate(event)" method="POST">
+            <input type="hidden" name="ipRequest" value="<?php echo$ipRequest ?>">
             <input type="email" name="email" id="email" placeholder="Email" maxlength='128'>
 
-            <input type="submit" class="submitBtn" value="Entrar">
+            <input type="submit" class="submitBtn" value="Recuperar senha">
         </form>
-
+        
+        <?php 
+        if(!isset($_SESSION['isAuth'])) {
+            echo"<div class='register'>
+                    <span>Não tem uma conta? <a href='register.php'>Cadastre-se</a></span>
+                </div>";
+        }
+        ?>
         <div class="register">
-            <span>Não tem uma conta? <a href="register.php">Cadastre-se</a></span>
-        </div>
-
-        <div class="register">
-            <span>Já possui um cadastro? <a href="login.php">Entrar</a></span>
+            <span>Lembrou da senha? <a href="login.php">Entrar</a></span>
         </div>
     </div>
 

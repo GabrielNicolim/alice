@@ -12,13 +12,13 @@ Based in the basic relational operations term CRUD (Create, Read, Update and Del
 
 To construct this aplication, was used PHP and JavaScript with the DBMS Postgree 9.6.2 (and later ported over to MariaDB). The visual part of the website was built using HTML and pure CSS, in set with the JavaScript and JQuery to DOM manipulation. We worked together in order to develop our respective technologies (Back and Front).
 
-We implement all the basic security measures for the account creation and storage in the DB, a noscript warning.
+We implement all the basic security measures for the account creation and storage in the DB, a noscript warning, and the possibility of changing/recovering you password by email using PHPMailer + Composer.
 
 ## View of the Project
 
 ![image](https://user-images.githubusercontent.com/69210720/126088619-11e4d862-4a53-4cc9-b97e-08e66de33c45.png)
 
-The project has a index startup screen, Login, Register and User page with visual error feedbacks. When the user performs the sign-in, he is redirected to the Home page, which has the interaction with the user to do the main operations of the application, insert, edit and exclude through modals and boxes. The User page alows the user to change their informations and profile picture. **The Profile Picute System won't work in the server version because of upload restrictions and old software**.
+The project has a index startup screen, Login, Register and User page with visual error feedbacks. When the user performs the sign-in, he is redirected to the Home page, which has the interaction with the user to do the main operations of the application, insert, edit and exclude through modals and boxes. The User page alows the user to change their informations and profile picture. **The Profile Picture and Recover Password Systems won't work in the server version because of upload restrictions and crappy old software**.
 
 If you want to view our project quickly **[click on here](http://200.145.153.175/felipeestevanatto/Projetos/ALICE/).**
 
@@ -107,3 +107,21 @@ FOREIGN KEY (fk_user) REFERENCES users (id_user)
 ```
 
 >For the Creation of this Tables in PostGreSQL to work, it's necessary to remove the ```UNSIGNED``` from the table ```user_records``` and ```user_picture``` because PostGree doesn't have the UNSIGNED attribute and it is needed in the MySQL/MariaDB version.
+
+****
+
+**PasswordResset Table Creation**
+
+```sql
+CREATE TABLE pwdreset (
+id_pwdReset SERIAL PRIMARY KEY NOT NULL,
+ipRequest VARCHAR(46) NOT NULL,
+dateRequest TIMESTAMP NOT NULL DEFAULT now(),
+pwdResetEmail VARCHAR(128) NOT NULL,
+pwdResetSelector VARCHAR(256) NOT NULL,
+pwdResetToken VARCHAR(256) NOT NULL,
+pwdResetExpires TEXT NOT NULL
+);
+```
+
+>For the Password Recover System to work you will need to create you own file named 'env.php' based on the 'env_example.php' with it's own host, user, password and port.
