@@ -12,11 +12,9 @@ try {
     $password_user = cleanString($_POST['password']);
     $confirmPassword_user = cleanString($_POST['confirmPassword']);
 
-    if( isPasswordSecure($password_user) ) {
+    if( !isPasswordSecure($password_user) ) {
         throw new Exception("?error=1");
     }
-
-    //
 
     if (!empty($name_user) && !empty($email_user) && !empty($password_user) &&
         !empty($confirmPassword_user) && $password_user == $confirmPassword_user) {
