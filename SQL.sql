@@ -41,8 +41,8 @@ CREATE TABLE pwdreset (
   ipRequest VARCHAR(46) NOT NULL,
   dateRequest TIMESTAMP NOT NULL DEFAULT now(),
   pwdResetEmail VARCHAR(128) NOT NULL,
-  pwdResetSelector VARCHAR(256) NOT NULL,
-  pwdResetToken VARCHAR(256) NOT NULL,
+  pwdResetSelector TEXT NOT NULL,
+  pwdResetToken TEXT NOT NULL,
   pwdResetExpires TEXT NOT NULL
 );
 

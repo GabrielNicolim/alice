@@ -40,14 +40,14 @@ if (isset($_POST['reset-password-submit'])) {
     }
 
     $tokenBin = hex2bin($validator);
-    $tokenCheck = password_verify($tokenBin, $row[0]["pwdResetToken"]);
+    $tokenCheck = password_verify($tokenBin, $row[0]['pwdresettoken']);
 
     if ($tokenCheck === false) {
         header("location: ../public/views/new-password.php?newpwd=error");
         exit();
     } elseif ($tokenCheck === true) {
 
-        $tokenEmail = $row[0]['pwdResetEmail'];
+        $tokenEmail = $row[0]['pwdresetemail'];
 
         $query = "SELECT * FROM users WHERE email_user = :email";
         $stmt = $conn -> prepare($query);
@@ -69,7 +69,7 @@ if (isset($_POST['reset-password-submit'])) {
             $stmt -> bindValue(":email_user", $tokenEmail);
             $stmt -> execute();
 
-            $query = "DELETE FROM pwdreset WHERE pwdResetEmail = :email_user";
+            $query = "DELETE FROM pwdreset WHERE pwdtesetemail = :email_user";
             $stmt2 = $conn -> prepare($query);
             $stmt2 -> bindValue(':email_user', $tokenEmail);
             $stmt2 -> execute();
