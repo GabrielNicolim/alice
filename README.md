@@ -20,8 +20,6 @@ We implement all the basic security measures for the account creation and storag
 
 The project has a index startup screen, Login, Register and User page with visual error feedbacks. When the user performs the sign-in, he is redirected to the Home page, which has the interaction with the user to do the main operations of the application, insert, edit and exclude through modals and boxes. The User page alows the user to change their informations and profile picture. **The Profile Picture System won't work in the server version because of upload restrictions and old software**.
 
-If you want to view our project quickly **[click on here](http://200.145.153.175/felipeestevanatto/Projetos/ALICE/).**
-
 ****
 
 ## Installation
